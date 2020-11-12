@@ -9,12 +9,12 @@ package oop_java_project;
  *
  * @author davidzhong
  */
-public class Employee extends Person{
+public class Employees extends Person{
     
     private int login_ID;
     private String password;
 
-    public Employee(int login_ID, String password, String first_name, String last_name, String mail) {
+    public Employees(int login_ID, String password, String first_name, String last_name, String mail) {
         super(first_name, last_name, mail);
         this.login_ID = login_ID;
         this.password = password;
