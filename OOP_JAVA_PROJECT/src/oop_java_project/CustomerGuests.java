@@ -14,13 +14,6 @@ public class CustomerGuests extends Person{
     public CustomerGuests(String firstname, String lastname, String mail) {
         super(firstname, lastname, mail);
     }
-    
-     public void buytickets()
-    {
-    
-    }
-    
-    
-    
+     
     
 }
