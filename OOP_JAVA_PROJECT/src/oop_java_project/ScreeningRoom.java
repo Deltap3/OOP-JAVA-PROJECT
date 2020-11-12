@@ -32,18 +32,18 @@ public class ScreeningRoom {
     return this.time;
     }
     
-    public void setNumberseat(int m_numberseat)
+    public void setNumberseat(int m_number_seat)
     {
-    this.number_seat=m_numberseat;
+    this.number_seat=m_number_seat;
     }
     public int getNumberseat()
     {
     return this.number_seat;
     }
     
-    public void setTicketsboughts(int m_ticketsboughts)
+    public void setTicketsboughts(int m_tickets_boughts)
     {
-    this.tickets_boughts=m_ticketsboughts;
+    this.tickets_boughts=m_tickets_boughts;
     }
     public int getTicketsboughts()
     {
