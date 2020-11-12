@@ -9,18 +9,18 @@ package oop_java_project;
  *
  * @author davidzhong
  */
-public class Screeningroom {
+public class ScreeningRoom {
     
     Movie film;
     private int time;
-    private int numberseat;
-    private int ticketsboughts;
+    private int number_seat;
+    private int tickets_boughts;
 
-    public Screeningroom(Movie film, int time, int numberseat, int ticketsboughts) {
+    public ScreeningRoom(Movie film, int time, int number_seat, int tickets_boughts) {
         this.film = film;
         this.time = time;
-        this.numberseat = numberseat;
-        this.ticketsboughts = ticketsboughts;
+        this.number_seat = number_seat;
+        this.tickets_boughts = tickets_boughts;
     }
     
     public void setTime(int m_time)
@@ -34,20 +34,20 @@ public class Screeningroom {
     
     public void setNumberseat(int m_numberseat)
     {
-    this.numberseat=m_numberseat;
+    this.number_seat=m_numberseat;
     }
     public int getNumberseat()
     {
-    return this.numberseat;
+    return this.number_seat;
     }
     
     public void setTicketsboughts(int m_ticketsboughts)
     {
-    this.ticketsboughts=m_ticketsboughts;
+    this.tickets_boughts=m_ticketsboughts;
     }
     public int getTicketsboughts()
     {
-    return this.ticketsboughts;
+    return this.tickets_boughts;
     }
     
     

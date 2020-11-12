@@ -11,31 +11,31 @@ package oop_java_project;
  */
 public class Person {
     
-    private String firstname;
-    private String lastname;
+    private String first_name;
+    private String last_name;
     private String mail;
 
-    public Person(String firstname, String lastname, String mail) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public Person(String first_name, String last_name, String mail) {
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.mail = mail;
     }
-    public void setFirstname(String m_firstname)
+    public void setFirstName(String m_first_name)
     {
-    this.firstname=m_firstname;
+    this.first_name=m_first_name;
     }
-    public String getFirstname()
+    public String getFirstName()
     {
-    return this.firstname;
+    return this.first_name;
     }
     
-    public void setLastname(String m_lastname)
+    public void setLastName(String m_last_name)
     {
-    this.lastname=m_lastname;
+    this.last_name=m_last_name;
     }
-    public String getLastname()
+    public String getLastName()
     {
-    return this.lastname;
+    return this.last_name;
     }
   
     public void setMail(String m_mail)

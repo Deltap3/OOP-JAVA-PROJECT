@@ -11,22 +11,22 @@ package oop_java_project;
  */
 public class Employee extends Person{
     
-    private int loginID;
+    private int login_ID;
     private String password;
 
-    public Employee(int loginID, String password, String firstname, String lastname, String mail) {
-        super(firstname, lastname, mail);
-        this.loginID = loginID;
+    public Employee(int login_ID, String password, String first_name, String last_name, String mail) {
+        super(first_name, last_name, mail);
+        this.login_ID = login_ID;
         this.password = password;
     }
     
     public void setLoginID(int m_id)
     {
-    this.loginID=m_id;
+    this.login_ID=m_id;
     }
     public int getLoginID()
     {
-    return this.loginID;
+    return this.login_ID;
     }
     
     public void setPassword(String m_password)

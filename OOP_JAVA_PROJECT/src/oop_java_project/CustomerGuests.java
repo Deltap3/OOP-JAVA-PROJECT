@@ -11,8 +11,8 @@ package oop_java_project;
  */
 public class CustomerGuests extends Person{
 
-    public CustomerGuests(String firstname, String lastname, String mail) {
-        super(firstname, lastname, mail);
+    public CustomerGuests(String first_name, String last_name, String mail) {
+        super(first_name, last_name, mail);
     }
      
     

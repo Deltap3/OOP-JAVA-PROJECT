@@ -11,24 +11,24 @@ package oop_java_project;
  */
 public class CustomerMembers extends Person{
     
-    private int loginID;
+    private int login_ID;
     private String password;
     private int category_member;
 
-    public CustomerMembers(int loginID, String password,int category_member, String firstname, String lastname, String mail) {
-        super(firstname, lastname, mail);
-        this.loginID = loginID;
+    public CustomerMembers(int loginID, String password,int category_member, String first_name, String last_name, String mail) {
+        super(first_name, last_name, mail);
+        this.login_ID = loginID;
         this.password = password;
         this.category_member=category_member;
     }
     
     public void setLoginID(int m_id)
     {
-    this.loginID=m_id;
+    this.login_ID=m_id;
     }
     public int getLoginID()
     {
-    return this.loginID;
+    return this.login_ID;
     }
     
     public void setPassword(String m_password)
