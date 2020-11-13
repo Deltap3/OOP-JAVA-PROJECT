@@ -13,7 +13,7 @@ create table person
 	firstName varchar(50) not null,
     lastName varchar(50) not null,
     mail varchar(50) not null,
-    login int not null,
+    login varchar(100) not null,
     passw varchar(50) not null,
     categoryMember int not null
 );

@@ -11,7 +11,6 @@ package oop_java_project;
  */
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Connection {
     private final java.sql.Connection conn;
@@ -30,7 +29,7 @@ public class Connection {
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     }
     public void getAllFromTable(String query) throws SQLException {
-        try
+      try
       {
          // Execute the query.
          ResultSet resultSet = stmt.executeQuery("select * from " + query);
@@ -69,14 +68,27 @@ public class Connection {
             // Go to the next row in the ResultSet.
             resultSet.next();
          }
-         
-         // Close the statement and connection objects.
-         stmt.close();
-         conn.close();
       }
       catch (SQLException ex)
       {
          ex.printStackTrace();
+      }
+    }
+    public boolean personExist(String login, String password){
+      try
+      {
+         ResultSet resultSet = stmt.executeQuery("select * from person\n" +
+                           "where login = '" + login + "' and passw = '" + password + "'");
+         if(resultSet.next())
+            return true;
+         else
+             return false;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+          System.out.println("non");
+         return false;
       }
     }
 }
