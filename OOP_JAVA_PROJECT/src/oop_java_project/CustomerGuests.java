@@ -7,17 +7,13 @@ package oop_java_project;
 
 /**
  *
- * @author maist
+ * @author davidzhong
  */
-public class OOP_JAVA_PROJECT {
+public class CustomerGuests extends Person{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        
+    public CustomerGuests(String first_name, String last_name, String mail) {
+        super(first_name, last_name, mail);
     }
+     
     
 }
