@@ -17,14 +17,14 @@ public class Movie {
     private String genre;
     private String director;
     GregorianCalendar release_date;
-    private int runtime_minute;
+    private int run_time_minute;
 
-    public Movie(String name, String genre, String director, GregorianCalendar release_date, int runtime_minute) {
+    public Movie(String name, String genre, String director, GregorianCalendar release_date, int run_time_minute) {
         this.name = name;
         this.genre = genre;
         this.director = director;
         this.release_date = release_date;
-        this.runtime_minute = runtime_minute;
+        this.run_time_minute = run_time_minute;
     }
     
     public void setIdMovie(int m_idmovie)
@@ -70,6 +70,15 @@ public class Movie {
     public GregorianCalendar getReleaseDate()
     {
     return this.release_date;
+    }
+    
+    public void setRunTime(int m_run_time)
+    {
+    this.IDmovie=m_run_time;
+    }
+    public int getRunTime()
+    {
+    return this.run_time_minute;
     }
     
     
