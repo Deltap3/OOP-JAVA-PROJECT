@@ -11,7 +11,7 @@ package oop_java_project;
  */
 
 import java.sql.*;
-import java.util.GregorianCalendar;
+import java.util.ArrayList;
 
 public class Connection {
     private final java.sql.Connection conn;
@@ -92,7 +92,7 @@ public class Connection {
          return false;
       }
     }
-    public boolean addMovie(String title, String genre, Date releaseDate, int runTime, String image){
+    public boolean addMovie(String title, String genre, String releaseDate, int runTime, String image){
       try
       {
         stmt.executeUpdate("insert into movies (title,genre,releaseDate,runTime,image)\n" +
@@ -131,17 +131,39 @@ public class Connection {
          return false;
       }
     }
-    public boolean addScreening(int time, int numberSeat, int ticketsBoughts, int discount){
+    public boolean addScreening(String datetime, int numberSeat, int ticketsBoughts, int discount){
       try
       {
         stmt.executeUpdate("insert into employee (tim,numberSeat,ticketsBoughts,discount)\n" +
-                           "values ("+time+","+numberSeat+","+ticketsBoughts+","+discount+")");
+                           "values ('"+datetime+"',"+numberSeat+","+ticketsBoughts+","+discount+")");
         return true;
       }
       catch (SQLException ex)
       {
          ex.printStackTrace();
          return false;
+      }
+    }
+    public ArrayList<String> getScreening(String dateTime){
+      try
+      {
+        ResultSet resultSet = stmt.executeQuery("select * from project.screening\n" +
+                            "where datetim = '"+dateTime+"'");
+        ArrayList<String> result = new ArrayList<String>();
+        int numRows = resultSet.getRow();
+        ResultSetMetaData meta = resultSet.getMetaData();
+         for (int row = 0; row < numRows; row++)
+         {
+            for (int col = 0; col < meta.getColumnCount(); col++)
+               result.add(resultSet.getString(col + 1));
+            resultSet.next();
+         }
+         return result;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return null;
       }
     }
 }
