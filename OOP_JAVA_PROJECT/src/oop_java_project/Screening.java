@@ -9,14 +9,14 @@ package oop_java_project;
  *
  * @author davidzhong
  */
-public class ScreeningRoom {
+public class Screening {
     
     Movie film;
     private int time;
     private int number_seat;
     private int tickets_boughts;
 
-    public ScreeningRoom(Movie film, int time, int number_seat, int tickets_boughts) {
+    public Screening(Movie film, int time, int number_seat, int tickets_boughts) {
         this.film = film;
         this.time = time;
         this.number_seat = number_seat;
