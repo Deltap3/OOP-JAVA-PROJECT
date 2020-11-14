@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package oop_java_project;
+import java.sql.Date;
 import  java.util.GregorianCalendar;
 
 /**
@@ -16,10 +17,10 @@ public class Movie {
     private String name;
     private String genre;
     private String director;
-    GregorianCalendar release_date;
+    Date release_date;
     private int run_time_minute;
 
-    public Movie(String name, String genre, String director, GregorianCalendar release_date, int run_time_minute) {
+    public Movie(String name, String genre, String director, Date release_date, int run_time_minute) {
         this.name = name;
         this.genre = genre;
         this.director = director;
@@ -63,13 +64,13 @@ public class Movie {
     return this.director;
     }
     
-    public void setReleaseDate(GregorianCalendar m_release_date)
+    public void setReleaseDate(Date m_release_date)
     {
-    this.release_date=m_release_date;
+        this.release_date=m_release_date;
     }
-    public GregorianCalendar getReleaseDate()
+    public Date getReleaseDate()
     {
-    return this.release_date;
+        return this.release_date;
     }
     
     public void setRunTime(int m_run_time)

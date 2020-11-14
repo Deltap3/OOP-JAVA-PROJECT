@@ -12,24 +12,24 @@ package oop_java_project;
 public class ScreeningRoom {
     
     Movie film;
-    private int time;
+    private String dateTime;
     private int number_seat;
     private int tickets_boughts;
 
-    public ScreeningRoom(Movie film, int time, int number_seat, int tickets_boughts) {
+    public ScreeningRoom(Movie film, String time, int number_seat, int tickets_boughts) {
         this.film = film;
-        this.time = time;
+        this.dateTime = time;
         this.number_seat = number_seat;
         this.tickets_boughts = tickets_boughts;
     }
     
-    public void setTime(int m_time)
+    public void setTime(String m_time)
     {
-    this.time=m_time;
+    this.dateTime=m_time;
     }
-    public int getTime()
+    public String getTime()
     {
-    return this.time;
+    return this.dateTime;
     }
     
     public void setNumberseat(int m_number_seat)
