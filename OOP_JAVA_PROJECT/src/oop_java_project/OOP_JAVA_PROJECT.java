@@ -23,6 +23,7 @@ public class OOP_JAVA_PROJECT {
     public static void main(String[] args) {
         try { 
             Connection dataBase = new Connection("project", "root", "password");
+            dataBase.getScreening("2000-03-23 23:30:30");
         } catch (SQLException ex) {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

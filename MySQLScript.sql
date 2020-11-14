@@ -1,7 +1,7 @@
 create database project;
 create table movies
 (
-	movieId int primary key auto_increment not null,
+	movieId int primary key auto_increment,
     title varchar(100) not null,
     genre varchar(50) not null,
     releaseDate date not null,
@@ -10,16 +10,15 @@ create table movies
 );
 create table employee
 (
-	personId int primary key auto_increment not null,
+	personId int primary key auto_increment,
 	firstName varchar(50) not null,
     lastName varchar(50) not null,
-    mail varchar(50) not null,
     login varchar(100) not null,
     passw varchar(50) not null
 );
 create table members
 (
-	personId int primary key auto_increment not null,
+	personId int primary key auto_increment,
 	firstName varchar(50) not null,
     lastName varchar(50) not null,
     mail varchar(50) not null,
@@ -29,10 +28,10 @@ create table members
 );
 create table screening
 (
-	screeningID int primary key auto_increment not null,
+	screeningID int primary key auto_increment,
     movieId int not null,
     foreign key (movieId) references movies(movieId),
-    tim int not null,
+    datetim datetime not null,
     numberSeat int not null,
     ticketsBoughts int not null,
     discount int not null
