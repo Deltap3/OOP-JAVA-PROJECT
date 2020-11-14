@@ -1,4 +1,5 @@
 create database project;
+use project;
 create table movies
 (
 	movieId int primary key auto_increment,

@@ -19,10 +19,10 @@ public class Movie {
     private String name;
     private String genre;
     private String director;
-    Date release_date;
+    String release_date;
     private int run_time_minute;
 
-    public Movie(String name, String genre, String director, Date release_date, int run_time_minute) {
+    public Movie(String name, String genre, String director, String release_date, int run_time_minute) {
         this.name = name;
         this.genre = genre;
         this.director = director;
@@ -66,11 +66,11 @@ public class Movie {
     return this.director;
     }
     
-    public void setReleaseDate(Date m_release_date)
+    public void setReleaseDate(String m_release_date)
     {
         this.release_date=m_release_date;
     }
-    public Date getReleaseDate()
+    public String getReleaseDate()
     {
         return this.release_date;
     }
