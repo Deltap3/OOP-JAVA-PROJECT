@@ -15,12 +15,14 @@ public class Screening {
     private String dateTime;
     private int number_seat;
     private int tickets_boughts;
+    private int discount;
 
-    public ScreeningRoom(Movie film, String time, int number_seat, int tickets_boughts) {
+    public Screening(Movie film, String time, int number_seat, int tickets_boughts, int discount) {
         this.film = film;
         this.dateTime = time;
         this.number_seat = number_seat;
         this.tickets_boughts = tickets_boughts;
+        this.discount= discount;
     }
     
     public void setTime(String m_time)
@@ -50,6 +52,14 @@ public class Screening {
     return this.tickets_boughts;
     }
     
+    public void setDiscount(int m_discount)
+    {
+    this.discount=m_discount;
+    }
+    public int getDiscount()
+    {
+    return this.discount;
+    }
     
     
 }
