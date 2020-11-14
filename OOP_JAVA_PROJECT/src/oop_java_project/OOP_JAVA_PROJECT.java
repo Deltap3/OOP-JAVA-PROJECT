@@ -5,7 +5,9 @@
  */
 package oop_java_project;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,9 +23,7 @@ public class OOP_JAVA_PROJECT {
     public static void main(String[] args) {
         try { 
             Connection dataBase = new Connection("project", "root", "password");
-            dataBase.personExist("Pierre33", "Pierrot");
-            dataBase.personExist("Pierre31", "Pierrot");
-            dataBase.personExist("Pierre33", "Pierro");
+            dataBase.getScreening("2000-03-23 23:30:30");
         } catch (SQLException ex) {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

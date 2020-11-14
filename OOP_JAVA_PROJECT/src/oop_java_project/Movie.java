@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package oop_java_project;
-import  java.util.Date;
+
+
+import java.sql.Date;
+import  java.util.GregorianCalendar;
+
 
 /**
  *
@@ -65,11 +69,11 @@ public class Movie {
     
     public void setReleaseDate(Date m_release_date)
     {
-    this.release_date=m_release_date;
+        this.release_date=m_release_date;
     }
     public Date getReleaseDate()
     {
-    return this.release_date;
+        return this.release_date;
     }
     
     public void setRunTime(int m_run_time)

@@ -11,6 +11,7 @@ package oop_java_project;
  */
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Connection {
     private final java.sql.Connection conn;
@@ -89,6 +90,80 @@ public class Connection {
          ex.printStackTrace();
           System.out.println("non");
          return false;
+      }
+    }
+    public boolean addMovie(String title, String genre, String releaseDate, int runTime, String image){
+      try
+      {
+        stmt.executeUpdate("insert into movies (title,genre,releaseDate,runTime,image)\n" +
+                           "values ('"+title+"','"+genre+"','2001-01-02',"+runTime+",'"+image+"')");
+        return true;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return false;
+      }
+    }
+    public boolean addEmployee(String firstName, String lastName, String login, String password){
+      try
+      {
+        stmt.executeUpdate("insert into employee (firstName,lastName,login,passw)\n" +
+                           "values ('"+firstName+"','"+lastName+"','"+login+"','"+password+"')");
+        return true;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return false;
+      }
+    }
+    public boolean addMember(String firstName, String lastName,String mail, String login, String password, int categoryMember){
+      try
+      {
+        stmt.executeUpdate("insert into employee (firstName,lastName,mail,login,passw,categoryMember)\n" +
+                           "values ('"+firstName+"','"+lastName+"','"+mail+"','"+login+"','"+password+"',"+categoryMember+")");
+        return true;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return false;
+      }
+    }
+    public boolean addScreening(String datetime, int numberSeat, int ticketsBoughts, int discount){
+      try
+      {
+        stmt.executeUpdate("insert into employee (tim,numberSeat,ticketsBoughts,discount)\n" +
+                           "values ('"+datetime+"',"+numberSeat+","+ticketsBoughts+","+discount+")");
+        return true;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return false;
+      }
+    }
+    public ArrayList<String> getScreening(String dateTime){
+      try
+      {
+        ResultSet resultSet = stmt.executeQuery("select * from project.screening\n" +
+                            "where datetim = '"+dateTime+"'");
+        ArrayList<String> result = new ArrayList<String>();
+        int numRows = resultSet.getRow();
+        ResultSetMetaData meta = resultSet.getMetaData();
+         for (int row = 0; row < numRows; row++)
+         {
+            for (int col = 0; col < meta.getColumnCount(); col++)
+               result.add(resultSet.getString(col + 1));
+            resultSet.next();
+         }
+         return result;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return null;
       }
     }
 }
