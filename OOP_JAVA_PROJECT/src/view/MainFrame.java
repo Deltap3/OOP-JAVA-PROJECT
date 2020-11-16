@@ -42,15 +42,31 @@ public class MainFrame extends JFrame{
         //first panel
         initMap.put("Customer", 1);
         initMap.put("Employee", 8);
-        panelsList.add(new ButtonMenuPanel(this, "welcome\n are you a custommer or an employee?\n", initMap));
+        ButtonMenuPanel panel0=new ButtonMenuPanel(this, "welcome\n are you a custommer or an employee?\n", initMap);
+        panelsList.add(panel0);
+        this.add(panel0);
         initMap.clear();
         
         //second panel
-        initMap.put("Guest", 2);
-        initMap.put("Member", 5);
-        panelsList.add(new ButtonMenuPanel(this, "are you a guest or a member?\n", initMap));
+        initMap.put("Guest", 4);
+        initMap.put("Member", 2);
+        ButtonMenuPanel panel1=new ButtonMenuPanel(this, "are you a guest or a member?\n", initMap);
+        panelsList.add(panel1);
+        this.add(panel1);
         initMap.clear();
         
+        
+        //third panel
+        LoginPanel panel2= new LoginPanel(this, "member", 1, 3);
+        panelsList.add(panel2);
+        this.add(panel2);
+        
+        /*
+        //9th panel
+        LoginPanel panel8= new LoginPanel(this, "employee", 0, 9);
+        panelsList.add(panel8);
+        this.add(panel8);
+        */
         pack();
     }
     public ArrayList<JPanel> getPanels()

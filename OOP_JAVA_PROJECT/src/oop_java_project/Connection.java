@@ -60,6 +60,24 @@ public class Connection {
          return null;
       }
     }
+    public boolean loginIsCorrect(String table, String login, String password)
+    {
+        try
+      {
+         ResultSet resultSet = stmt.executeQuery("select * from "+table+"\n" +
+                           "where login = '" + login + "' and passw = '" + password + "'");
+         if(resultSet.next())
+            return true;
+         else
+             return false;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+          System.out.println("non");
+         return false;
+      }
+    }
     public boolean memberExist(String login, String password){
       try
       {

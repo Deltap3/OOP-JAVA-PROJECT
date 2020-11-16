@@ -45,7 +45,7 @@ public class ButtonMenuPanel extends JPanel{
             this.add(btn);
         }
         
-        frame.add(this);
+        
         
     }
     
@@ -59,6 +59,7 @@ public class ButtonMenuPanel extends JPanel{
         }
         public void actionPerformed(ActionEvent e)
         {
+            
             myFrame.setContentPane(myFrame.getPanels().get(myInt));
             invalidate();
             validate();
