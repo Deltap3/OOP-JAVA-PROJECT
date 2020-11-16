@@ -12,6 +12,8 @@ package oop_java_project;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Connection {
     private final java.sql.Connection conn;
@@ -29,50 +31,33 @@ public class Connection {
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     }
-    public void getAllFromTable(String query) throws SQLException {
+    private ArrayList<String> getResult(ResultSet resultSet){
+        try {
+            ArrayList<String> result = new ArrayList<String>();
+            int numRows = resultSet.getRow();
+            ResultSetMetaData meta = resultSet.getMetaData();
+            for (int row = 0; row < numRows; row++)
+            {
+                for (int col = 0; col < meta.getColumnCount(); col++)
+                    result.add(resultSet.getString(col + 1));
+                resultSet.next();
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public ArrayList<String> getAllFromTable(String query) throws SQLException {
       try
       {
-         // Execute the query.
          ResultSet resultSet = stmt.executeQuery("select * from " + query);
-
-         // Get the number of rows.
-         resultSet.last();                 // Move to last row
-         int numRows = resultSet.getRow(); // Get row number
-         resultSet.first();                // Move to first row
-
-         // Get a metadata object for the result set.
-         ResultSetMetaData meta = resultSet.getMetaData();
-
-         // Create an array of Strings for the column names.
-         String [] colNames = new String[meta.getColumnCount()];
-
-         // Store the column names in the colNames array.
-         for (int i = 0; i < meta.getColumnCount(); i++)
-         {
-            // Get a column name.
-            colNames[i] = meta.getColumnLabel(i+1);
-            System.out.print(colNames[i] + "  ");
-         }
-          System.out.println("");
-         // Create a 2D String array for the table data.
-         String [][] tableData = new String[numRows][meta.getColumnCount()];
-
-         // Store the columns in the tableData array.
-         for (int row = 0; row < numRows; row++)
-         {
-            for (int col = 0; col < meta.getColumnCount(); col++)
-            {
-               tableData[row][col] = resultSet.getString(col + 1);
-               System.out.print(tableData[row][col] + "  ");
-            }
-             System.out.println("");
-            // Go to the next row in the ResultSet.
-            resultSet.next();
-         }
+         return getResult(resultSet);
       }
       catch (SQLException ex)
       {
          ex.printStackTrace();
+         return null;
       }
     }
     public boolean memberExist(String login, String password){
@@ -161,21 +146,67 @@ public class Connection {
          return false;
       }
     }
-    public ArrayList<String> getScreening(String dateTime){
+    public ArrayList<String> getScreeningFrom(String dateTime){
       try
       {
-        ResultSet resultSet = stmt.executeQuery("select * from project.screening\n" +
+        ResultSet resultSet = stmt.executeQuery("select * from screening\n" +
                             "where datetim = '"+dateTime+"'");
-        ArrayList<String> result = new ArrayList<String>();
-        int numRows = resultSet.getRow();
-        ResultSetMetaData meta = resultSet.getMetaData();
-         for (int row = 0; row < numRows; row++)
-         {
-            for (int col = 0; col < meta.getColumnCount(); col++)
-               result.add(resultSet.getString(col + 1));
-            resultSet.next();
-         }
-         return result;
+        return getResult(resultSet);
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return null;
+      }
+    }
+    public ArrayList<String> getMoviesFrom(String dateTime){
+      try
+      {
+        ResultSet resultSet = stmt.executeQuery("select * from movies\n" +
+                            "inner join screening on movies.movieId = screening.movieId"+
+                            "where datetim = '"+dateTime+"'");
+        return getResult(resultSet);
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return null;
+      }
+    }
+    public boolean addDiscount(String start, String end, int discount){
+      try
+      {
+        ResultSet resultSet = stmt.executeQuery("update screening\n" +
+                                                "set discount ='"+discount+"'\n" +
+                                                "where datetim <'"+end+"' and datetim >'"+start+"'");
+         return true;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return false;
+      }
+    }
+    public ArrayList<String> findClient(String firstName, String lastName, String mail){
+        try
+        {
+          ResultSet resultSet = stmt.executeQuery("select * from members\n" +
+                            "where firstName = '"+firstName+"' and lastName = '"+lastName+"' and mail = '"+mail+"'");
+          return getResult(resultSet);
+        }
+        catch (SQLException ex)
+        {
+           ex.printStackTrace();
+           return null;
+        }
+    }
+    public ArrayList<String> getMoviesWihtoutScreenings(String dateTime){
+      try
+      {
+        ResultSet resultSet = stmt.executeQuery("select * from movies\n" +
+                        "inner join screening on movies.movieId = screening.movieId\n" +
+                        "where screening.movieId is null");
+        return getResult(resultSet);
       }
       catch (SQLException ex)
       {
