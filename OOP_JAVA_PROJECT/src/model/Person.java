@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oop_java_project;
+package model;
 
 /**
  *
@@ -13,12 +13,12 @@ public class Person {
     
     private String first_name;
     private String last_name;
-    private String mail;
+    
+    public Person(){}
 
-    public Person(String first_name, String last_name, String mail) {
+    public Person(String first_name, String last_name) {
         this.first_name = first_name;
         this.last_name = last_name;
-        this.mail = mail;
     }
     public void setFirstName(String m_first_name)
     {
@@ -38,14 +38,6 @@ public class Person {
     return this.last_name;
     }
   
-    public void setMail(String m_mail)
-    {
-    this.mail=m_mail;
-    }
-    public String getMail()
-    {
-    return this.mail;
-    }
     
     
 }

@@ -3,21 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oop_java_project;
+package model;
 
 /**
  *
  * @author davidzhong
  */
-public class Employees extends Person{
+public class CustomerMember extends Person{
     
     private int login_ID;
     private String password;
+    private String category_member;
 
-    public Employees(int login_ID, String password, String first_name, String last_name, String mail) {
-        super(first_name, last_name, mail);
-        this.login_ID = login_ID;
+    public CustomerMember(){}
+    public CustomerMember(int loginID, String password,String category_member, String first_name, String last_name) {
+        super(first_name, last_name);
+        this.login_ID = loginID;
         this.password = password;
+        this.category_member=category_member;
     }
     
     public void setLoginID(int m_id)
@@ -38,9 +41,18 @@ public class Employees extends Person{
     return this.password;
     }
     
+    public void setCategoryMember(String m_categoryMember)
+    {
+    this.category_member=m_categoryMember;
+    }
+    public String getCategoryMember()
+    {
+    return this.category_member;
+    }
     
     
     
+  
     
     
 }

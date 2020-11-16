@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oop_java_project;
+package model;
 
 /**
  *
@@ -77,59 +77,9 @@ public class Connection {
          return false;
       }
     }
-    //////////////////////////////Add///////////////////////////////
-    public boolean addMovie(String title, String genre, String releaseDate, int runTime, String image){
-      try
-      {
-        stmt.executeUpdate("insert into movies (title,genre,releaseDate,runTime,image)\n" +
-                           "values ('"+title+"','"+genre+"','2001-01-02',"+runTime+",'"+image+"')");
-        return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
-    public boolean addEmployee(String firstName, String lastName, String login, String password){
-      try
-      {
-        stmt.executeUpdate("insert into employee (firstName,lastName,login,passw)\n" +
-                           "values ('"+firstName+"','"+lastName+"','"+login+"','"+password+"')");
-        return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
-    public boolean addMember(String firstName, String lastName,String mail, String login, String password, int categoryMember){
-      try
-      {
-        stmt.executeUpdate("insert into employee (firstName,lastName,mail,login,passw,categoryMember)\n" +
-                           "values ('"+firstName+"','"+lastName+"','"+mail+"','"+login+"','"+password+"',"+categoryMember+")");
-        return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
-    public boolean addScreening(String datetime, int numberSeat, int ticketsBoughts, int discount){
-      try
-      {
-        stmt.executeUpdate("insert into employee (tim,numberSeat,ticketsBoughts,discount)\n" +
-                           "values ('"+datetime+"',"+numberSeat+","+ticketsBoughts+","+discount+")");
-        return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
+    
+    
+  
     public boolean addDiscount(String start, String end, int discount){
       try
       {
@@ -145,30 +95,7 @@ public class Connection {
       }
     }
     
-     ////////////////////Delete////////////////////////
-    public void deleteEmployees(Employees obj) {
-        try{
-            conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM COURS WHERE id ="+ obj.getLoginID());
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
     
-    public void deleteMembers(CustomerMembers obj) {
-        try{
-            conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM COURS WHERE id ="+ obj.getLoginID());
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-    }
-    
-     public void deleteMovie(Movie obj) {
-        try{
-            conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM COURS WHERE id ="+ obj.getIdMovie());
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-    }
      
     
     ////////

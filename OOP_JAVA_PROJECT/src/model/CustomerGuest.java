@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oop_java_project;
+package model;
 
 /**
  *
  * @author davidzhong
  */
-public class CustomerGuests extends Person{
+public class CustomerGuest extends Person{
 
-    public CustomerGuests(String first_name, String last_name, String mail) {
-        super(first_name, last_name, mail);
+    public CustomerGuest(String first_name, String last_name) {
+        super(first_name, last_name);
     }
      
     
