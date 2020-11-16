@@ -14,12 +14,14 @@ public class MenuFrame extends javax.swing.JFrame {
 
     private JPanel customerPanel1;
     private JPanel employeeLoginPanel;
+    private JPanel memberLoginPanel;
+    private JPanel buyTicketsPanel;
     /**
      * Creates new form MenuFrame
      */
     public MenuFrame() {
+        
         initComponents();
-        buidCustomerPanel1();
         setVisible(true);
     }
 
@@ -38,6 +40,11 @@ public class MenuFrame extends javax.swing.JFrame {
         
         
         JButton buttonMember= new JButton("Member");
+        buttonMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMemberActionPerformed(evt);
+            }
+        });
         
         
         GroupLayout layout = new GroupLayout(customerPanel1);
@@ -162,6 +169,7 @@ public class MenuFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        buidCustomerPanel1();
         setContentPane(customerPanel1);
         invalidate();
         validate();
@@ -175,7 +183,15 @@ public class MenuFrame extends javax.swing.JFrame {
 
     private void buttonGuestActionPerformed(ActionEvent evt)
     {
-        
+        setContentPane(buyTicketsPanel);
+        invalidate();
+        validate();
+    }
+    private void buttonMemberActionPerformed(ActionEvent evt)
+    {
+        setContentPane(memberLoginPanel);
+        invalidate();
+        validate();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
