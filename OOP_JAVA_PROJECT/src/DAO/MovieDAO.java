@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Movie;
+import java.util.ArrayList;
 /**
  *
  * @author davidzhong
@@ -19,6 +20,7 @@ public class MovieDAO extends DAO<Movie>{
     {
     super(conn);
     }
+
     
     
     public Movie add(Movie obj){
@@ -67,4 +69,45 @@ public class MovieDAO extends DAO<Movie>{
         return movie;
     
 }
+  public Movie getMovieByDateTime(String dateTime){
+           Movie m = new Movie();
+                   try{
+            ResultSet result = this.connect.createStatement().executeQuery("select * from movies\n" +
+                            "inner join screening on movies.movieId = screening.movieId"+
+                            "where datetim = '"+dateTime+"'");
+            
+            
+            while(result.next()){
+            
+                m = new Movie(result.getInt("movieId"),
+                        result.getString("title"),result.getString("genre"),
+                        result.getString("director"),result.getString("releaseDate"),
+                        result.getInt("runTime"),result.getString("image"));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return m;
+    }
+
+  
+  public ArrayList<Movie> getAllMovie(){
+        ArrayList<Movie> listMovie = new ArrayList<>();
+        Movie m = new Movie();
+        try{
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM movies");
+            while(result.next()){
+                m = new Movie(result.getInt("movieId"),
+                        result.getString("title"),result.getString("genre"),
+                        result.getString("director"),result.getString("releaseDate"),
+                        result.getInt("runTime"),result.getString("image"));
+                       
+                listMovie.add(m);
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return listMovie;
+    }
+  
 }

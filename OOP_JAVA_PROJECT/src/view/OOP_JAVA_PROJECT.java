@@ -8,7 +8,8 @@ package view;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Connection;
+import model.Connections;
+import DAO.*;
 
 /**
  *
@@ -21,8 +22,10 @@ public class OOP_JAVA_PROJECT {
      */
     public static void main(String[] args) {
         try { 
-            Connection dataBase = new Connection("project", "root", "password");
-            dataBase.getScreeningFrom("2000-03-23 23:30:30");
+            
+            Connections dataBase = new Connections("project", "root", "password");
+            DAO dao=new MovieDAO(dataBase);
+            //dataBase.getScreeningFrom("2000-03-23 23:30:30");
         } catch (SQLException ex) {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

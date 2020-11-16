@@ -15,22 +15,43 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Connection {
-    private final java.sql.Connection conn;
-    private final Statement stmt;
+public class Connections {
+    
+    private static Connection conn;
+    private Statement stmt;
     private ResultSet rset;
     private ResultSetMetaData rsetMeta;
+    private static String urlDatabase;
+    private static String loginDatabase;
+    private static String passwordDatabase;
     
-    public Connection(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException{
+    public Connections(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException{
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
         // url de connexion
-        String urlDatabase = "jdbc:mysql://localhost:3306/" + nameDatabase+"?useSSL=false";
-        //création d'une connexion JDBC à la base 
-        conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
+        this.urlDatabase = "jdbc:mysql://localhost:3306/" + nameDatabase+"?useSSL=false";
+        this.loginDatabase=loginDatabase;
+        this.passwordDatabase=passwordDatabase;
+        
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     }
+    
+     public static Connection getInstance(){
+       if(conn == null){
+           try{
+               conn = DriverManager.getConnection(urlDatabase,loginDatabase,passwordDatabase);
+               System.out.println("Connexion BDD réussie");
+           }catch (SQLException ex){
+               ex.getMessage();
+               System.out.println("Connexion BDD ratée");
+           }
+           
+       }
+       return conn;
+   }
+ 
+    
     private ArrayList<String> getResult(ResultSet resultSet){
         try {
             ArrayList<String> result = new ArrayList<String>();
@@ -44,7 +65,7 @@ public class Connection {
             }
             return result;
         } catch (SQLException ex) {
-            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Connections.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -95,40 +116,6 @@ public class Connection {
       }
     }
     
-    
-     
-    
-    ////////
-    
-    public ArrayList<String> getScreeningFrom(String dateTime){
-      try
-      {
-        ResultSet resultSet = stmt.executeQuery("select * from screening\n" +
-                            "where datetim = '"+dateTime+"'");
-        return getResult(resultSet);
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return null;
-      }
-    }
-    public ArrayList<String> getMoviesFrom(String dateTime){
-      try
-      {
-        ResultSet resultSet = stmt.executeQuery("select * from movies\n" +
-                            "inner join screening on movies.movieId = screening.movieId"+
-                            "where datetim = '"+dateTime+"'");
-        return getResult(resultSet);
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return null;
-      }
-    }
-    
-   
     
     public ArrayList<String> findClient(String firstName, String lastName, String mail){
         try

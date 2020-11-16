@@ -51,13 +51,12 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
             ex.getMessage();
         }
     }
-    
     public CustomerMember find(int id)
     {
       CustomerMember member = new CustomerMember();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM COURS WHERE id = " + id);
-            if(result.first()){
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE login = " + id);
+            if(result.first() && result.first()){
                 member = new CustomerMember(id,
                         result.getString("passw"),result.getString("categoryMember"),
                         result.getString("firstName"),result.getString("lastName"));
@@ -68,5 +67,26 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
         }
         return member;
     }
+    
+    public CustomerMember findFromLoginPassword(int id, String password)
+    {
+      CustomerMember member = new CustomerMember();
+        try{
+            ResultSet result1 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE login = " + id);
+            ResultSet result2 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE passw = " + password);
+            if(result1.first() && result2.first()){
+                member = new CustomerMember(id,
+                        password,result1.getString("categoryMember"),
+                        result1.getString("firstName"),result1.getString("lastName"));
+               
+            }
+        }catch(SQLException ex){
+            ex.getMessage();
+        }
+        return member;
+    }
+    
+    
+    
     
 }

@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.Movie;
+import java.util.ArrayList;
 import model.Screening;
 
 /**
@@ -59,7 +59,7 @@ public class ScreeningDAO extends DAO<Screening> {
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM COURS WHERE id = " + id);
             if(result.first()){
                 screening = new Screening(id,
-                        result.getInt("movieID"),result.getString("datetim"),
+                        result.getInt("movieId"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
                         result.getInt("discount"));
                
@@ -71,5 +71,46 @@ public class ScreeningDAO extends DAO<Screening> {
         }
         return screening;
     
+}//////////////Get Screening by DateTime////////////
+    public Screening getScreeningByDateTime(String dateTime){
+           Screening s = new Screening();
+                   try{
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM screening WHERE datetim = '" + dateTime + "'");
+            while(result.next()){
+            
+                s = new Screening(result.getInt("screeningID"),
+                        result.getInt("movieId"),dateTime,
+                        result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
+                        result.getInt("discount"));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return s;
+    }
+
+  ////////List of all the Screening
+  public ArrayList<Screening> getAllScreening(){
+        ArrayList<Screening> listScreening = new ArrayList<>();
+        Screening s = new Screening();
+        try{
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM screening");
+            while(result.next()){
+                s = new Screening(result.getInt("screeningID"),
+                        result.getInt("movieId"),result.getString("datetim"),
+                        result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
+                        result.getInt("discount"));
+                       
+                listScreening.add(s);
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return listScreening;
+    }
+  
 }
-}
+
+  
+  
+
