@@ -4,12 +4,7 @@
  * and open the template in the editor.
  */
 package oop_java_project;
-
-
 import java.sql.Date;
-import  java.util.GregorianCalendar;
-
-
 /**
  *
  * @author davidzhong
