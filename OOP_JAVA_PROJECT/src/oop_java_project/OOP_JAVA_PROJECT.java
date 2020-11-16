@@ -5,9 +5,7 @@
  */
 package oop_java_project;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
