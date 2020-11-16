@@ -5,8 +5,6 @@
  */
 package oop_java_project;
 import java.sql.Date;
-import  java.util.GregorianCalendar;
-
 /**
  *
  * @author davidzhong
