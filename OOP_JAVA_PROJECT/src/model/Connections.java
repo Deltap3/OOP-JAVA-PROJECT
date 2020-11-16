@@ -32,7 +32,7 @@ public class Connections {
         this.urlDatabase = "jdbc:mysql://localhost:3306/" + nameDatabase+"?useSSL=false";
         this.loginDatabase=loginDatabase;
         this.passwordDatabase=passwordDatabase;
-        
+        getInstance();
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     }

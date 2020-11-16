@@ -13,9 +13,9 @@ import model.Employee;
  *
  * @author davidzhong
  */
-public class EmployeesDAO extends DAO<Employee>{
+public class EmployeeDAO extends DAO<Employee>{
     
-    public EmployeesDAO(Connection con)
+    public EmployeeDAO(Connection con)
     {
     super(con);
     }
