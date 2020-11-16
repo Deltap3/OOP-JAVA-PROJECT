@@ -8,6 +8,7 @@ package oop_java_project;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import view.MainFrame;
 
 /**
  *
@@ -19,6 +20,7 @@ public class OOP_JAVA_PROJECT {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        /*
         try { 
 
             Connection dataBase = new Connection("project", "root", "projetJava2020");
@@ -26,13 +28,12 @@ public class OOP_JAVA_PROJECT {
             dataBase.memberExist("Pierre31", "Pierrot");
             dataBase.memberExist("Dav45", "dd45dd");
 
-            dataBase.getScreening("2000-03-23 23:30:30");
 
         } catch (SQLException ex) {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        MenuFrame menu= new MenuFrame();
+        }*/
+        MainFrame frame= new MainFrame();
     }
 }
