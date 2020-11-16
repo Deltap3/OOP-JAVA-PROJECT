@@ -77,6 +77,7 @@ public class Connection {
          return false;
       }
     }
+    //////////////////////////////Add///////////////////////////////
     public boolean addMovie(String title, String genre, String releaseDate, int runTime, String image){
       try
       {
@@ -129,6 +130,49 @@ public class Connection {
          return false;
       }
     }
+    public boolean addDiscount(String start, String end, int discount){
+      try
+      {
+        ResultSet resultSet = stmt.executeQuery("update screening\n" +
+                                                "set discount ='"+discount+"'\n" +
+                                                "where datetim <'"+end+"' and datetim >'"+start+"'");
+         return true;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+         return false;
+      }
+    }
+    
+     ////////////////////Delete////////////////////////
+    public void deleteEmployees(Employees obj) {
+        try{
+            conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM COURS WHERE id ="+ obj.getLoginID());
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void deleteMembers(CustomerMembers obj) {
+        try{
+            conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM COURS WHERE id ="+ obj.getLoginID());
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+     public void deleteMovie(Movie obj) {
+        try{
+            conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM COURS WHERE id ="+ obj.getIdMovie());
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+     
+    
+    ////////
+    
     public ArrayList<String> getScreeningFrom(String dateTime){
       try
       {
@@ -156,20 +200,9 @@ public class Connection {
          return null;
       }
     }
-    public boolean addDiscount(String start, String end, int discount){
-      try
-      {
-        ResultSet resultSet = stmt.executeQuery("update screening\n" +
-                                                "set discount ='"+discount+"'\n" +
-                                                "where datetim <'"+end+"' and datetim >'"+start+"'");
-         return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
+    
+   
+    
     public ArrayList<String> findClient(String firstName, String lastName, String mail){
         try
         {
