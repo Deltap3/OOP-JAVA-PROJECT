@@ -44,7 +44,7 @@ public class EmployeeDAO extends DAO<Employee>{
   {
   try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM employee WHERE id ="+ obj.getLoginID());
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM employee WHERE login ="+ obj.getLoginID());
         }catch(SQLException ex){
             ex.getMessage();
         }
@@ -53,7 +53,7 @@ public class EmployeeDAO extends DAO<Employee>{
   public Employee find(int id) {
          Employee emp = new Employee();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM COURS WHERE id = " + id);
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM employee WHERE login = " + id);
             if(result.first()){
                 emp = new Employee(id,
                         result.getString("passw"),

@@ -46,7 +46,7 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
     {
          try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM members WHERE id ="+ obj.getLoginID());
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM members WHERE login ="+ obj.getLoginID());
         }catch(SQLException ex){
             ex.getMessage();
         }

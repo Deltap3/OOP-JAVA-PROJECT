@@ -27,7 +27,7 @@ public class ScreeningDAO extends DAO<Screening> {
     public Screening add(Screening obj){
       try
       {
-          String sql = ("insert into employee (tim,numberSeat,ticketsBoughts,discount)\n" +
+          String sql = ("insert into screening (tim,numberSeat,ticketsBoughts,discount)\n" +
                            "values ('"+obj.getDateTime()+"',"+obj.getNumberseat()+","+obj.getTicketsBoughts()+","+obj.getDiscount()+")");
           PreparedStatement stmt = connect.prepareStatement(sql); 
           
@@ -47,7 +47,7 @@ public class ScreeningDAO extends DAO<Screening> {
   {
   try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM movies WHERE id ="+ obj.getIdScreening());
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE screeningID ="+ obj.getIdScreening());
         }catch(SQLException ex){
             ex.getMessage();
         }
@@ -56,7 +56,7 @@ public class ScreeningDAO extends DAO<Screening> {
   public Screening find(int id) {
          Screening screening = new Screening();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM COURS WHERE id = " + id);
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM screening WHERE screeningID = " + id);
             if(result.first()){
                 screening = new Screening(id,
                         result.getInt("movieId"),result.getString("datetim"),

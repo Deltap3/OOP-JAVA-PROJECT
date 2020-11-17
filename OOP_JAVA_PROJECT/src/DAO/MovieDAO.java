@@ -46,7 +46,7 @@ public class MovieDAO extends DAO<Movie>{
   {
   try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM movies WHERE id ="+ obj.getIdMovie());
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM movies WHERE movieId ="+ obj.getIdMovie());
         }catch(SQLException ex){
             ex.getMessage();
         }
@@ -55,7 +55,7 @@ public class MovieDAO extends DAO<Movie>{
   public Movie find(int id) {
          Movie movie = new Movie();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM COURS WHERE id = " + id);
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM movies WHERE movieId = " + id);
             if(result.first()){
                 movie = new Movie(id,
                         result.getString("title"),result.getString("genre"),
