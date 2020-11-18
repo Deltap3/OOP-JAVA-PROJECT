@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oop_java_project;
+
+package model;
+
 import java.sql.Date;
 /**
  *
@@ -12,18 +14,22 @@ import java.sql.Date;
 public class Movie {
     
     private int IDmovie;
-    private String name;
+    private String title;
     private String genre;
     private String director;
-    Date release_date;
+    private String release_date;
     private int run_time_minute;
+    private String image;
 
-    public Movie(String name, String genre, String director, Date release_date, int run_time_minute) {
-        this.name = name;
+    public Movie(){}
+    public Movie(int IDmovie, String title, String genre, String director, String release_date, int run_time_minute, String image) {
+        this.IDmovie= IDmovie;
+        this.title = title;
         this.genre = genre;
         this.director = director;
         this.release_date = release_date;
         this.run_time_minute = run_time_minute;
+        this.image=image;
     }
     
     public void setIdMovie(int m_idmovie)
@@ -35,13 +41,13 @@ public class Movie {
     return this.IDmovie;
     }
     
-    public void setName(String m_name)
+    public void setTitle(String m_title)
     {
-    this.name=m_name;
+    this.title=m_title;
     }
-    public String getName()
+    public String getTitle()
     {
-    return this.name;
+    return this.title;
     }
     
     public void setGenre(String m_genre)
@@ -62,11 +68,11 @@ public class Movie {
     return this.director;
     }
     
-    public void setReleaseDate(Date m_release_date)
+    public void setReleaseDate(String m_release_date)
     {
         this.release_date=m_release_date;
     }
-    public Date getReleaseDate()
+    public String getReleaseDate()
     {
         return this.release_date;
     }
@@ -80,6 +86,14 @@ public class Movie {
     return this.run_time_minute;
     }
     
+    public void setImage(String m_image)
+    {
+    this.image=m_image;
+    }
+    public String getImage()
+    {
+    return this.image;
+    }
     
     
     

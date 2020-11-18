@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oop_java_project;
+package model;
 
 /**
  *
@@ -15,22 +15,43 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Connection {
-    private final java.sql.Connection conn;
-    private final Statement stmt;
+public class Connections {
+    
+    private static Connection conn;
+    private Statement stmt;
     private ResultSet rset;
     private ResultSetMetaData rsetMeta;
+    private static String urlDatabase;
+    private static String loginDatabase;
+    private static String passwordDatabase;
     
-    public Connection(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException{
+    public Connections(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException{
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
         // url de connexion
-        String urlDatabase = "jdbc:mysql://localhost:3306/" + nameDatabase+"?useSSL=false";
-        //création d'une connexion JDBC à la base 
-        conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
+        this.urlDatabase = "jdbc:mysql://localhost:3306/" + nameDatabase+"?useSSL=false";
+        this.loginDatabase=loginDatabase;
+        this.passwordDatabase=passwordDatabase;
+        getInstance();
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     }
+    
+     public static Connection getInstance(){
+       if(conn == null){
+           try{
+               conn = DriverManager.getConnection(urlDatabase,loginDatabase,passwordDatabase);
+               System.out.println("Connexion BDD réussie");
+           }catch (SQLException ex){
+               ex.getMessage();
+               System.out.println("Connexion BDD ratée");
+           }
+           
+       }
+       return conn;
+   }
+ 
+    
     private ArrayList<String> getResult(ResultSet resultSet){
         try {
             ArrayList<String> result = new ArrayList<String>();
@@ -44,7 +65,7 @@ public class Connection {
             }
             return result;
         } catch (SQLException ex) {
-            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Connections.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -112,85 +133,9 @@ public class Connection {
          return false;
       }
     }
-    public boolean addMovie(String title, String genre, String releaseDate, int runTime, String image){
-      try
-      {
-        stmt.executeUpdate("insert into movies (title,genre,releaseDate,runTime,image)\n" +
-                           "values ('"+title+"','"+genre+"','2001-01-02',"+runTime+",'"+image+"')");
-        return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
-    public boolean addEmployee(String firstName, String lastName, String login, String password){
-      try
-      {
-        stmt.executeUpdate("insert into employee (firstName,lastName,login,passw)\n" +
-                           "values ('"+firstName+"','"+lastName+"','"+login+"','"+password+"')");
-        return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
-    public boolean addMember(String firstName, String lastName,String mail, String login, String password, int categoryMember){
-      try
-      {
-        stmt.executeUpdate("insert into employee (firstName,lastName,mail,login,passw,categoryMember)\n" +
-                           "values ('"+firstName+"','"+lastName+"','"+mail+"','"+login+"','"+password+"',"+categoryMember+")");
-        return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
-    public boolean addScreening(String datetime, int numberSeat, int ticketsBoughts, int discount){
-      try
-      {
-        stmt.executeUpdate("insert into employee (tim,numberSeat,ticketsBoughts,discount)\n" +
-                           "values ('"+datetime+"',"+numberSeat+","+ticketsBoughts+","+discount+")");
-        return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
-    public ArrayList<String> getScreeningFrom(String dateTime){
-      try
-      {
-        ResultSet resultSet = stmt.executeQuery("select * from screening\n" +
-                            "where datetim = '"+dateTime+"'");
-        return getResult(resultSet);
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return null;
-      }
-    }
-    public ArrayList<String> getMoviesFrom(String dateTime){
-      try
-      {
-        ResultSet resultSet = stmt.executeQuery("select * from movies\n" +
-                            "inner join screening on movies.movieId = screening.movieId"+
-                            "where datetim = '"+dateTime+"'");
-        return getResult(resultSet);
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return null;
-      }
-    }
+    
+    
+  
     public boolean addDiscount(String start, String end, int discount){
       try
       {
@@ -205,6 +150,8 @@ public class Connection {
          return false;
       }
     }
+    
+    
     public ArrayList<String> findClient(String firstName, String lastName, String mail){
         try
         {
