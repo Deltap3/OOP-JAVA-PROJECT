@@ -49,17 +49,17 @@ insert into members (firstName,lastName,mail,login,passw,categoryMember) values
 ('Soline','GERMOND','patatedouce@gmail.com','soline789','sol7','23'),
 ('Guillauem','SAURY','nouillefroide@gmail.com','guillaume56','gui5','34'),
 ('Alexis','BOYADJAN','tablebasse@gmail.com','alexis002','alex0','45'),
-('Alec','PAQUERON','litposé@gmail.com','alec93','ale9','56'),
+('Alec','PAQUERON','litpose@gmail.com','alec93','ale9','56'),
 ('Valentine','LACOTTE','superfraise@gmail.com','valentine352','val3','12'),
-('Margaux','GOUJEAU','ultraik"a@gmail.com','margaux456','mar4','67');
+('Margaux','GOUJEAU','ultraikea@gmail.com','margaux456','mar4','67');
 
 insert into movies (title,genre,releaseDate,runTime,image) values
 ('Shrek','Animation','2001-07-04','90','shrek.jpg'),
-('Pirates des Caraïbes : La Malédiction du Black Pearl','Action','2003-08-13','142','pirates_des_caraibes.jpg'),
-('Avengers Infinity War','Super-héros','2018-04-25','149','avengers.jpg'),
-('Star Wars, épisode IV : Un nouvel espoir','Science-fiction','1977-07-11','121','star_wars.jpg'),
-('Le Seigneur des anneaux : La Communauté de l anneau','Fantasy','2001-12-19','178','seigneur_des_anneaux.jpg'),
-('Harry Potter à l école des sorciers','Fantastique','2001-12-05','152','harry_potter.jpg');
+('Pirates des Caraibes : La Malediction du Black Pearl','Action','2003-08-13','142','pirates_des_caraibes.jpg'),
+('Avengers Infinity War','Super-heros','2018-04-25','149','avengers.jpg'),
+('Star Wars, episode IV : Un nouvel espoir','Science-fiction','1977-07-11','121','star_wars.jpg'),
+('Le Seigneur des anneaux : La Communaute de l anneau','Fantasy','2001-12-19','178','seigneur_des_anneaux.jpg'),
+('Harry Potter a l ecole des sorciers','Fantastique','2001-12-05','152','harry_potter.jpg');
 
 insert into screening (movieId,datetim,numberSeat,ticketsBoughts,discount) values
 ('1','2020-12-05 08:30:00','100','70','0'),
