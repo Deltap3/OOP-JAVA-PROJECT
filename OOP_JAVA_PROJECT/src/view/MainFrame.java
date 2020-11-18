@@ -5,29 +5,30 @@
  */
 package view;
 
-import java.awt.BorderLayout;
+import model.*;
+
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Map;
-import javax.swing.BoxLayout;
+
 /**
  *
  * @author Juju
  */
 public class MainFrame extends JFrame{
+    
     private ArrayList<JPanel> panelsList;
     private final int WINDOW_WIDTH = 400;
     private final int WINDOW_HEIGHT = 300;
+    private Person user;
     
     public MainFrame()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+       // setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         
         setTitle("My movie theater");
         initComponents();
@@ -37,7 +38,8 @@ public class MainFrame extends JFrame{
     private void initComponents()
     {
         panelsList= new ArrayList<>();
-        Map<String, Integer> initMap= new HashMap<>();
+        Map<String, Integer> initMap= new LinkedHashMap<>();
+        //map based on insertion order
         
         //panel 0
         initMap.put("Customer", 1);
@@ -71,11 +73,45 @@ public class MainFrame extends JFrame{
         this.add(panel3);
         initMap.clear();
         
+        //panel 4
+        ScreeningChoicePanel panel4= new ScreeningChoicePanel(this, 5);
+        panelsList.add(panel4);
+        this.add(panel4);
+        
         /*
-        //9th panel
+        //panel 8
         LoginPanel panel8= new LoginPanel(this, "employee", 0, 9);
         panelsList.add(panel8);
         this.add(panel8);
+        
+        //panel 9
+        initMap.put("manage screenings", 10);
+        initMap.put("manage discounts", 13);
+        initMap.put("manage member customers",16);
+        initMap.put("show stats",21);
+        initMap.put("back", 8);
+        ButtonMenuPanel panel9=new ButtonMenuPanel(this, "what do you want to do?\n", initMap);
+        panelsList.add(panel9);
+        this.add(panel9);
+        initMap.clear();
+        
+        //panel 10
+        initMap.put("add screening session", 11);
+        initMap.put("Remove screening session", 12);
+        initMap.put("back", 9);
+        ButtonMenuPanel panel10=new ButtonMenuPanel(this, "what do you want to do?\n", initMap);
+        panelsList.add(panel10);
+        this.add(panel10);
+        initMap.clear();
+        
+        //panel 13
+        initMap.put("add screening session", 11);
+        initMap.put("Remove screening session", 12);
+        initMap.put("back", 9);
+        ButtonMenuPanel panel13=new ButtonMenuPanel(this, "discount type: \n", initMap);
+        panelsList.add(panel13);
+        this.add(panel13);
+        initMap.clear();
         */
         pack();
     }
