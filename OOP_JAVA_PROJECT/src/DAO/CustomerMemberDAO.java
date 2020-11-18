@@ -57,8 +57,8 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
         try{
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE login = " + id);
             if(result.first() && result.first()){
-                member = new CustomerMember(id,
-                        result.getString("passw"),result.getInt("categoryMember"),
+                member = new CustomerMember(id, result.getString("passw"),
+                        result.getString("mail"),result.getInt("categoryMember"),
                         result.getString("firstName"),result.getString("lastName"));
                
             }
@@ -76,7 +76,7 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
             ResultSet result2 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE passw = " + password);
             if(result1.first() && result2.first()){
                 member = new CustomerMember(id,
-                        password,result1.getInt("categoryMember"),
+                        password,result1.getString("mail"),result1.getInt("categoryMember"),
                         result1.getString("firstName"),result1.getString("lastName"));
                
             }
