@@ -22,6 +22,6 @@ public abstract class DAO<T>{
   
   public abstract void delete(T obj);
     
-  public abstract T find(int id);
+  public abstract T find(String id);
     
 }

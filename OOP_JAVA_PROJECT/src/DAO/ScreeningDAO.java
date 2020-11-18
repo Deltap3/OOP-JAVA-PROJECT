@@ -47,19 +47,20 @@ public class ScreeningDAO extends DAO<Screening> {
   {
   try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE screeningID ="+ obj.getIdScreening());
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE datetim = '"+ obj.getDateTime()+"'");
         }catch(SQLException ex){
             ex.getMessage();
         }
   }
   
-  public Screening find(int id) {
+  public Screening find(String datetime) {
          Screening screening = new Screening();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM screening WHERE screeningID = " + id);
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount FROM screening, movies\n" +
+                "WHERE screening.movieId = movies.movieId AND datetim = '" + datetime + "'");
             if(result.first()){
-                screening = new Screening(id,
-                        result.getInt("movieId"),result.getString("datetim"),
+                screening = new Screening(
+                        result.getString("movieId"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
                         result.getInt("discount"));
                
@@ -75,11 +76,12 @@ public class ScreeningDAO extends DAO<Screening> {
     public Screening getScreeningByDateTime(String dateTime){
            Screening s = new Screening();
                    try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM screening WHERE datetim = '" + dateTime + "'");
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount FROM screening, movies\n" +
+                "WHERE screening.movieId = movies.movieId AND datetim = '" + dateTime + "'");
             while(result.next()){
             
-                s = new Screening(result.getInt("screeningID"),
-                        result.getInt("movieId"),dateTime,
+                s = new Screening(
+                        result.getString("title"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
                         result.getInt("discount"));
             }
@@ -94,10 +96,10 @@ public class ScreeningDAO extends DAO<Screening> {
         ArrayList<Screening> listScreening = new ArrayList<>();
         Screening s = new Screening();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM screening");
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount FROM screening, movies\n" +
+                                                                            "WHERE screening.movieId = movies.movieId");
             while(result.next()){
-                s = new Screening(result.getInt("screeningID"),
-                        result.getInt("movieId"),result.getString("datetim"),
+                s = new Screening(result.getString("title"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
                         result.getInt("discount"));
                        
