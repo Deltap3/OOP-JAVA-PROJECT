@@ -46,20 +46,19 @@ public class MovieDAO extends DAO<Movie>{
   {
   try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM movies WHERE movieId ="+ obj.getIdMovie());
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM movies WHERE title = '"+ obj.getTitle()+"'");
         }catch(SQLException ex){
             ex.getMessage();
         }
   }
   
-  public Movie find(int id) {
+  public Movie find(String movieName) {
          Movie movie = new Movie();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM movies WHERE movieId = " + id);
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM movies WHERE title = '" + movieName +"'");
             if(result.first()){
-                movie = new Movie(id,
-                        result.getString("title"),result.getString("genre"),
-                        result.getString("director"),result.getString("releaseDate"),
+                movie = new Movie(result.getString("title"),
+                        result.getString("genre"),result.getString("releaseDate"),
                         result.getInt("runTime"),result.getString("image"));
                
             }
@@ -79,9 +78,8 @@ public class MovieDAO extends DAO<Movie>{
             
             while(result.next()){
             
-                m = new Movie(result.getInt("movieId"),
-                        result.getString("title"),result.getString("genre"),
-                        result.getString("director"),result.getString("releaseDate"),
+                m = new Movie(result.getString("title"),
+                        result.getString("genre"),result.getString("releaseDate"),
                         result.getInt("runTime"),result.getString("image"));
             }
         }catch(SQLException ex){
@@ -97,9 +95,8 @@ public class MovieDAO extends DAO<Movie>{
         try{
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM movies");
             while(result.next()){
-                m = new Movie(result.getInt("movieId"),
-                        result.getString("title"),result.getString("genre"),
-                        result.getString("director"),result.getString("releaseDate"),
+                m = new Movie(result.getString("title"),
+                        result.getString("genre"),result.getString("releaseDate"),
                         result.getInt("runTime"),result.getString("image"));
                        
                 listMovie.add(m);

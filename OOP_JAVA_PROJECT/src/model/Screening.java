@@ -11,39 +11,28 @@ package model;
  */
 public class Screening {
     
-    private int IDscreening;
-    private int IDmovie;
+    private String movieName;
     private String dateTime;
     private int number_seat;
     private int tickets_boughts;
     private int discount;
 
     public Screening(){}
-    public Screening(int IDscreening,int IDmovie, String datetime, int number_seat, int tickets_boughts, int discount) {
-        this.IDscreening=IDscreening;
-        this.IDmovie = IDmovie;
+    public Screening(String movieName, String datetime, int number_seat, int tickets_boughts, int discount) {
+        this.movieName = movieName;
         this.dateTime = datetime;
         this.number_seat = number_seat;
         this.tickets_boughts = tickets_boughts;
         this.discount= discount;
     }
     
-    public void getIdScreening(int m_id_screening)
+    public void getMovieName(String m_id_movie)
     {
-    this.IDscreening=m_id_screening;
+    this.movieName=m_id_movie;
     }
-    public int getIdScreening()
+    public String getMovieName()
     {
-    return this.IDscreening;
-    }
-    
-    public void getIdMovie(int m_id_movie)
-    {
-    this.IDmovie=m_id_movie;
-    }
-    public int getIdMovie()
-    {
-    return this.IDmovie;
+    return this.movieName;
     }
     
     public void setDateTime(String m_time)
