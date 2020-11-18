@@ -13,10 +13,10 @@ public class CustomerMember extends Person{
     
     private int login_ID;
     private String password;
-    private String category_member;
+    private int category_member;
 
     public CustomerMember(){}
-    public CustomerMember(int loginID, String password,String category_member, String first_name, String last_name) {
+    public CustomerMember(int loginID, String password,int category_member, String first_name, String last_name) {
         super(first_name, last_name);
         this.login_ID = loginID;
         this.password = password;
@@ -41,11 +41,11 @@ public class CustomerMember extends Person{
     return this.password;
     }
     
-    public void setCategoryMember(String m_categoryMember)
+    public void setCategoryMember(int m_categoryMember)
     {
     this.category_member=m_categoryMember;
     }
-    public String getCategoryMember()
+    public int getCategoryMember()
     {
     return this.category_member;
     }
