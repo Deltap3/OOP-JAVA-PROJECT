@@ -11,12 +11,16 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import model.*;
 import DAO.*;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 /**
@@ -28,6 +32,7 @@ public class ScreeningChoicePanel extends JPanel{
     public ScreeningChoicePanel(MainFrame frame, int nextPanel)
     {
         super();
+        setSize(new Dimension(1200,1400));
         setLayout(new SpringLayout());
         
         ButtonGroup group= new ButtonGroup();
@@ -46,23 +51,11 @@ public class ScreeningChoicePanel extends JPanel{
             
             
             final Movie m= movieCo.find(s.getMovieName());
-            this.add(new JPanel(){
-                
-                public void paintComponent(Graphics g)
-                {
-                  super.paintComponent(g);
-                  //drawing poster
-                  g.drawImage(m.getImage(), 0, 0, this);
-                  repaint();
-                }
-            });     
-            
-            JRadioButton choiceButton=new JRadioButton(s.getMovieName());
-            
-            choiceButton.addActionListener(new ChoiceActionListener(frame, nextPanel));
-            group.add(choiceButton);
-            this.add(choiceButton);
-            
+            Image scaledImage = m.getImage().getScaledInstance(this.getWidth()/6,this.getHeight()/(sessions.size()*2),Image.SCALE_SMOOTH);
+            JButton btn= new JButton(new ImageIcon(scaledImage));
+            btn.addActionListener(new ChoiceActionListener(frame, nextPanel));
+            this.add(btn);     
+            this.add(new JLabel(s.getMovieName()));
             this.add(new JLabel(s.getDateTime()));
             
         }
