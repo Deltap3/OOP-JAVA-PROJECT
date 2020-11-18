@@ -11,13 +11,13 @@ package model;
  */
 public class CustomerMember extends Person{
     
-    private int login_ID;
+    private String login_ID;
     private String password;
     private String mail;
     private int category_member;
 
     public CustomerMember(){}
-    public CustomerMember(int loginID, String password, String mail, int category_member, String first_name, String last_name) {
+    public CustomerMember(String loginID, String password, String mail, int category_member, String first_name, String last_name) {
         super(first_name, last_name);
         this.login_ID = loginID;
         this.password = password;
@@ -25,11 +25,11 @@ public class CustomerMember extends Person{
         this.category_member=category_member;
     }
     
-    public void setLoginID(int m_id)
+    public void setLoginID(String m_id)
     {
     this.login_ID=m_id;
     }
-    public int getLoginID()
+    public String getLoginID()
     {
     return this.login_ID;
     }

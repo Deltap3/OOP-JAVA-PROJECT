@@ -12,37 +12,24 @@ import java.sql.Date;
  */
 public class Movie {
     
-    private int IDmovie;
     private String title;
     private String genre;
-    private String director;
     private String release_date;
     private int run_time_minute;
     private String image;
 
     public Movie(){}
-    public Movie(int IDmovie, String title, String genre, String director, String release_date, int run_time_minute, String image) {
-        this.IDmovie= IDmovie;
+    public Movie(String title, String genre, String release_date, int run_time_minute, String image) {
         this.title = title;
         this.genre = genre;
-        this.director = director;
         this.release_date = release_date;
         this.run_time_minute = run_time_minute;
-        this.image=image;
-    }
-    
-    public void setIdMovie(int m_idmovie)
-    {
-    this.IDmovie=m_idmovie;
-    }
-    public int getIdMovie()
-    {
-    return this.IDmovie;
+        this.image = image;
     }
     
     public void setTitle(String m_title)
     {
-    this.title=m_title;
+    this.title = m_title;
     }
     public String getTitle()
     {
@@ -51,25 +38,16 @@ public class Movie {
     
     public void setGenre(String m_genre)
     {
-    this.genre=m_genre;
+    this.genre = m_genre;
     }
     public String getGenre()
     {
     return this.genre;
     }
     
-    public void setDirector(String m_director)
-    {
-    this.director=m_director;
-    }
-    public String getDirector()
-    {
-    return this.director;
-    }
-    
     public void setReleaseDate(String m_release_date)
     {
-        this.release_date=m_release_date;
+        this.release_date = m_release_date;
     }
     public String getReleaseDate()
     {
@@ -78,7 +56,7 @@ public class Movie {
     
     public void setRunTime(int m_run_time)
     {
-    this.IDmovie=m_run_time;
+    this.run_time_minute = m_run_time;
     }
     public int getRunTime()
     {

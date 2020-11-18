@@ -46,18 +46,18 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
     {
          try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM members WHERE login ="+ obj.getLoginID());
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM members WHERE login = '"+ obj.getLoginID()+"'");
         }catch(SQLException ex){
             ex.getMessage();
         }
     }
-    public CustomerMember find(int id)
+    public CustomerMember find(String login)
     {
       CustomerMember member = new CustomerMember();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE login = " + id);
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE login = '" + login+"'");
             if(result.first() && result.first()){
-                member = new CustomerMember(id, result.getString("passw"),
+                member = new CustomerMember(result.getString("login"), result.getString("passw"),
                         result.getString("mail"),result.getInt("categoryMember"),
                         result.getString("firstName"),result.getString("lastName"));
                
@@ -68,15 +68,15 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
         return member;
     }
     
-    public CustomerMember findFromLoginPassword(int id, String password)
+    public CustomerMember findFromLoginPassword(String login, String password)
     {
       CustomerMember member = new CustomerMember();
         try{
-            ResultSet result1 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE login = " + id);
-            ResultSet result2 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE passw = " + password);
+            ResultSet result1 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE login = '" + login+"'");
+            ResultSet result2 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE passw = '" + password+"'");
             if(result1.first() && result2.first()){
-                member = new CustomerMember(id,
-                        password,result1.getString("mail"),result1.getInt("categoryMember"),
+                member = new CustomerMember(result1.getString("login"),
+                        result1.getString("passw"),result1.getString("mail"),result1.getInt("categoryMember"),
                         result1.getString("firstName"),result1.getString("lastName"));
                
             }

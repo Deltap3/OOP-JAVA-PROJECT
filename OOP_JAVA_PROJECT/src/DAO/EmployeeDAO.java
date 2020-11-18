@@ -44,18 +44,18 @@ public class EmployeeDAO extends DAO<Employee>{
   {
   try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM employee WHERE login ="+ obj.getLoginID());
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM employee WHERE login = '"+ obj.getLoginID() + "'");
         }catch(SQLException ex){
             ex.getMessage();
         }
   }
   
-  public Employee find(int id) {
+  public Employee find(String login) {
          Employee emp = new Employee();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM employee WHERE login = " + id);
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM employee WHERE login = '" + login + "'");
             if(result.first()){
-                emp = new Employee(id,
+                emp = new Employee(result.getString("login"),
                         result.getString("passw"),
                         result.getString("firstName"),result.getString("lastName"));
                
