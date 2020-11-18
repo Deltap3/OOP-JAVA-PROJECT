@@ -102,7 +102,7 @@ public class Connections {
     public boolean memberExist(String login, String password){
       try
       {
-         ResultSet resultSet = stmt.executeQuery("select * from member\n" +
+         ResultSet resultSet = stmt.executeQuery("select * from members\n" +
                            "where login = '" + login + "' and passw = '" + password + "'");
          if(resultSet.next())
             return true;

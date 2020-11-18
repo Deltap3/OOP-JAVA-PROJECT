@@ -17,6 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SpringLayout;
 
 /**
  *
@@ -33,7 +34,7 @@ public class ButtonMenuPanel extends JPanel{
         super();
         
         //making a vertical alligned layout
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new SpringLayout());
         
         JLabel label=new JLabel(question);
         this.add(label);
@@ -45,7 +46,10 @@ public class ButtonMenuPanel extends JPanel{
             this.add(btn);
         }
         
-        
+        SpringUtilities.makeCompactGrid(this,
+                (buttonLink.size()+1), 1, //rows, cols
+                6, 6, //initX, initY
+                6, 6); //xPad, yPad
         
     }
     

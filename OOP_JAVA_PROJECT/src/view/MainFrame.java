@@ -39,7 +39,7 @@ public class MainFrame extends JFrame{
         panelsList= new ArrayList<>();
         Map<String, Integer> initMap= new HashMap<>();
         
-        //first panel
+        //panel 0
         initMap.put("Customer", 1);
         initMap.put("Employee", 8);
         ButtonMenuPanel panel0=new ButtonMenuPanel(this, "welcome\n are you a custommer or an employee?\n", initMap);
@@ -47,19 +47,29 @@ public class MainFrame extends JFrame{
         this.add(panel0);
         initMap.clear();
         
-        //second panel
+        //panel 1
         initMap.put("Guest", 4);
         initMap.put("Member", 2);
+        initMap.put("back", 0);
         ButtonMenuPanel panel1=new ButtonMenuPanel(this, "are you a guest or a member?\n", initMap);
         panelsList.add(panel1);
         this.add(panel1);
         initMap.clear();
         
         
-        //third panel
-        LoginPanel panel2= new LoginPanel(this, "member", 1, 3);
+        //panel 2
+        LoginPanel panel2= new LoginPanel(this, "members", 1, 3);
         panelsList.add(panel2);
         this.add(panel2);
+        
+        //panel 3
+        initMap.put("buy tickets", 4);
+        initMap.put("display info", 7);
+        initMap.put("back", 2);
+        ButtonMenuPanel panel3=new ButtonMenuPanel(this, "what do you want to do?\n", initMap);
+        panelsList.add(panel3);
+        this.add(panel3);
+        initMap.clear();
         
         /*
         //9th panel

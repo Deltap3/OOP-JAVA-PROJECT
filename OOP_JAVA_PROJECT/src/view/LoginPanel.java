@@ -5,14 +5,14 @@
  */
 package view;
 
-import oop_java_project.Connection;
+import model.Connections;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.SpringLayout;
-import oop_java_project.OOP_JAVA_PROJECT;
+
 
 /**
  *
@@ -86,8 +86,20 @@ public class LoginPanel extends JPanel {
 
         public void actionPerformed(ActionEvent e) {
             try {
-                Connection co = new Connection("project", "root", "projetJava2020");
-                if (co.loginIsCorrect(table, loginField.getText(), new String(pswField.getPassword()))) {
+                Connections co = new Connections("project", "root", "projetJava2020");
+                String login= loginField.getText();
+                String password= new String(pswField.getPassword());
+                System.out.println("login: "+login);
+                System.out.println("password: "+password);
+                boolean correct=false;
+                if(table.equals("members")){
+                 correct= co.memberExist(login, password);
+                }
+                else if(table.equals("employee"))
+                {
+                    correct= co.employeeExist(login, password);
+                }
+                if (correct) {
                     myFrame.setContentPane(myFrame.getPanels().get(numPanel));
                     invalidate();
                     validate();
@@ -107,6 +119,9 @@ public class LoginPanel extends JPanel {
                 JOptionPane.showMessageDialog(null, ex.getMessage(),"",JOptionPane.ERROR_MESSAGE);
 
             }
+            
+            loginField.setText("");
+            pswField.setText("");
 
         }
     }
