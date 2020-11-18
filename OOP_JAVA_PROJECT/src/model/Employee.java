@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oop_java_project;
+package model;
 
 /**
  *
  * @author davidzhong
  */
-public class Employees extends Person{
+public class Employee extends Person{
     
     private int login_ID;
     private String password;
 
-    public Employees(int login_ID, String password, String first_name, String last_name, String mail) {
-        super(first_name, last_name, mail);
+    public Employee(){}
+   
+    public Employee(int login_ID, String password, String first_name, String last_name) {
+        super(first_name, last_name);
         this.login_ID = login_ID;
         this.password = password;
     }

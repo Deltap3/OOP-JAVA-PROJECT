@@ -3,22 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oop_java_project;
+package model;
 
 /**
  *
  * @author davidzhong
  */
-public class CustomerMembers extends Person{
+public class CustomerMember extends Person{
     
     private int login_ID;
     private String password;
+    private String mail;
     private int category_member;
 
-    public CustomerMembers(int loginID, String password,int category_member, String first_name, String last_name, String mail) {
-        super(first_name, last_name, mail);
+    public CustomerMember(){}
+    public CustomerMember(int loginID, String password, String mail, int category_member, String first_name, String last_name) {
+        super(first_name, last_name);
         this.login_ID = loginID;
         this.password = password;
+        this.mail=mail;
         this.category_member=category_member;
     }
     
@@ -40,26 +43,25 @@ public class CustomerMembers extends Person{
     return this.password;
     }
     
-    public float discount_in_percent()
+    public void setMail(String m_mail)
     {
-    float discount=0;
-    if(category_member==1)///10% children
-    {
-    discount=10;
-    return discount;
+    this.mail=m_mail;
     }
-    if (category_member==2)///25% senior
+    public String getMail()
     {
-    discount=25;
-    return discount;
+    return this.mail;
     }
-    else///20% other member so regularmember
+    
+    public void setCategoryMember(int m_categoryMember)
     {
-    discount=20;
-    return discount;
+    this.category_member=m_categoryMember;
     }
-        
-    }  
+    public int getCategoryMember()
+    {
+    return this.category_member;
+    }
+    
+    
     
   
     
