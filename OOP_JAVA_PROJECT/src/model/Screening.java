@@ -16,14 +16,16 @@ public class Screening {
     private int number_seat;
     private int tickets_boughts;
     private int discount;
+    private int number_room;
 
     public Screening(){}
-    public Screening(String movieName, String datetime, int number_seat, int tickets_boughts, int discount) {
+    public Screening(String movieName, String datetime, int number_seat, int tickets_boughts, int discount, int number_room) {
         this.movieName = movieName;
         this.dateTime = datetime;
         this.number_seat = number_seat;
         this.tickets_boughts = tickets_boughts;
         this.discount= discount;
+        this.number_room=number_room;
     }
     
     public void getMovieName(String m_id_movie)
@@ -69,6 +71,15 @@ public class Screening {
     public int getDiscount()
     {
     return this.discount;
+    }
+    
+     public void setNumberRoom(int m_number_room)
+    {
+    this.number_room=m_number_room;
+    }
+    public int getNumberRoom()
+    {
+    return this.number_room;
     }
     
     

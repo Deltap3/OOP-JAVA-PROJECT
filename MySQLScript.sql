@@ -34,7 +34,8 @@ create table if not exists screening
     datetim datetime not null,
     numberSeat int not null,
     ticketsBoughts int not null,
-    discount int not null
+    discount int not null,
+    numberRoom int not null
 );
 
 insert into employee (firstName,lastName,login,passw) values
@@ -61,10 +62,10 @@ insert into movies (title,genre,releaseDate,runTime,image) values
 ('Le Seigneur des anneaux : La Communaute de l anneau','Fantasy','2001-12-19','178','seigneur_des_anneaux.jpg'),
 ('Harry Potter a l ecole des sorciers','Fantastique','2001-12-05','152','harry_potter.jpg');
 
-insert into screening (movieId,datetim,numberSeat,ticketsBoughts,discount) values
-('1','2020-12-05 08:30:00','100','70','0'),
-('2','2020-12-05 12:50:00','400','350','10'),
-('3','2020-12-05 16:00:00','250','230','15'),
-('1','2020-12-12 14:15:00','370','120','20'),
-('4','2020-12-12 13:30:00','60','60','25'),
-('5','2020-12-22 17:45:00','230','210','30');
+insert into screening (movieId,datetim,numberSeat,ticketsBoughts,discount,numberRoom) values
+('1','2020-12-05 08:30:00','100','70','0','1'),
+('2','2020-12-05 12:50:00','400','350','10','2'),
+('3','2020-12-05 16:00:00','250','230','15','3'),
+('1','2020-12-12 14:15:00','370','120','20','1'),
+('4','2020-12-12 13:30:00','60','60','25','2'),
+('5','2020-12-22 17:45:00','230','210','30','1');
