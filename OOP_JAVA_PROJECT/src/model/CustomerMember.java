@@ -62,7 +62,11 @@ public class CustomerMember extends Person{
     }
     
     
-    
+    @Override
+    public boolean isMember()
+    {
+        return true;
+    }
   
     
     

@@ -24,6 +24,8 @@ public class MainFrame extends JFrame{
     private final int WINDOW_WIDTH = 400;
     private final int WINDOW_HEIGHT = 300;
     private Person user;
+    private Screening session;
+    private Order customerOrder;
     
     public MainFrame()
     {
@@ -37,6 +39,7 @@ public class MainFrame extends JFrame{
     }
     private void initComponents()
     {
+        session= new Screening();
         panelsList= new ArrayList<>();
         Map<String, Integer> initMap= new LinkedHashMap<>();
         //map based on insertion order
@@ -77,6 +80,11 @@ public class MainFrame extends JFrame{
         ScreeningChoicePanel panel4= new ScreeningChoicePanel(this, 5);
         panelsList.add(panel4);
         this.add(panel4);
+        
+        //panel 5
+        BuyPanel panel5= new BuyPanel(this, session);
+        panelsList.add(panel5);
+        this.add(panel5);
         
         /*
         //panel 8
@@ -126,6 +134,30 @@ public class MainFrame extends JFrame{
     public int getHeight()
     {
         return WINDOW_HEIGHT;
+    }
+
+    public Person getUser() {
+        return user;
+    }
+
+    public void setUser(Person user) {
+        this.user = user;
+    }
+
+    public Order getCustomerOrder() {
+        return customerOrder;
+    }
+
+    public void setCustomerOrder(Order customerOrder) {
+        this.customerOrder = customerOrder;
+    }
+
+    public Screening getSession() {
+        return session;
+    }
+
+    public void setSession(Screening session) {
+        this.session = session;
     }
     
 }

@@ -53,7 +53,7 @@ public class ScreeningChoicePanel extends JPanel{
             final Movie m= movieCo.find(s.getMovieName());
             Image scaledImage = m.getImage().getScaledInstance(this.getWidth()/6,this.getHeight()/(sessions.size()*2),Image.SCALE_SMOOTH);
             JButton btn= new JButton(new ImageIcon(scaledImage));
-            btn.addActionListener(new ChoiceActionListener(frame, nextPanel));
+            btn.addActionListener(new ChoiceActionListener(frame, nextPanel,s));
             this.add(btn);     
             this.add(new JLabel(s.getMovieName()));
             this.add(new JLabel(s.getDateTime()));
@@ -77,15 +77,19 @@ public class ScreeningChoicePanel extends JPanel{
     public class ChoiceActionListener implements ActionListener{
         private MainFrame frame;
         private int numPanel;
+        private Screening session;
         
-        public ChoiceActionListener(MainFrame frame, int numPanel)
+        public ChoiceActionListener(MainFrame frame, int numPanel, Screening session)
         {
             this.frame=frame;
             this.numPanel=numPanel;
+            this.session=session;
         }
         
         public void actionPerformed(ActionEvent e)
         {
+            frame.setSession(session);
+            frame.getPanels().set(numPanel, new BuyPanel(frame, session));
             frame.setContentPane(frame.getPanels().get(numPanel));
             invalidate();
             validate();

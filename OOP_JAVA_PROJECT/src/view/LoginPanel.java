@@ -5,7 +5,8 @@
  */
 package view;
 
-import model.Connections;
+import model.*;
+import DAO.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -87,19 +88,27 @@ public class LoginPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             try {
                 Connections co = new Connections("project", "root", "projetJava2020");
+                
                 String login= loginField.getText();
                 String password= new String(pswField.getPassword());
-                System.out.println("login: "+login);
-                System.out.println("password: "+password);
                 boolean correct=false;
+                Person user = null;
+                
                 if(table.equals("members")){
+                    
+                 CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
+                 user= memberCo.findFromLoginPassword(login, password);
                  correct= co.memberExist(login, password);
+                 
                 }
                 else if(table.equals("employee"))
                 {
+                    EmployeeDAO employeeCo= new EmployeeDAO(co.getInstance());
+                    user= employeeCo.findFromLoginPassword(login, password);
                     correct= co.employeeExist(login, password);
                 }
                 if (correct) {
+                    myFrame.setUser(user);
                     myFrame.setContentPane(myFrame.getPanels().get(numPanel));
                     invalidate();
                     validate();

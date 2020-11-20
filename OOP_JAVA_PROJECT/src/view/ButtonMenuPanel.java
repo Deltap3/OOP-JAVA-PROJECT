@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
+import model.CustomerGuest;
 
 /**
  *
@@ -63,7 +64,10 @@ public class ButtonMenuPanel extends JPanel{
         }
         public void actionPerformed(ActionEvent e)
         {
-            
+            if(e.getActionCommand().equals("Guest"))
+            {
+                myFrame.setUser(new CustomerGuest());
+            }
             myFrame.setContentPane(myFrame.getPanels().get(myInt));
             invalidate();
             validate();
