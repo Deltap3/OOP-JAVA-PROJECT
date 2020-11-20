@@ -7,6 +7,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,7 @@ public class ButtonMenuPanel extends JPanel{
         
         //making a vertical alligned layout
         this.setLayout(new SpringLayout());
-        
+        this.setSize(new Dimension(500,buttonLink.size()*200));
         JLabel label=new JLabel(question);
         this.add(label);
         
@@ -68,9 +69,11 @@ public class ButtonMenuPanel extends JPanel{
             {
                 myFrame.setUser(new CustomerGuest());
             }
+            myFrame.setSize(myFrame.getPanels().get(myInt).getSize());
             myFrame.setContentPane(myFrame.getPanels().get(myInt));
             invalidate();
             validate();
+            repaint();
         }
     }
 }

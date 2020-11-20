@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.*;
 import DAO.*;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -30,7 +31,7 @@ public class BuyPanel extends JPanel{
     {
         super();
         setLayout(new SpringLayout());
-        
+        setSize(new Dimension(500,700));
         
         Movie chosenMovie = new Movie();
         
@@ -69,6 +70,7 @@ public class BuyPanel extends JPanel{
         //4th row: number of tickets choice
         JLabel nbTicketsLabel=new JLabel("number of tickets: ");
         nbTicketsField= new JTextField();
+        nbTicketsField.setMaximumSize(nbTicketsField.getPreferredSize());
         nbTicketsLabel.setLabelFor(nbTicketsField);
         this.add(nbTicketsLabel);
         this.add(nbTicketsField);
@@ -96,6 +98,7 @@ public class BuyPanel extends JPanel{
         }
 
         public void actionPerformed(ActionEvent e) {
+            myFrame.setSize(myFrame.getPanels().get(4).getSize());
             myFrame.setContentPane(myFrame.getPanels().get(4));
             invalidate();
             validate();
@@ -132,6 +135,7 @@ public class BuyPanel extends JPanel{
             customOrder.setSession(session);
             myFrame.setCustomerOrder(customOrder);
             
+            myFrame.setSize(myFrame.getPanels().get(6).getSize());
             myFrame.setContentPane(myFrame.getPanels().get(6));
             
             }
@@ -144,6 +148,7 @@ public class BuyPanel extends JPanel{
             }
             invalidate();
             validate();
+            repaint();
         }
     }
 }

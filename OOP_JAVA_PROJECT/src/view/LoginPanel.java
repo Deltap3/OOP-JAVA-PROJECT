@@ -7,6 +7,7 @@ package view;
 
 import model.*;
 import DAO.*;
+import java.awt.Dimension;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -28,13 +29,15 @@ public class LoginPanel extends JPanel {
         
         super();
         this.setLayout(new SpringLayout());
-
+        this.setSize(new Dimension(700,600));
         JLabel loginLabel = new JLabel("login: ");
         loginField = new JTextField();
+        loginField.setMaximumSize(loginField.getPreferredSize());
         loginLabel.setLabelFor(loginField);
 
         JLabel passwordLabel = new JLabel("password: ");
         pswField = new JPasswordField();
+        pswField.setMaximumSize(pswField.getPreferredSize());
         passwordLabel.setLabelFor(pswField);
 
         JButton backButton = new JButton("BACK");
@@ -67,6 +70,7 @@ public class LoginPanel extends JPanel {
         }
 
         public void actionPerformed(ActionEvent e) {
+            myFrame.setSize(myFrame.getPanels().get(numPanel).getSize());
             myFrame.setContentPane(myFrame.getPanels().get(numPanel));
             invalidate();
             validate();
@@ -109,9 +113,11 @@ public class LoginPanel extends JPanel {
                 }
                 if (correct) {
                     myFrame.setUser(user);
+                    myFrame.setSize(myFrame.getPanels().get(numPanel).getSize());
                     myFrame.setContentPane(myFrame.getPanels().get(numPanel));
                     invalidate();
                     validate();
+                    repaint();
                 } 
                 else {
                     throw new IllegalArgumentException("login or password is incorrect");

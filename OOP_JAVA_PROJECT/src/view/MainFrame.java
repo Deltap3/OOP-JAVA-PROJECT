@@ -21,8 +21,8 @@ import java.util.Map;
 public class MainFrame extends JFrame{
     
     private ArrayList<JPanel> panelsList;
-    private final int WINDOW_WIDTH = 400;
-    private final int WINDOW_HEIGHT = 300;
+    private final int WINDOW_WIDTH = 1200;
+    private final int WINDOW_HEIGHT = 1400;
     private Person user;
     private Screening session;
     private Order customerOrder;
@@ -34,6 +34,7 @@ public class MainFrame extends JFrame{
         
         setTitle("My movie theater");
         initComponents();
+        setSize(panelsList.get(0).getSize());
         setContentPane(panelsList.get(0));
         setVisible(true);
     }

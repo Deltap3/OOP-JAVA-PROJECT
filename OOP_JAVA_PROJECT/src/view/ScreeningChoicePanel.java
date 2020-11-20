@@ -12,17 +12,15 @@ import javax.swing.SpringLayout;
 import model.*;
 import DAO.*;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
+
 /**
  *
  * @author Juju
@@ -33,6 +31,7 @@ public class ScreeningChoicePanel extends JPanel{
     {
         super();
         setSize(new Dimension(1200,1400));
+        setPreferredSize(new Dimension(1200,1400));
         setLayout(new SpringLayout());
         
         ButtonGroup group= new ButtonGroup();
@@ -89,10 +88,15 @@ public class ScreeningChoicePanel extends JPanel{
         public void actionPerformed(ActionEvent e)
         {
             frame.setSession(session);
-            frame.getPanels().set(numPanel, new BuyPanel(frame, session));
+            if(numPanel==5)
+            {
+                frame.getPanels().set(numPanel, new BuyPanel(frame, session));
+            }
+            frame.setSize(frame.getPanels().get(numPanel).getSize());
             frame.setContentPane(frame.getPanels().get(numPanel));
             invalidate();
             validate();
+            repaint();
         }
     }
     
