@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package view;
+import model.*;
+import DAO.*;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.*;
-import DAO.*;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
