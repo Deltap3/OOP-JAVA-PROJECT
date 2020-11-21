@@ -24,6 +24,7 @@ create table if not exists members
     mail varchar(50) not null,
     login varchar(100) not null,
     passw varchar(50) not null,
+    ticketsBought int not null,
     categoryMember int not null
 );
 create table if not exists screening
@@ -31,6 +32,7 @@ create table if not exists screening
 	screeningID int primary key auto_increment,
     movieId int not null,
     foreign key (movieId) references movies(movieId),
+    roomNumber int not null,
     datetim datetime not null,
     numberSeat int not null,
     ticketsBoughts int not null,

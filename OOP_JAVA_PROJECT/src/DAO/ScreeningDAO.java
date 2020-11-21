@@ -20,7 +20,7 @@ public class ScreeningDAO extends DAO<Screening> {
     
     public ScreeningDAO(Connection conn)
     {
-    super(conn);
+        super(conn);
     }
     
     
@@ -111,6 +111,18 @@ public class ScreeningDAO extends DAO<Screening> {
         return listScreening;
     }
   
+    public boolean addTickets (int tickets, String dateTime){
+       try{
+            this.connect.createStatement().executeUpdate("update screening \n" +
+                                    "set ticketsBoughts = ticketsBoughts + "+tickets+"\n" +
+                                    "where datetim = '"+dateTime+"'");
+            return true;
+        }    
+        catch(SQLException ex){
+            ex.getMessage();
+            return false;
+        }
+    }
 }
 
   
