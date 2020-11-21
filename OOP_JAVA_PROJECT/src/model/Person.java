@@ -39,5 +39,13 @@ public abstract class Person {
     }
   
     public abstract boolean isMember();
+
+    public String getMail() {
+    return "";
+    }
+
+    public int getCategoryMember() {
+        return 0;
+    }
     
 }

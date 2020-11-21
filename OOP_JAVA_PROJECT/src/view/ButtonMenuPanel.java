@@ -5,9 +5,11 @@
  */
 package view;
 
+import DAO.*;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.util.Map;
 import javax.swing.JButton;
@@ -25,15 +27,20 @@ import model.CustomerGuest;
 //your panels in the programm
 public class ButtonMenuPanel extends JPanel{
     
-    public ButtonMenuPanel(MainFrame frame,String question, Map<String,Integer> buttonLink)
+    public ButtonMenuPanel(MainFrame frame,ArrayList<String> infos, Map<String,Integer> buttonLink)
     {
         super();
         
         //making a vertical alligned layout
         this.setLayout(new SpringLayout());
         this.setSize(new Dimension(500,buttonLink.size()*200));
-        JLabel label=new JLabel(question);
-        this.add(label);
+        
+        for(String str: infos)
+        {
+            JLabel label=new JLabel(str);
+            this.add(label);
+        }
+        
         
         for(Map.Entry<String, Integer> e: buttonLink.entrySet())
         {
@@ -43,7 +50,7 @@ public class ButtonMenuPanel extends JPanel{
         }
         
         SpringUtilities.makeCompactGrid(this,
-                (buttonLink.size()+1), 1, //rows, cols
+                (buttonLink.size()+infos.size()), 1, //rows, cols
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
         
@@ -59,9 +66,13 @@ public class ButtonMenuPanel extends JPanel{
         }
         public void actionPerformed(ActionEvent e)
         {
-            if(e.getActionCommand().equals("Guest"))
+            if(myInt==4 && e.getActionCommand().equals("Guest"))
             {
                 myFrame.setUser(new CustomerGuest());
+            }
+            else if(myInt==7)
+            {
+                myFrame.buildPanel7();
             }
             myFrame.setSize(myFrame.getPanels().get(myInt).getSize());
             myFrame.setContentPane(myFrame.getPanels().get(myInt));

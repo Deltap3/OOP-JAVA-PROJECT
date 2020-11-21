@@ -96,7 +96,7 @@ public class ScreeningDAO extends DAO<Screening> {
         ArrayList<Screening> listScreening = new ArrayList<>();
         Screening s = new Screening();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount FROM screening, movies\n" +
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,numberRoom FROM screening, movies\n" +
                                                                             "WHERE screening.movieId = movies.movieId");
             while(result.next()){
                 s = new Screening(result.getString("title"),result.getString("datetim"),

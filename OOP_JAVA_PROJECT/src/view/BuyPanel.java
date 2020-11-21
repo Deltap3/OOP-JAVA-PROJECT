@@ -58,7 +58,7 @@ public class BuyPanel extends JPanel{
         JLabel runTimeLabel= new JLabel("run time: "+chosenMovie.getRunTime()+" min");
         this.add(runTimeLabel);
         //3rd row
-        JLabel roomLabel= new JLabel("room ");
+        JLabel roomLabel= new JLabel("room "+session.getNumberRoom());
         this.add(roomLabel);
         JLabel discountLabel= new JLabel("");
         if(session.getDiscount()>0)
@@ -135,6 +135,7 @@ public class BuyPanel extends JPanel{
             customOrder.setSession(session);
             myFrame.setCustomerOrder(customOrder);
             
+            myFrame.buildPanel6();
             myFrame.setSize(myFrame.getPanels().get(6).getSize());
             myFrame.setContentPane(myFrame.getPanels().get(6));
             
