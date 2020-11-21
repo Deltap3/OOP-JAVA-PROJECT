@@ -85,8 +85,4 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
         }
         return member;
     }
-    
-    
-    
-    
 }
