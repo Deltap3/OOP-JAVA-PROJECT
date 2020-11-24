@@ -5,12 +5,11 @@
  */
 package view;
 
-import java.sql.*;
+/*
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.*;
-import DAO.*;
+*/
 
 /**
  *
@@ -22,20 +21,20 @@ public class OOP_JAVA_PROJECT {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        /*
         try { 
-            
-            
-            
-            Connections usedataBase = new Connections("project", "root", "password");
-            Connection dataBase=usedataBase.getInstance();
-            ScreeningDAO dao=new ScreeningDAO(dataBase);
-            dao.getScreeningByDateTime("2000-03-23 23:30:30");
-            
+
+            Connection dataBase = new Connection("project", "root", "projetJava2020");
+            dataBase.memberExist("Juju23", "juju2306");
+            dataBase.memberExist("Pierre31", "Pierrot");
+            dataBase.memberExist("Dav45", "dd45dd");
+
+
         } catch (SQLException ex) {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }*/
+        MainFrame frame= new MainFrame();
     }
 }

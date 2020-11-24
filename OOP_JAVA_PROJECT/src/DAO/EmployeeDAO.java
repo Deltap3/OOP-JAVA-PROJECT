@@ -65,7 +65,22 @@ public class EmployeeDAO extends DAO<Employee>{
         }
         return emp;
     }
-  
+  public Employee findFromLoginPassword(String login, String password)
+    {
+      Employee emp = new Employee();
+        try{
+            ResultSet result1 = this.connect.createStatement().executeQuery("SELECT * FROM employee WHERE login = '" + login+"'");
+            ResultSet result2 = this.connect.createStatement().executeQuery("SELECT * FROM employee WHERE passw = '" + password+"'");
+            if(result1.first() && result2.first()){
+                emp = new Employee(result1.getString("login"), result1.getString("passw"),
+                        result1.getString("firstName"),result1.getString("lastName"));
+               
+            }
+        }catch(SQLException ex){
+            ex.getMessage();
+        }
+        return emp;
+    }
   
   
 }

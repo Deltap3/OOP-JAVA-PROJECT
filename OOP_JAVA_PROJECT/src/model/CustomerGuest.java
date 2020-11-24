@@ -11,9 +11,16 @@ package model;
  */
 public class CustomerGuest extends Person{
 
+    public CustomerGuest()
+    {}
+    
     public CustomerGuest(String first_name, String last_name) {
         super(first_name, last_name);
     }
      
-    
+    @Override
+    public boolean isMember()
+    {
+        return false;
+    }
 }

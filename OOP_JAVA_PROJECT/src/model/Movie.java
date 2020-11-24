@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
+import javax.imageio.ImageIO;
 /**
  *
  * @author davidzhong
@@ -17,15 +20,21 @@ public class Movie {
     private String genre;
     private String release_date;
     private int run_time_minute;
-    private String image;
+    private BufferedImage image;
 
     public Movie(){}
-    public Movie(String title, String genre, String release_date, int run_time_minute, String image) {
+    public Movie(String title, String genre, String release_date, int run_time_minute, String image_name) {
         this.title = title;
         this.genre = genre;
         this.release_date = release_date;
         this.run_time_minute = run_time_minute;
-        this.image = image;
+        
+        try{
+        this.image= ImageIO.read(new File("images/"+image_name));
+        }
+        catch (IOException e) {
+            System.out.println("couldn't load image "+image_name);
+        }
     }
     
     public void setTitle(String m_title)
@@ -64,13 +73,13 @@ public class Movie {
     return this.run_time_minute;
     }
     
-    public void setImage(String m_image)
+    public void setImage(BufferedImage m_image)
     {
-    this.image=m_image;
+        this.image=m_image;
     }
-    public String getImage()
+    public BufferedImage getImage()
     {
-    return this.image;
+        return this.image;
     }
     
     

@@ -41,7 +41,11 @@ public class Employee extends Person{
     }
     
     
-    
+    @Override
+    public boolean isMember()
+    {
+        return false;
+    }
     
     
     

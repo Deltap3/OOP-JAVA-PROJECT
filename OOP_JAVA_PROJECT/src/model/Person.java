@@ -9,7 +9,7 @@ package model;
  *
  * @author davidzhong
  */
-public class Person {
+public abstract class Person {
     
     private String first_name;
     private String last_name;
@@ -38,6 +38,14 @@ public class Person {
     return this.last_name;
     }
   
-    
+    public abstract boolean isMember();
+
+    public String getMail() {
+    return "";
+    }
+
+    public int getCategoryMember() {
+        return 0;
+    }
     
 }

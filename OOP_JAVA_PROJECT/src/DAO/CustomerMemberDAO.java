@@ -24,9 +24,9 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
     {
     try
     {
-    String sql=("insert into members (firstName,lastName,login,passw,categoryMember)\n" +
-                           "values ('"+obj.getFirstName()+"','"+obj.getLastName()+"','"+obj.getLoginID()+"',"
-            + "               '"+obj.getPassword()+"',"+obj.getCategoryMember()+")");
+    String sql=("insert into members (firstName,lastName,mail,login,passw,categoryMember)\n" +
+            "values ('"+obj.getFirstName()+"','"+obj.getLastName()+"','"+obj.getMail()+
+            "','"+obj.getLoginID()+"','"+obj.getPassword()+"','"+obj.getCategoryMember()+"')");
     
     
     PreparedStatement stmt = connect.prepareStatement(sql); 

@@ -47,6 +47,7 @@ public class CustomerMember extends Person{
     {
     this.mail=m_mail;
     }
+    @Override
     public String getMail()
     {
     return this.mail;
@@ -56,13 +57,19 @@ public class CustomerMember extends Person{
     {
     this.category_member=m_categoryMember;
     }
+    
+    @Override
     public int getCategoryMember()
     {
     return this.category_member;
     }
     
     
-    
+    @Override
+    public boolean isMember()
+    {
+        return true;
+    }
   
     
     

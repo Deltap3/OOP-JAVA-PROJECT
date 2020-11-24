@@ -81,10 +81,28 @@ public class Connections {
          return null;
       }
     }
-    public boolean personExist(String login, String password){
+    
+    public boolean memberExist(String login, String password){
       try
       {
-         ResultSet resultSet = stmt.executeQuery("select * from person\n" +
+         ResultSet resultSet = stmt.executeQuery("select * from members\n" +
+                           "where login = '" + login + "' and passw = '" + password + "'");
+         if(resultSet.next())
+            return true;
+         else
+             return false;
+      }
+      catch (SQLException ex)
+      {
+         ex.printStackTrace();
+          System.out.println("non");
+         return false;
+      }
+    }
+    public boolean employeeExist(String login, String password){
+      try
+      {
+         ResultSet resultSet = stmt.executeQuery("select * from employee\n" +
                            "where login = '" + login + "' and passw = '" + password + "'");
          if(resultSet.next())
             return true;
