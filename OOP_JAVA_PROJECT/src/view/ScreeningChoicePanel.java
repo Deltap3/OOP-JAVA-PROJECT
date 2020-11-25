@@ -39,7 +39,7 @@ public class ScreeningChoicePanel extends JPanel{
         
         try{
             
-        Connections con= new Connections("project", "root", "projetJava2020");
+        Connections con= new Connections("project", "root", "password");
         ScreeningDAO screnningCo= new ScreeningDAO(con.getInstance());
         sessions=screnningCo.getAllScreening();//will be replaced later
         
