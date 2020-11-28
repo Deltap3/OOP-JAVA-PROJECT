@@ -72,7 +72,7 @@ public class Connections {
     public ArrayList<String> getAllFromTable(String query) throws SQLException {
       try
       {
-         ResultSet resultSet = stmt.executeQuery("select * from " + query);
+         ResultSet resultSet = stmt.executeQuery("SELECT * FROM " + query);
          return getResult(resultSet);
       }
       catch (SQLException ex)
@@ -161,5 +161,15 @@ public class Connections {
          ex.printStackTrace();
          return null;
       }
+    }
+    public int getNbRows(String query){
+        ArrayList<String> result = new ArrayList<String>();
+        try {
+            result = getAllFromTable(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Connections.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return result.size();
     }
 }

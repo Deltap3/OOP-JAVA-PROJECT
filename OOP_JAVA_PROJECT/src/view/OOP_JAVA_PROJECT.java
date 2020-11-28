@@ -25,9 +25,7 @@ public class OOP_JAVA_PROJECT {
         try { 
 
             Connection dataBase = new Connection("project", "root", "projetJava2020");
-            dataBase.memberExist("Juju23", "juju2306");
-            dataBase.memberExist("Pierre31", "Pierrot");
-            dataBase.memberExist("Dav45", "dd45dd");
+
 
 
         } catch (SQLException ex) {
@@ -35,6 +33,7 @@ public class OOP_JAVA_PROJECT {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        MainFrame frame= new MainFrame();
+        //MainFrame frame= new MainFrame();
+        Statistics stat = new Statistics("Member/Customer Ratio");
     }
 }
