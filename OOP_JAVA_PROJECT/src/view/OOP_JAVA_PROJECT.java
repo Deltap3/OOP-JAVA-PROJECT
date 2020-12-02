@@ -5,7 +5,12 @@
  */
 package view;
 
-import javax.swing.JFrame;
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Connections;
+
 
 /*
 import java.sql.SQLException;
@@ -37,8 +42,8 @@ public class OOP_JAVA_PROJECT {
         }*/
         
         MainFrame frame= new MainFrame();
-
-                
+            
         //Statistics stat = new Statistics("Member/Customer Ratio");
+
     }
 }

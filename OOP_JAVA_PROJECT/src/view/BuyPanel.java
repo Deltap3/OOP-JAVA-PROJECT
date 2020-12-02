@@ -39,7 +39,7 @@ public class BuyPanel extends JPanel{
         
         try{   
             
-        Connections con= new Connections("project", "root", "projetJava2020");
+        Connections con= new Connections("project", "root", "password");
         MovieDAO movieCo= new MovieDAO(con.getInstance());
         chosenMovie= movieCo.find(session.getMovieName());
         }

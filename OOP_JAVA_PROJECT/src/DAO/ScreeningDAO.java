@@ -56,13 +56,13 @@ public class ScreeningDAO extends DAO<Screening> {
   public Screening find(String datetime) {
          Screening screening = new Screening();
         try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,numberRoom FROM screening, movies\n" +
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
                 "WHERE screening.movieId = movies.movieId AND datetim = '" + datetime + "'");
             if(result.first()){
                 screening = new Screening(
                         result.getString("movieId"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
-                        result.getInt("discount"),result.getInt("numberRoom"));
+                        result.getInt("discount"),result.getInt("roomNumber"));
                
             }
             
@@ -76,14 +76,14 @@ public class ScreeningDAO extends DAO<Screening> {
     public Screening getScreeningByDateTime(String dateTime){
            Screening s = new Screening();
                    try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,numberRoom FROM screening, movies\n" +
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
                 "WHERE screening.movieId = movies.movieId AND datetim = '" + dateTime + "'");
             while(result.next()){
             
                 s = new Screening(
                         result.getString("title"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
-                        result.getInt("discount"),result.getInt("numberRoom"));
+                        result.getInt("discount"),result.getInt("roomNumber"));
             }
         }catch(SQLException ex){
             ex.printStackTrace();

@@ -172,4 +172,11 @@ public class Connections {
         
         return result.size();
     }
+    public void disconnect(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Connections.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
