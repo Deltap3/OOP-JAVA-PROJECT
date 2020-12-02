@@ -1,4 +1,5 @@
 create database if not exists project ;
+use project;
 create table if not exists movies
 (
 	movieId int primary key auto_increment,

@@ -100,31 +100,23 @@ public class MainFrame extends JFrame{
         //panel 6
         buildPanel6();
         
+        //panel 8
+        buildPanel8();
+        
         //panel 7
         buildPanel7();
         
         
-        //panel 8
-        LoginPanel panel8= new LoginPanel(this, "employee", 0, 9);
-        panelsList.set(8,panel8);
-        this.add(panel8);
-        
         //panel 9
-        initMap.put("manage screenings", 10);
-        initMap.put("manage discounts", 13);
-        initMap.put("manage member customers",16);
-        initMap.put("show stats",21);
-        initMap.put("back", 8);
-        initInfos.add("what do you want to do?\n");
-        ButtonMenuPanel panel9=new ButtonMenuPanel(this, initInfos, initMap);
+        LoginPanel panel9= new LoginPanel(this, "employee", 0, 10);
         panelsList.set(9,panel9);
         this.add(panel9);
-        initMap.clear();
-        initInfos.clear();
         
         //panel 10
-        initMap.put("add screening session", 11);
-        initMap.put("Remove screening session", 12);
+        initMap.put("manage screenings", 9);
+        initMap.put("manage discounts", 14);
+        initMap.put("manage member customers",17);
+        initMap.put("show stats",22);
         initMap.put("back", 9);
         initInfos.add("what do you want to do?\n");
         ButtonMenuPanel panel10=new ButtonMenuPanel(this, initInfos, initMap);
@@ -133,16 +125,18 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
-        //panel 13
-        initMap.put("add screening session", 11);
-        initMap.put("Remove screening session", 12);
-        initMap.put("back", 9);
-        initInfos.add("discount type: \n");
-        ButtonMenuPanel panel13=new ButtonMenuPanel(this, initInfos, initMap);
-        panelsList.set(13,panel13);
-        this.add(panel13);
+        //panel 11
+        initMap.put("add screening session", 12);
+        initMap.put("Remove screening session", 13);
+        initMap.put("back", 10);
+        initInfos.add("what do you want to do?\n");
+        ButtonMenuPanel panel11=new ButtonMenuPanel(this, initInfos, initMap);
+        panelsList.set(11,panel11);
+        this.add(panel11);
         initMap.clear();
         initInfos.clear();
+        
+
         
         pack();
     }
@@ -182,6 +176,13 @@ public class MainFrame extends JFrame{
         panelsList.set(7,panel7);
         this.add(panel7);
 
+    }
+    public void buildPanel8()
+    {
+        AgeDiscountPanel panel8= new AgeDiscountPanel(this);
+        panelsList.set(8, panel8);
+        this.add(panel8);
+        
     }
     public ArrayList<JPanel> getPanels()
     {

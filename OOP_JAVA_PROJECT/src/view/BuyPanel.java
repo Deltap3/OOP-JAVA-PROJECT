@@ -6,6 +6,7 @@
 package view;
 import model.*;
 import DAO.*;
+import controller.ChangePanelListener;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -80,7 +81,8 @@ public class BuyPanel extends JPanel{
         buyButton.addActionListener(new BuyActionListener(frame, session));
         this.add(buyButton);
         JButton backButton= new JButton("Back");
-        backButton.addActionListener(new BackActionListener(frame));
+        backButton.addActionListener(new ChangePanelListener(frame, 4));
+        
         this.add(backButton);
         
         SpringUtilities.makeCompactGrid(this,
@@ -89,21 +91,6 @@ public class BuyPanel extends JPanel{
                 6, 6); //xPad, yPad
     }
     
-    public class BackActionListener implements ActionListener {
-
-        private MainFrame myFrame;
-
-        public BackActionListener(MainFrame frame) {
-            myFrame = frame;
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            myFrame.setSize(myFrame.getPanels().get(4).getSize());
-            myFrame.setContentPane(myFrame.getPanels().get(4));
-            invalidate();
-            validate();
-        }
-    }
     
     public class BuyActionListener implements ActionListener
     {
@@ -129,15 +116,13 @@ public class BuyPanel extends JPanel{
             }
             else{
                 
-            Order customOrder=new Order();  
-            customOrder.setTicketsNumber(ticketsNumber);
-            customOrder.setCustomer(myFrame.getUser());
-            customOrder.setSession(session);
+            Order customOrder=new Order(ticketsNumber,session,myFrame.getUser());  
+            
             myFrame.setCustomerOrder(customOrder);
             
-            myFrame.buildPanel6();
-            myFrame.setSize(myFrame.getPanels().get(6).getSize());
-            myFrame.setContentPane(myFrame.getPanels().get(6));
+            myFrame.buildPanel8();
+            myFrame.setSize(myFrame.getPanels().get(8).getSize());
+            myFrame.setContentPane(myFrame.getPanels().get(8));
             
             }
             

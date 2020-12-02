@@ -6,6 +6,7 @@
 package view;
 
 import DAO.*;
+import controller.ChangePanelListener;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,29 +57,5 @@ public class ButtonMenuPanel extends JPanel{
         
     }
     
-    private class ChangePanelListener implements ActionListener{
-        MainFrame myFrame;
-        Integer myInt;
-        public ChangePanelListener(MainFrame frame, Integer i)
-        {
-            myFrame=frame;
-            myInt=i;
-        }
-        public void actionPerformed(ActionEvent e)
-        {
-            if(myInt==4 && e.getActionCommand().equals("Guest"))
-            {
-                myFrame.setUser(new CustomerGuest());
-            }
-            else if(myInt==7)
-            {
-                myFrame.buildPanel7();
-            }
-            myFrame.setSize(myFrame.getPanels().get(myInt).getSize());
-            myFrame.setContentPane(myFrame.getPanels().get(myInt));
-            invalidate();
-            validate();
-            repaint();
-        }
-    }
+    
 }

@@ -91,7 +91,7 @@ public class LoginPanel extends JPanel {
 
         public void actionPerformed(ActionEvent e) {
             try {
-                Connections co = new Connections("project", "root", "password");
+                Connections co = new Connections("project", "root", "projetJava2020");
                 System.out.println(co.getAllFromTable(""));
                 String login= loginField.getText();
                 String password= new String(pswField.getPassword());
