@@ -5,6 +5,11 @@
  */
 package view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Connections;
+
 /*
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -34,6 +39,6 @@ public class OOP_JAVA_PROJECT {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         //MainFrame frame= new MainFrame();
-        Statistics stat = new Statistics("Member/Customer Ratio");
+        Statistics stat = new Statistics("Most viewed film");
     }
 }
