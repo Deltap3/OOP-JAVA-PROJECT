@@ -6,17 +6,15 @@
 package view;
 import model.*;
 import DAO.*;
+import controller.BuyActionListener;
 import controller.ChangePanelListener;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
@@ -78,7 +76,7 @@ public class BuyPanel extends JPanel{
         
         //last row: buy/ go back
         JButton buyButton= new JButton("Buy");
-        buyButton.addActionListener(new BuyActionListener(frame, session));
+        buyButton.addActionListener(new BuyActionListener(frame, session, nbTicketsField));
         this.add(buyButton);
         JButton backButton= new JButton("Back");
         backButton.addActionListener(new ChangePanelListener(frame, 4));
@@ -92,49 +90,5 @@ public class BuyPanel extends JPanel{
     }
     
     
-    public class BuyActionListener implements ActionListener
-    {
-        private MainFrame myFrame;
-        private Screening session;
-        
-        public BuyActionListener(MainFrame frame, Screening session)
-        {
-            myFrame=frame;
-            this.session=session;
-        }
-        
-        public void actionPerformed(ActionEvent e)
-        {           
-            try{
-                
-            String str= nbTicketsField.getText();
-            int ticketsNumber=Integer.parseInt(str);
-            
-            if(session.getNumberseat()<(session.getTicketsBoughts()+ticketsNumber))
-            {
-               throw new IllegalArgumentException("you cannot buy "+ticketsNumber+" tickets for this screening session"); 
-            }
-            else{
-                
-            Order customOrder=new Order(ticketsNumber,session,myFrame.getUser());  
-            
-            myFrame.setCustomerOrder(customOrder);
-            
-            myFrame.buildPanel8();
-            myFrame.setSize(myFrame.getPanels().get(8).getSize());
-            myFrame.setContentPane(myFrame.getPanels().get(8));
-            
-            }
-            
-            }         
-            catch(IllegalArgumentException ex)
-            {
-                JOptionPane.showMessageDialog(null, ex.getMessage(),"",JOptionPane.ERROR_MESSAGE);
-
-            }
-            invalidate();
-            validate();
-            repaint();
-        }
-    }
+    
 }
