@@ -85,4 +85,23 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
         }
         return member;
     }
+    public String getGrade(CustomerMember member){
+        String grade = "";
+        double price = 0;
+        try{
+            ResultSet result1 = this.connect.createStatement().executeQuery("SELECT totalPaid FROM members WHERE login = '" + member.getLoginID()+"'");
+            if(result1.first()){
+                price = result1.getDouble("totalPaid");
+            }
+        }catch(SQLException ex){
+            ex.getMessage();
+        }
+        if(price > 0 && price < 50)
+            grade = "Bronze";
+        else if(price > 50 && price < 100)
+            grade = "Argent";
+        else
+            grade = "Or";
+        return grade;
+    }
 }

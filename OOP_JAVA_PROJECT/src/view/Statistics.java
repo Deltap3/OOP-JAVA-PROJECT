@@ -30,66 +30,76 @@ public class Statistics extends JFrame {
     private String statType;
     public Statistics(String statType) throws HeadlessException {
         this.statType = statType;
+
         if(statType.equals("Most viewed film") ){
             mostViewedFilm();
         }
         else if(statType.equals("Percentage tickets per seats")){
+
             percentageTicketsPerSeats();
         }
-        else {
-            
+        else if("Most viewed Genre".equals(statType)){
+            mostViewedGenre();
+        }
+        else if("Discount per Screenings".equals(statType)){
+            discountPerScreenings();
         }
     }
-    public void timePassedWatchingFilm(){
+    public void discountPerScreenings(){
         try {
             DefaultCategoryDataset data = new DefaultCategoryDataset();
             Connections co = new Connections("project", "root", "password");
             ScreeningDAO screenCo = new ScreeningDAO(co.getInstance());
-            Screening screen = new Screening();
-            int numberTickets = 0, price = 0;
+            Screening select = new Screening();
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
+            boolean display = true;
+            ArrayList<Integer> counter = new ArrayList<Integer>();
             for(int i = 0; i < allScreenings.size() ; ++i){
-               screen = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
-               numberTickets = screen.getTicketsBoughts();
-               for(int j = 0; j < allScreenings.size() ; ++j)
-                   if(i != j && allScreenings.get(i).getMovieName().equals(allScreenings.get(j).getMovieName()))
-                       numberTickets = numberTickets + allScreenings.get(j).getTicketsBoughts();     
-               data.addValue(numberTickets,screen.getMovieName(),"Movies");
+               counter.add(1);
+               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+               data.addValue(select.getDiscount(),"Screening " + i,select.getMovieName());
             }
-            JFreeChart chart = ChartFactory.createBarChart("Tickets Boughts Per Movies",
-                    "Movie", "Tickets Bought",data,PlotOrientation.VERTICAL,
+            JFreeChart chart = ChartFactory.createBarChart("Discounts Per Screenings",
+                    "Screenings", "Discount (in percentage)",data,PlotOrientation.VERTICAL,
                     true,true,false);
-            ChartFrame frame = new ChartFrame("Statistics", chart);
-            frame.pack();
-            //frame.setVisible(true);
+
+            
+
+            ChartPanel frame = new ChartPanel(chart);
+	    frame.setVisible(true);
+
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void financialStats(){
+    public void mostViewedGenre(){
         try {
-            DefaultCategoryDataset data = new DefaultCategoryDataset();
+            DefaultPieDataset data = new DefaultPieDataset();
             Connections co = new Connections("project", "root", "password");
             ScreeningDAO screenCo = new ScreeningDAO(co.getInstance());
-            Screening screen = new Screening();
-            int numberTickets = 0, price = 0;
+            Screening select = new Screening();
+            MovieDAO movieCo = new MovieDAO(co.getInstance());
+            Movie selectMovie = new Movie();
+            int numberTickets = 0;
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
+            ArrayList<Movie> allMovies = movieCo.getAllMovie();
             for(int i = 0; i < allScreenings.size() ; ++i){
-               screen = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
-               numberTickets = screen.getTicketsBoughts();
+               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+               selectMovie = movieCo.find(select.getMovieName());
+               numberTickets = select.getTicketsBoughts();
                for(int j = 0; j < allScreenings.size() ; ++j)
-                   if(i != j && allScreenings.get(i).getMovieName().equals(allScreenings.get(j).getMovieName()))
+                   if(i != j && allMovies.get(i).getGenre().equals(allMovies.get(j).getGenre()))
                        numberTickets = numberTickets + allScreenings.get(j).getTicketsBoughts();     
-               data.addValue(numberTickets,screen.getMovieName(),"Movies");
+               data.setValue(selectMovie.getGenre(),numberTickets);
             }
-            JFreeChart chart = ChartFactory.createBarChart("Tickets Boughts Per Movies",
-                    "Movie", "Tickets Bought",data,PlotOrientation.VERTICAL,
-                    true,true,false);
-            ChartFrame frame = new ChartFrame("Statistics", chart);
-            frame.pack();
-            //frame.setVisible(true);
+
+
+            JFreeChart chart = ChartFactory.createPieChart("Most Viewed Genre", data, true, true, false);
+            ChartPanel frame = new ChartPanel(chart);
+            frame.setVisible(true);
+
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -115,8 +125,7 @@ public class Statistics extends JFrame {
             JFreeChart chart = ChartFactory.createBarChart("Tickets Boughts Per Movies",
                     "Movie", "Tickets Bought",data,PlotOrientation.VERTICAL,
                     true,true,false);
-            ChartFrame frame = new ChartFrame("Statistics", chart);
-            frame.pack();
+            ChartPanel frame = new ChartPanel(chart);
             frame.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);

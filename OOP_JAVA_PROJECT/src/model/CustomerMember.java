@@ -15,6 +15,7 @@ public class CustomerMember extends Person{
     private String password;
     private String mail;
     private int category_member;
+    private double totalPaid;
 
     public CustomerMember(){}
     public CustomerMember(String loginID, String password, String mail, int category_member, String first_name, String last_name) {
@@ -23,6 +24,7 @@ public class CustomerMember extends Person{
         this.password = password;
         this.mail=mail;
         this.category_member=category_member;
+        this.totalPaid = 0.0;
     }
     
     public void setLoginID(String m_id)
@@ -71,6 +73,8 @@ public class CustomerMember extends Person{
         return true;
     }
   
-    
+    public void addPrice(double price){
+        totalPaid = totalPaid + price;
+    }
     
 }
