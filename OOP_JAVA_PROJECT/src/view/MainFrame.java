@@ -166,12 +166,6 @@ public class MainFrame extends JFrame{
         initInfos.add("room "+session.getNumberRoom());
         initInfos.add(""+customerOrder.getTicketsNumber()+" tickets");
         initInfos.add("total price: "+customerOrder.computePrice());
-        try{
-            CustomerMember customer = (CustomerMember)user;
-            customer.addPrice(customerOrder.computePrice());  
-        }catch (IllegalStateException e){
-            System.out.println(e.getMessage() + "A guest can't remerber past orders");
-        }
         JPanel panel6= new ButtonMenuPanel(this, initInfos, initMap);
         panelsList.set(6, panel6);
         this.add(panel6);
@@ -185,20 +179,6 @@ public class MainFrame extends JFrame{
         initInfos.add(user.getFirstName()+" "+user.getLastName());
         initInfos.add(user.getMail());
         initInfos.add("age: "+user.getCategoryMember());
-        CustomerMember customer; 
-         try{
-             customer = (CustomerMember)user;
-             Connections con= new Connections("project", "root", "password");
-             CustomerMemberDAO custromerCo= new CustomerMemberDAO(con.getInstance());
-             customer = custromerCo.find(customer.getLoginID());
-             initInfos.add("grade: " + custromerCo.getGrade(customer));
-        }catch (IllegalStateException e){
-             System.out.println(e.getMessage() + "A guest can't have a grade");
-        } catch (SQLException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
         ButtonMenuPanel panel7= new ButtonMenuPanel(this, initInfos, initMap);
         panelsList.set(7,panel7);
         this.add(panel7);
