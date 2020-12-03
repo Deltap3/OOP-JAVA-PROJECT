@@ -60,8 +60,7 @@ public class Statistics extends JFrame {
             JFreeChart chart = ChartFactory.createBarChart("Discounts Per Screenings",
                     "Screenings", "Discount (in percentage)",data,PlotOrientation.VERTICAL,
                     true,true,false);
-            ChartFrame frame = new ChartFrame("Stats",chart);
-            frame.pack();
+            ChartPanel frame = new ChartPanel(chart);
             frame.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
