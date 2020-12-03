@@ -38,7 +38,7 @@ public class OOP_JAVA_PROJECT {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        //MainFrame frame= new MainFrame();
+        MainFrame frame= new MainFrame();
         Statistics stat = new Statistics("Most viewed film");
     }
 }

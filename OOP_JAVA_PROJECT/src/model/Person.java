@@ -47,5 +47,4 @@ public abstract class Person {
     public int getCategoryMember() {
         return 0;
     }
-    
 }
