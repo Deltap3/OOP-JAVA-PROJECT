@@ -44,7 +44,7 @@ public class LoginListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             try {
                 Connections co = new Connections("project", "root", "projetJava2020");
-                System.out.println(co.getAllFromTable(""));
+               // System.out.println(co.getAllFromTable(""));
                 String login= loginField.getText();
                 String password= new String(pswField.getPassword());
                 boolean correct=false;
@@ -65,8 +65,9 @@ public class LoginListener implements ActionListener{
                 }
                 if (correct) {
                     myFrame.setUser(user);
-                    myFrame.setSize(myFrame.getPanels().get(numPanel).getSize());
+                  //  myFrame.setSize(myFrame.getPanels().get(numPanel).getSize());
                     myFrame.setContentPane(myFrame.getPanels().get(numPanel));
+                    myFrame.pack();
                     myFrame.invalidate();
                     myFrame.validate();
                     myFrame.repaint();

@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Map;
+import javax.swing.SpringLayout;
 
 /**
  *
@@ -48,13 +49,13 @@ public class MainFrame extends JFrame{
         ArrayList<String> initInfos= new ArrayList<>();
         //map based on insertion order
         
-        for(int i=0;i<24;i++)
+        for(int i=0;i<25;i++)
         {
             panelsList.add(new JPanel());
         }
         //panel 0
         initMap.put("Customer", 1);
-        initMap.put("Employee", 8);
+        initMap.put("Employee", 9);
         initInfos.add("welcome\n are you a custommer or an employee?\n");
         ButtonMenuPanel panel0=new ButtonMenuPanel(this, initInfos, initMap);
         panelsList.set(0,panel0);
@@ -62,6 +63,7 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
+        //customer side
         //panel 1
         initMap.put("Guest", 4);
         initMap.put("Member", 2);
@@ -107,18 +109,19 @@ public class MainFrame extends JFrame{
         buildPanel7();
         
         
+        //employee side
         //panel 9
         LoginPanel panel9= new LoginPanel(this, "employee", 0, 10);
         panelsList.set(9,panel9);
         this.add(panel9);
         
         //panel 10
-        initMap.put("manage screenings", 9);
+        initMap.put("manage screenings", 11);
         initMap.put("manage discounts", 14);
-        initMap.put("manage member customers",17);
+        initMap.put("manage members customers",17);
         initMap.put("show stats",22);
         initMap.put("back", 9);
-        initInfos.add("what do you want to do?\n");
+        initInfos.add("general management screen\n");
         ButtonMenuPanel panel10=new ButtonMenuPanel(this, initInfos, initMap);
         panelsList.set(10,panel10);
         this.add(panel10);
@@ -129,14 +132,51 @@ public class MainFrame extends JFrame{
         initMap.put("add screening session", 12);
         initMap.put("Remove screening session", 13);
         initMap.put("back", 10);
-        initInfos.add("what do you want to do?\n");
+        initInfos.add("screening management\n");
         ButtonMenuPanel panel11=new ButtonMenuPanel(this, initInfos, initMap);
         panelsList.set(11,panel11);
         this.add(panel11);
         initMap.clear();
         initInfos.clear();
         
+        //panel 14
+        initMap.put("by movie played", 15);
+        initMap.put("by screening schedule", 16);
+        initMap.put("back", 10);
+        initInfos.add("choose the discount type\n");
+        ButtonMenuPanel panel14=new ButtonMenuPanel(this, initInfos, initMap);
+        panelsList.set(14,panel14);
+        this.add(panel14);
+        initMap.clear();
+        initInfos.clear();
 
+        //panel 17
+        initMap.put("see a member's info", 18);
+        initMap.put("Remove a member", 21);
+        initMap.put("add a new member", 20);
+        initMap.put("back", 10);
+        initInfos.add("member management\n");
+        ButtonMenuPanel panel17=new ButtonMenuPanel(this, initInfos, initMap);
+        panelsList.set(17,panel17);
+        this.add(panel17);
+        initMap.clear();
+        initInfos.clear();
+        
+        //panel 22
+        initMap.put("movie with most views", 23);
+        initMap.put("tickets sold / available", 24);
+        initMap.put("back", 10);
+        initInfos.add("stats list\n");
+        ButtonMenuPanel panel22=new ButtonMenuPanel(this, initInfos, initMap);
+        panelsList.set(22,panel22);
+        this.add(panel22);
+        initMap.clear();
+        initInfos.clear();
+        
+        //panel? 23 (will need changes)
+       // buildPanel23();
+        //panel? 24
+       // buildPanel24();
         
         pack();
     }
@@ -183,6 +223,18 @@ public class MainFrame extends JFrame{
         panelsList.set(8, panel8);
         this.add(panel8);
         
+    }
+    public void buildPanel23()
+    {
+        StatPanel panel23= new StatPanel(this, "Most viewed film");
+        panelsList.set(23, panel23);
+        this.add(panel23); 
+    }
+     public void buildPanel24()
+    {
+        StatPanel panel24= new StatPanel(this, "Percentage tickets per seats");
+        panelsList.set(24, panel24);
+        this.add(panel24); 
     }
     public ArrayList<JPanel> getPanels()
     {

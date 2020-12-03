@@ -47,7 +47,7 @@ public class BuyActionListener implements ActionListener{
         myFrame.setCustomerOrder(customOrder);
 
         myFrame.buildPanel8();
-        myFrame.setSize(myFrame.getPanels().get(8).getSize());
+       // myFrame.setSize(myFrame.getPanels().get(8).getSize());
         myFrame.setContentPane(myFrame.getPanels().get(8));
 
         }

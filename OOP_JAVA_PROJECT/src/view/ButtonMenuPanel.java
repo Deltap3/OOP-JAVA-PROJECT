@@ -34,7 +34,7 @@ public class ButtonMenuPanel extends JPanel{
         
         //making a vertical alligned layout
         this.setLayout(new SpringLayout());
-        this.setSize(new Dimension(500,buttonLink.size()*200));
+        
         
         for(String str: infos)
         {
@@ -50,6 +50,7 @@ public class ButtonMenuPanel extends JPanel{
             this.add(btn);
         }
         
+        this.setSize(new Dimension(500,((buttonLink.size()+infos.size())*20)+200));
         SpringUtilities.makeCompactGrid(this,
                 (buttonLink.size()+infos.size()), 1, //rows, cols
                 6, 6, //initX, initY

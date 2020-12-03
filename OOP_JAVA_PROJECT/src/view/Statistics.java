@@ -30,10 +30,10 @@ public class Statistics extends JFrame {
     private String statType;
     public Statistics(String statType) throws HeadlessException {
         this.statType = statType;
-        if(statType == "Most viewed film"){
+        if(statType.equals("Most viewed film") ){
             mostViewedFilm();
         }
-        else if(statType == "Percentage tickets per seats"){
+        else if(statType.equals("Percentage tickets per seats")){
             percentageTicketsPerSeats();
         }
         else {
@@ -61,7 +61,7 @@ public class Statistics extends JFrame {
                     true,true,false);
             ChartFrame frame = new ChartFrame("Statistics", chart);
             frame.pack();
-            frame.setVisible(true);
+            //frame.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -89,7 +89,7 @@ public class Statistics extends JFrame {
                     true,true,false);
             ChartFrame frame = new ChartFrame("Statistics", chart);
             frame.pack();
-            frame.setVisible(true);
+            //frame.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -128,7 +128,7 @@ public class Statistics extends JFrame {
         final MultiplePieChartDemo1 demo = new MultiplePieChartDemo1("Statistics");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
+        //demo.setVisible(true);
     }
     public class MultiplePieChartDemo1 extends ApplicationFrame {
     public MultiplePieChartDemo1(final String title) {

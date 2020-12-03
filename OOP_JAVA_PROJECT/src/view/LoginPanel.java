@@ -31,14 +31,16 @@ public class LoginPanel extends JPanel {
         
         super();
         this.setLayout(new SpringLayout());
-        this.setSize(new Dimension(700,600));
+        
         JLabel loginLabel = new JLabel("login: ");
         loginField = new JTextField();
+        loginField.setPreferredSize(new Dimension(200,(int)loginField.getPreferredSize().getHeight()));
         loginField.setMaximumSize(loginField.getPreferredSize());
         loginLabel.setLabelFor(loginField);
 
         JLabel passwordLabel = new JLabel("password: ");
         pswField = new JPasswordField();
+        pswField.setPreferredSize(new Dimension(200,(int)pswField.getPreferredSize().getHeight()));
         pswField.setMaximumSize(pswField.getPreferredSize());
         passwordLabel.setLabelFor(pswField);
 
@@ -54,6 +56,7 @@ public class LoginPanel extends JPanel {
         this.add(backButton);
         this.add(okButton);
 
+        this.setSize(new Dimension(800,600));
         SpringUtilities.makeCompactGrid(this,
                 3, 2, //rows, cols
                 6, 6, //initX, initY
