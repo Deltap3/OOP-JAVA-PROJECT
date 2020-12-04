@@ -27,6 +27,7 @@ import org.jfree.ui.RefineryUtilities;
 import org.jfree.util.TableOrder;
 
 public class Statistics extends JFrame {
+    
     private String statType;
     public Statistics(String statType) throws HeadlessException {
         this.statType = statType;
@@ -127,6 +128,7 @@ public class Statistics extends JFrame {
                     true,true,false);
             ChartPanel frame = new ChartPanel(chart);
             frame.setVisible(true);
+            
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

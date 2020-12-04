@@ -8,6 +8,7 @@ package view;
 import controller.ChangePanelListener;
 import controller.StatListener;
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -23,7 +24,7 @@ public class StatPanel extends JPanel{
         JLabel label= new JLabel(statType);
         this.add(label);
         Statistics statFrame= new Statistics(statType);
-        this.add(statFrame.getContentPane());
+        this.add(statFrame);
         JButton btn= new JButton("ok");
         btn.addActionListener(new StatListener(frame, statFrame));
         this.add(btn);
