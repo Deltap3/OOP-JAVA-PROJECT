@@ -26,12 +26,13 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.util.TableOrder;
 
-public class Statistics extends JFrame {
+public class Statistics extends JPanel {
     
     private String statType;
     public Statistics(String statType) throws HeadlessException {
         this.statType = statType;
 
+        
         if(statType.equals("Most viewed film") ){
             mostViewedFilm();
         }
@@ -45,6 +46,7 @@ public class Statistics extends JFrame {
         else if("Discount per Screenings".equals(statType)){
             discountPerScreenings();
         }
+                
     }
     public void discountPerScreenings(){
         try {
@@ -66,8 +68,9 @@ public class Statistics extends JFrame {
 
             
 
-            ChartPanel frame = new ChartPanel(chart);
-	    frame.setVisible(true);
+            ChartPanel panel = new ChartPanel(chart);
+            this.add(panel);
+	   // panel.setVisible(true);
 
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,8 +101,9 @@ public class Statistics extends JFrame {
 
 
             JFreeChart chart = ChartFactory.createPieChart("Most Viewed Genre", data, true, true, false);
-            ChartPanel frame = new ChartPanel(chart);
-            frame.setVisible(true);
+            ChartPanel panel = new ChartPanel(chart);
+            this.add(panel);
+            //panel.setVisible(true);
 
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,8 +130,9 @@ public class Statistics extends JFrame {
             JFreeChart chart = ChartFactory.createBarChart("Tickets Boughts Per Movies",
                     "Movie", "Tickets Bought",data,PlotOrientation.VERTICAL,
                     true,true,false);
-            ChartPanel frame = new ChartPanel(chart);
-            frame.setVisible(true);
+            ChartPanel panel = new ChartPanel(chart);
+            this.add(panel);
+           // panel.setVisible(true);
             
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,18 +142,19 @@ public class Statistics extends JFrame {
     }
     public void percentageTicketsPerSeats(){
         final MultiplePieChartDemo1 demo = new MultiplePieChartDemo1("Statistics");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
+        
+        this.add(demo);
+      //  RefineryUtilities.centerFrameOnScreen(demo);
         //demo.setVisible(true);
     }
-    public class MultiplePieChartDemo1 extends ApplicationFrame {
+    public class MultiplePieChartDemo1 extends JPanel {
     public MultiplePieChartDemo1(final String title) {
-        super(title);
+        super();
         final CategoryDataset dataset = createDataset();
         final JFreeChart chart = createChart(dataset);
         final ChartPanel chartPanel = new ChartPanel(chart, true, true, true, false, true);
-        chartPanel.setPreferredSize(new java.awt.Dimension(1366, 768));
-        setContentPane(chartPanel);
+        //chartPanel.setPreferredSize(new java.awt.Dimension(1366, 768));
+        this.add(chartPanel);
 
     }
     private CategoryDataset createDataset() {

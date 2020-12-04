@@ -26,7 +26,7 @@ public class StatPanel extends JPanel{
         Statistics statFrame= new Statistics(statType);
         this.add(statFrame);
         JButton btn= new JButton("ok");
-        btn.addActionListener(new StatListener(frame, statFrame));
+        btn.addActionListener(new StatListener(frame));
         this.add(btn);
         
         statFrame.setVisible(true);

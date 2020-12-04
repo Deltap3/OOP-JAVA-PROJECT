@@ -56,7 +56,7 @@ public class MainFrame extends JFrame{
         ArrayList<String> initInfos= new ArrayList<>();
         //map based on insertion order
         
-        for(int i=0;i<25;i++)
+        for(int i=0;i<28;i++)
         {
             panelsList.add(new JPanel());
         }
@@ -172,6 +172,8 @@ public class MainFrame extends JFrame{
         //panel 22
         initMap.put("movie with most views", 23);
         initMap.put("tickets sold / available", 24);
+        initMap.put("most view genre", 25);
+        initMap.put("Discount per Screenings", 26);
         initMap.put("back", 10);
         initInfos.add("stats list\n");
         ButtonMenuPanel panel22=new ButtonMenuPanel(this, initInfos, initMap);
@@ -240,6 +242,18 @@ public class MainFrame extends JFrame{
         panelsList.set(24, panel24);
         this.add(panel24); 
     }
+     public void buildPanel25()
+     {
+        StatPanel panel25= new StatPanel(this, "Most viewed Genre");
+        panelsList.set(25, panel25);
+        this.add(panel25); 
+     }
+     public void buildPanel26()
+     {
+        StatPanel panel26= new StatPanel(this, "Discount per Screenings");
+        panelsList.set(26, panel26);
+        this.add(panel26); 
+     }
     public ArrayList<JPanel> getPanels()
     {
         return panelsList;

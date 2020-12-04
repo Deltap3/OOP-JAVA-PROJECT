@@ -17,17 +17,17 @@ import view.MainFrame;
  */
 public class StatListener implements ActionListener{
     MainFrame myFrame;
-    JFrame statFrame;
+    
 
-    public StatListener(MainFrame myFrame, JFrame statFrame) {
+    public StatListener(MainFrame myFrame) {
         this.myFrame = myFrame;
-        this.statFrame = statFrame;
+       
     }
     
 
     public void actionPerformed(ActionEvent e)
     {
-        statFrame.dispose();
+        //statFrame.dispose();
         //myFrame.setSize(myFrame.getPanels().get(myInt).getSize());
         myFrame.setContentPane(myFrame.getPanels().get(22));
         myFrame.pack();
