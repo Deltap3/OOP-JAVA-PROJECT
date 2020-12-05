@@ -29,7 +29,7 @@ public class StatListener implements ActionListener{
     {
         //statFrame.dispose();
         //myFrame.setSize(myFrame.getPanels().get(myInt).getSize());
-        myFrame.setContentPane(myFrame.getPanels().get(22));
+        myFrame.setContentPane(myFrame.getPanels().get(23));
         myFrame.pack();
         myFrame.invalidate();
         myFrame.validate();

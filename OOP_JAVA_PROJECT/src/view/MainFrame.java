@@ -136,7 +136,7 @@ public class MainFrame extends JFrame{
         initMap.put("manage screenings", 11);
         initMap.put("manage discounts", 14);
         initMap.put("manage members customers",17);
-        initMap.put("show stats",22);
+        initMap.put("show stats",23);
         initMap.put("back", 9);
         initInfos.add("general management screen\n");
         ButtonMenuPanel panel10=new ButtonMenuPanel(this, initInfos, initMap);

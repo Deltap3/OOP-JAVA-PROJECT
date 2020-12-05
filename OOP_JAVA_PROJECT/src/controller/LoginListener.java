@@ -44,7 +44,7 @@ public class LoginListener implements ActionListener{
 
         public void actionPerformed(ActionEvent e) {
             try {
-                Connections co = new Connections("project", "root", "projetJava2020");
+                Connections co = new Connections("project", "root", "password");
                // System.out.println(co.getAllFromTable(""));
                 String login= loginField.getText();
                 String password= new String(pswField.getPassword());

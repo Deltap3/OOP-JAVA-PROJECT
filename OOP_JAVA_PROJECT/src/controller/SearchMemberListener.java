@@ -43,7 +43,7 @@ public class SearchMemberListener implements ActionListener{
 
         public void actionPerformed(ActionEvent e) {
             try {
-                Connections co = new Connections("project", "root", "projetJava2020");
+                Connections co = new Connections("project", "root", "password");
                // System.out.println(co.getAllFromTable(""));
                 String fName= firstNameField.getText();
                 String lName= lastNameField.getText();

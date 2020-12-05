@@ -64,7 +64,7 @@ public class AddMemberListener implements ActionListener{
                 CustomerMember member= new CustomerMember( login, psw, mail, age, fName, lName);
                 
                 //then we add it to the database
-                Connections co = new Connections("project", "root", "projetJava2020");
+                Connections co = new Connections("project", "root", "password");
                 CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
                 memberCo.add(member);
 

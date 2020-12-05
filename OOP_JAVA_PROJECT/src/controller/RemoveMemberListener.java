@@ -36,7 +36,7 @@ public class RemoveMemberListener implements ActionListener{
             
             try {
                 //delete the member from the database
-                Connections co = new Connections("project", "root", "projetJava2020");
+                Connections co = new Connections("project", "root", "password");
                 CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
                 memberCo.delete(member);
 
