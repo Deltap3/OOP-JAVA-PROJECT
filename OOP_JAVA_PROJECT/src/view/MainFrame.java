@@ -176,10 +176,15 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
+        //panel 20
+        CreateMemberPanel panel20= new CreateMemberPanel(this);
+        panelsList.set(20, panel20);
+        this.add(panel20);
+        
         //panel 22
         initMap.put("Most viewed film", 23);
         initMap.put("Percentage tickets per seats", 24);
-        initMap.put("most view genre", 25);
+        initMap.put("Most viewed Genre", 25);
         initMap.put("Discount per Screenings", 26);
         initMap.put("back", 10);
         initInfos.add("stats list\n");
@@ -189,10 +194,9 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
-        //panel? 23 (will need changes)
-       // buildPanel23();
-        //panel? 24
-       // buildPanel24();
+        //the stat panels (panels 23 to 26)
+        //have their own build method
+        //since they need to be updated
         
         pack();
     }
@@ -243,30 +247,7 @@ public class MainFrame extends JFrame{
         panelsList.set(num, panel);
         this.add(panel);
     }
-    public void buildPanel23()
-    {
-        StatPanel panel23= new StatPanel(this, "Most viewed film");
-        panelsList.set(23, panel23);
-        this.add(panel23); 
-    }
-     public void buildPanel24()
-    {
-        StatPanel panel24= new StatPanel(this, "Percentage tickets per seats");
-        panelsList.set(24, panel24);
-        this.add(panel24); 
-    }
-     public void buildPanel25()
-     {
-        StatPanel panel25= new StatPanel(this, "Most viewed Genre");
-        panelsList.set(25, panel25);
-        this.add(panel25); 
-     }
-     public void buildPanel26()
-     {
-        StatPanel panel26= new StatPanel(this, "Discount per Screenings");
-        panelsList.set(26, panel26);
-        this.add(panel26); 
-     }
+   
     public ArrayList<JPanel> getPanels()
     {
         return panelsList;
