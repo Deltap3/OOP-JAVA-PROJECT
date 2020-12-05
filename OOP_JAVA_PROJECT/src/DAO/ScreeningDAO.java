@@ -30,7 +30,7 @@ public class ScreeningDAO extends DAO<Screening> {
       try
       {
           //On essaye d'ajouter une scéance à la table scéance
-          String sql = ("insert into screening (tim,numberSeat,ticketsBoughts,discount,numberRoom)\n" +
+          String sql = ("insert into screening (tim,numberSeat,ticketsBoughts,discount,roomNumber)\n" +
                            "values ('"+obj.getDateTime()+"',"+obj.getNumberseat()+","+obj.getTicketsBoughts()+","+obj.getDiscount()+","+obj.getNumberRoom()+")");
           PreparedStatement stmt = connect.prepareStatement(sql); 
           //Si la requête fonctionne la scéance est bien ajouté
@@ -66,13 +66,13 @@ public class ScreeningDAO extends DAO<Screening> {
         Screening s = new Screening();
         try{
 
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,numberRoom FROM screening, movies\n" +
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
                 "WHERE screening.movieId = movies.movieId AND datetim = '" + datetime + "'");
             if(result.first()){
                s = new Screening(
                         result.getString("movieId"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
-                        result.getInt("discount"),result.getInt("numberRoom"));
+                        result.getInt("discount"),result.getInt("roomNumber"));
                
             }
             
@@ -87,7 +87,7 @@ public class ScreeningDAO extends DAO<Screening> {
            Screening s = new Screening();
 //On essaye de trouver la scéance avec sa date
                    try{
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,numberRoom FROM screening, movies\n" +
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
                 "WHERE screening.movieId = movies.movieId AND datetim = '" + dateTime + "'");
             
             //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête
@@ -97,7 +97,7 @@ public class ScreeningDAO extends DAO<Screening> {
                 s = new Screening(
                         result.getString("title"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
-                        result.getInt("discount"),result.getInt("numberRoom"));
+                        result.getInt("discount"),result.getInt("roomNumber"));
             }
         }catch(SQLException ex){
             //Si la requête n'a pas pu se réaliser on affiche une erreur
@@ -114,14 +114,14 @@ public class ScreeningDAO extends DAO<Screening> {
         try{
 
 	    //On essaye de trouver toutes les scéances de la base de donnée
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,numberRoom FROM screening, movies\n" +
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
 							 "WHERE screening.movieId = movies.movieId");
             //Si elle réussit et pour tous les éléments dans le résultat de la requête
             while(result.next()){
                 //On construit la nouvelle scéance
                 s = new Screening(result.getString("title"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
-                        result.getInt("discount"),result.getInt("numberRoom"));
+                        result.getInt("discount"),result.getInt("roomNumber"));
                        
                 //On l'ajoute à l'ArrayList de scéances       
 

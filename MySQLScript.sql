@@ -25,7 +25,7 @@ create table if not exists members
     mail varchar(50),
     login varchar(100),
     passw varchar(50),
-    ticketsBought int not null,
+    totalPaid double not null,
     categoryMember int not null
 );
 create table if not exists screening
@@ -48,7 +48,7 @@ insert into employee (firstName,lastName,login,passw) values
 ('Marie','DUPUIS','marie12','mar1'),
 ('Capucine','DUBOIS','capucine56','cap5');
 
-insert into members (firstName,lastName,mail,login,passw,ticketsBought,categoryMember) values
+insert into members (firstName,lastName,mail,login,passw,totalPaid,categoryMember) values
 ('Soline','GERMOND','patatedouce@gmail.com','soline789','sol7','10','23'),
 ('Guillauem','SAURY','nouillefroide@gmail.com','guillaume56','gui5','5','34'),
 ('Alexis','BOYADJAN','tablebasse@gmail.com','alexis002','alex0','9','45'),
@@ -56,13 +56,6 @@ insert into members (firstName,lastName,mail,login,passw,ticketsBought,categoryM
 ('Valentine','LACOTTE','superfraise@gmail.com','valentine352','val3','15','12'),
 ('Margaux','GOUJEAU','ultraikea@gmail.com','margaux456','mar4','3','67');
 
-insert into members (firstName,lastName,ticketsBought,categoryMember) values
-('Xavier','DANG','7','47'),
-('Adrien','NOUGARET','8','64'),
-('Bob','LENNON','10','25'),
-('Fred','DU GRENIER','13','32'),
-('Ponce','LES FLEURS','5','12'),
-('Lucas','HAUCHARD','3','25');
 
 insert into movies (title,genre,releaseDate,runTime,image) values
 ('Shrek','Animation','2001-07-04','90','shrek.jpg'),
