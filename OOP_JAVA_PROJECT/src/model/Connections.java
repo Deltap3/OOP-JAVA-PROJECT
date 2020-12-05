@@ -14,24 +14,24 @@ package model;
 
 import java.sql.*;
 
-//Cette classe gère toute la partie connexion à la base de donnée
+//This class manage the connection to the database
 public class Connections {
-    //La connexion à la base de données
+    //Connection to the databade
     private static Connection conn;
-    //Sert à envoyer une requête à la base de données
+    //Alows to send a query to the database
     private Statement stmt;
-    //Permet d'avoir le résultat de cette requête
+    //Alows to get the result of the query
     private ResultSet rset;
-    //Permet d'avoir des données précises du résultat de la requête
+    //Alows to have meta data about the query
     private ResultSetMetaData rsetMeta;
-    //Stocke  l'URL de notre base de données
+    //Stocks our database URL
     private static String urlDatabase;
-    //Stocke  le login de notre base de données
+    //Stocks our database login
     private static String loginDatabase;
-    //Stocke  le mot de passe de notre base de données
+    //Stocks our database password
     private static String passwordDatabase;
     
-    //Ici on se connecte à la base de donnée et on définis son URL, login et mot de passe
+    //We connect to the databade from its name, login and password
     public Connections(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException{
         Class.forName("com.mysql.jdbc.Driver");
         this.urlDatabase = "jdbc:mysql://localhost:3306/" + nameDatabase+"?useSSL=false";
@@ -41,22 +41,22 @@ public class Connections {
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     }
     
-    //Permet de renvoyer directement la connexion de la base de données
+    //Return the instance of the database
      public static Connection getInstance(){
-       //Si il n'y a pas encore de connexion
+       //If there's no connection
        if(conn == null){
          try{
-             //On essaye de se connecter à la base de données
+             //We try to connect to the database
              conn = DriverManager.getConnection(urlDatabase,loginDatabase,passwordDatabase);
-             //Si on réussit on en informe l'utilisateur
-             System.out.println("Connexion BDD réussie");
+             //If it suceed we display it to the user
+             System.out.println("Database connection suceed");
          }catch (SQLException ex){
-             //Si la connexion rate on en informe l'utilisateur et on affiche l'erreur
+             //If it failed we display it to the user
              ex.getMessage();
-             System.out.println("Connexion BDD ratée");
+             System.out.println("Database connection failed");
          }
        }
-       //Si il existe déjà une connexion on la renvoie
+       //If there's already a connection we return it
        return conn;
    }
 }

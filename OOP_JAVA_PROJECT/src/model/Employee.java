@@ -12,55 +12,52 @@ package model;
  * ING3 TDE02
  */
 
-/**Classe qui gère les employés
- * elle hérite de la classe abstraite "Person"
+/**This class manages the employees
+ * it extends "Person" class
  */
 public class Employee extends Person{
-    //Un employé possède un login et un mot de passe
+    //An employee have a login and a password
     private String login_ID;
     private String password;
 
     public Employee(){}
    
-    //Son contructeur initialse toutes les variables à celles passées en paramètre
+    //Its constructor initialize all the atributes with the values passed in parameters
     public Employee(String login_ID, String password, String first_name, String last_name) {
-        //Appel du constructeur de "Person"
+        //Calling of the "Person" constructor
         super(first_name, last_name);
         this.login_ID = login_ID;
         this.password = password;
     }
     
-    //Setter du login
+    //Login setter
     public void setLoginID(String m_id)
     {
     this.login_ID=m_id;
     }
     
-    //Getter du login
+    //Login getter
     public String getLoginID()
     {
     return this.login_ID;
     }
     
-    //Setter du mot de passe
+    //Password setter
     public void setPassword(String m_password)
     {
     this.password=m_password;
     }
     
-    //Getter du mot de passe
+    //Password getter
     public String getPassword()
     {
     return this.password;
     }
     
-    //Renvoie faux si on demande si l'objet est un membre
+    //Return false because a employee isn't a member
     @Override
     public boolean isMember()
     {
         return false;
     }
-    
-    
-    
 }
