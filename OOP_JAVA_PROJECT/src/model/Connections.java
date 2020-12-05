@@ -6,8 +6,10 @@
 package model;
 
 /**
- *
- * @author maist
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 
 import java.sql.*;

@@ -19,8 +19,10 @@ import javax.swing.SpringLayout;
 
 
 /**
- *
- * @author Juju
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class LoginPanel extends JPanel {
 

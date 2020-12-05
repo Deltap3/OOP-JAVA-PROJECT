@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.sql.Date;
 import javax.imageio.ImageIO;
 /**
- *
- * @author davidzhong
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class Movie {
     

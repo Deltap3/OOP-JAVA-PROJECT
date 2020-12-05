@@ -19,8 +19,10 @@ import javax.swing.SpringLayout;
 import model.CustomerGuest;
 
 /**
- *
- * @author Juju
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 //this class creates a menu with a question
 //and as many buttons as you want

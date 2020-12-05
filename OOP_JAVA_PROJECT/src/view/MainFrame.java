@@ -23,8 +23,10 @@ import java.util.logging.Logger;
 
 
 /**
- *
- * @author Juju
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class MainFrame extends JFrame{
     

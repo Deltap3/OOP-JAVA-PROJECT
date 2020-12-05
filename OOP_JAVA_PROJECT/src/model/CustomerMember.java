@@ -6,8 +6,10 @@
 package model;
 
 /**
- *
- * @author davidzhong
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class CustomerMember extends Person{
     
@@ -25,6 +27,15 @@ public class CustomerMember extends Person{
         this.mail=mail;
         this.category_member=category_member;
         this.totalPaid = 0.0;
+    }
+
+    public CustomerMember(String login_ID, String password, String mail, int category_member, double totalPaid, String first_name, String last_name) {
+        super(first_name, last_name);
+        this.login_ID = login_ID;
+        this.password = password;
+        this.mail = mail;
+        this.category_member = category_member;
+        this.totalPaid = totalPaid;
     }
     
     public void setLoginID(String m_id)
@@ -66,6 +77,9 @@ public class CustomerMember extends Person{
     return this.category_member;
     }
     
+    public double getTotalPaid(){
+    return totalPaid;
+    }
     
     @Override
     public boolean isMember()
