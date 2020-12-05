@@ -6,8 +6,10 @@
 package model;
 
 /**
- *
- * @author davidzhong
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class CustomerMember extends Person{
     

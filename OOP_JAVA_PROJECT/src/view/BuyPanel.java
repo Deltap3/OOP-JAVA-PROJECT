@@ -21,8 +21,10 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 /**
- *
- * @author Juju
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class BuyPanel extends JPanel{
     

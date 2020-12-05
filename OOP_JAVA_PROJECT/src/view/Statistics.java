@@ -3,16 +3,11 @@ import model.*;
 import DAO.*;
 
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import static model.Connections.getInstance;
 import org.jfree.chart.*;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.MultiplePiePlot;
@@ -20,12 +15,16 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.util.TableOrder;
-
+/**
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
+ */
 public class Statistics extends JFrame {
     private String statType;
     public Statistics(String statType) throws HeadlessException {
@@ -54,13 +53,13 @@ public class Statistics extends JFrame {
             ArrayList<Integer> counter = new ArrayList<Integer>();
             for(int i = 0; i < allScreenings.size() ; ++i){
                counter.add(1);
-               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+               select = screenCo.find(allScreenings.get(i).getDateTime());
                data.addValue(select.getDiscount(),"Screening " + i,select.getMovieName());
             }
             JFreeChart chart = ChartFactory.createBarChart("Discounts Per Screenings",
                     "Screenings", "Discount (in percentage)",data,PlotOrientation.VERTICAL,
                     true,true,false);
-            ChartPanel frame = new ChartPanel(chart);
+            ChartFrame frame = new ChartFrame("stats",chart);
             frame.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,7 +79,7 @@ public class Statistics extends JFrame {
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             ArrayList<Movie> allMovies = movieCo.getAllMovie();
             for(int i = 0; i < allScreenings.size() ; ++i){
-               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+               select = screenCo.find(allScreenings.get(i).getDateTime());
                selectMovie = movieCo.find(select.getMovieName());
                numberTickets = select.getTicketsBoughts();
                for(int j = 0; j < allScreenings.size() ; ++j)
@@ -106,7 +105,7 @@ public class Statistics extends JFrame {
             int numberTickets = 0;
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             for(int i = 0; i < allScreenings.size() ; ++i){
-               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+               select = screenCo.find(allScreenings.get(i).getDateTime());
                numberTickets = select.getTicketsBoughts();
                for(int j = 0; j < allScreenings.size() ; ++j)
                    if(i != j && allScreenings.get(i).getMovieName().equals(allScreenings.get(j).getMovieName()))
@@ -150,7 +149,7 @@ public class Statistics extends JFrame {
             int counter = 1;
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             for(int i = 0; i < allScreenings.size() ; ++i){
-                select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+                select = screenCo.find(allScreenings.get(i).getDateTime());
                 numberTickets = select.getTicketsBoughts();
                 numberSeats = select.getNumberseat();
                 for(int j = 0; j < allScreenings.size() ; ++j)

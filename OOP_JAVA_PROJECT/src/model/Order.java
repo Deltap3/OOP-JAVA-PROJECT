@@ -6,8 +6,10 @@
 package model;
 
 /**
- *
- * @author Juju
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class Order {
     
