@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.CustomerMember;
 import model.Employee;
 /**
  *
@@ -81,7 +82,32 @@ public class EmployeeDAO extends DAO<Employee>{
         }
         return emp;
     }
-  
+  public CustomerMember addMember(CustomerMember obj){
+      try
+        {
+        String sql=("insert into members (firstName,lastName,mail,login,passw,totalPaid,categoryMember)\n" +
+                "values ('"+obj.getFirstName()+"','"+obj.getLastName()+"','"+obj.getMail()+
+                "','"+obj.getLoginID()+"','"+obj.getPassword()+"','"+obj.getTotalPaid()+"','"+obj.getCategoryMember()+"')");
+
+
+        PreparedStatement stmt = connect.prepareStatement(sql); 
+
+            stmt.executeUpdate();
+        } 
+        catch (SQLException ex)
+        {
+           ex.printStackTrace();
+        }
+        return obj;
+  }
+  public void deleteMember(CustomerMember obj){
+      try{
+            this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM members WHERE login = '"+ obj.getLoginID()+"'");
+        }catch(SQLException ex){
+            ex.getMessage();
+        }
+  }
 }
     
 

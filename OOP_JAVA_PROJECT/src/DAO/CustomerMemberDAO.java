@@ -22,29 +22,29 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
     
     public CustomerMember add(CustomerMember obj)
     {
-    try
-    {
-    String sql=("insert into members (firstName,lastName,mail,login,passw,categoryMember)\n" +
-            "values ('"+obj.getFirstName()+"','"+obj.getLastName()+"','"+obj.getMail()+
-            "','"+obj.getLoginID()+"','"+obj.getPassword()+"','"+obj.getCategoryMember()+"')");
-    
-    
-    PreparedStatement stmt = connect.prepareStatement(sql); 
-          
-        stmt.executeUpdate();
-    } 
-    catch (SQLException ex)
-    {
-       ex.printStackTrace();
-    }
-      
-      return obj;
+        try
+        {
+        String sql=("insert into members (firstName,lastName,mail,login,passw,totalPaid,categoryMember)\n" +
+                "values ('"+obj.getFirstName()+"','"+obj.getLastName()+"','"+obj.getMail()+
+                "','"+obj.getLoginID()+"','"+obj.getPassword()+"','"+obj.getTotalPaid()+"','"+obj.getCategoryMember()+"')");
+
+
+        PreparedStatement stmt = connect.prepareStatement(sql); 
+
+            stmt.executeUpdate();
+        } 
+        catch (SQLException ex)
+        {
+           ex.printStackTrace();
+        }
+
+          return obj;
     }
     
   
     public void delete(CustomerMember obj)
     {
-         try{
+        try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM members WHERE login = '"+ obj.getLoginID()+"'");
         }catch(SQLException ex){
@@ -58,7 +58,7 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE login = '" + login+"'");
             if(result.first() && result.first()){
                 member = new CustomerMember(result.getString("login"), result.getString("passw"),
-                        result.getString("mail"),result.getInt("categoryMember"),
+                        result.getString("mail"),result.getInt("categoryMember"),result.getDouble("totalPaid"),
                         result.getString("firstName"),result.getString("lastName"));
                
             }
@@ -76,7 +76,7 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
             ResultSet result2 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE passw = '" + password+"'");
             if(result1.first() && result2.first()){
                 member = new CustomerMember(result1.getString("login"),
-                        result1.getString("passw"),result1.getString("mail"),result1.getInt("categoryMember"),
+                        result1.getString("passw"),result1.getString("mail"),result1.getInt("categoryMember"),result1.getDouble("totalPaid"),
                         result1.getString("firstName"),result1.getString("lastName"));
                
             }

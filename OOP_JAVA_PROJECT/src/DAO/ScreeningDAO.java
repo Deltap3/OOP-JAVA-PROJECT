@@ -45,7 +45,7 @@ public class ScreeningDAO extends DAO<Screening> {
   
   public void delete(Screening obj)
   {
-  try{
+        try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE datetim = '"+ obj.getDateTime()+"'");
         }catch(SQLException ex){
@@ -121,6 +121,14 @@ public class ScreeningDAO extends DAO<Screening> {
         catch(SQLException ex){
             ex.getMessage();
             return false;
+        }
+    }
+    public void setDiscount(Screening obj){
+        try{
+            this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+obj.getDiscount()+"' WHERE datetim = '"+ obj.getDateTime()+"'");
+        }catch(SQLException ex){
+            ex.getMessage();
         }
     }
 }
