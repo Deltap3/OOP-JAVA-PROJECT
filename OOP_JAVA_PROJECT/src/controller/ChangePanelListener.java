@@ -8,6 +8,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import model.CustomerGuest;
+import model.CustomerMember;
 import view.MainFrame;
 
 /**
@@ -36,7 +37,11 @@ public class ChangePanelListener implements ActionListener{
         }
         else if(myInt==7)
         {
-            myFrame.buildPanel7();
+            myFrame.buildMemberInfoPanel(7, 3);
+        }
+        else if(myInt==18)
+        {
+            myFrame.buildMemberInfoPanel(18, 10);
         }
         else if(myInt==23 || myInt==24 || myInt==25 || myInt==26)
         {

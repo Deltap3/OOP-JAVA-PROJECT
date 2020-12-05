@@ -25,53 +25,44 @@ import view.OOP_JAVA_PROJECT;
  *
  * @author Juju
  */
-public class LoginListener implements ActionListener{
+public class SearchMemberListener implements ActionListener{
     
-         private int numPanel;
-        private String table;
+        private int numPanel;
         private MainFrame myFrame;
-        private JTextField loginField;
-        private JPasswordField pswField;
+        private JTextField firstNameField;
+        private JTextField lastNameField;
+        private JTextField mailField;
 
-        public LoginListener(int numPanel, String table, MainFrame myFrame, JTextField loginField, JPasswordField pswField) {
-            this.numPanel = numPanel;
-            this.table = table;
-            this.myFrame = myFrame;
-            this.loginField = loginField;
-            this.pswField = pswField;
-        }
+    public SearchMemberListener(int numPanel, MainFrame myFrame, JTextField firstNameField, JTextField lastNameField, JTextField mailField) {
+        this.numPanel = numPanel;
+        this.myFrame = myFrame;
+        this.firstNameField = firstNameField;
+        this.lastNameField = lastNameField;
+        this.mailField = mailField;
+    }
+
+        
         
 
         public void actionPerformed(ActionEvent e) {
             try {
                 Connections co = new Connections("project", "root", "projetJava2020");
                // System.out.println(co.getAllFromTable(""));
-                String login= loginField.getText();
-                String password= new String(pswField.getPassword());
+                String fName= firstNameField.getText();
+                String lName= lastNameField.getText();
+                String mail= mailField.getText();
                 
-                Person user = null;
-                
-                if(table.equals("members")){
-                    
+                CustomerMember member= new CustomerMember();
+   
                  CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
-                 user= memberCo.findFromLoginPassword(login, password);
-                 myFrame.setSelectedMember((CustomerMember)user);
-                 
-                }
-                else if(table.equals("employee"))
-                {
-                    EmployeeDAO employeeCo= new EmployeeDAO(co.getInstance());
-                    user= employeeCo.findFromLoginPassword(login, password);
-                    
-                }
-                
-                 
-                if(user==null){
-                    throw new IllegalArgumentException("login or password is incorrect");
+                 //member= memberCo.find
+                 myFrame.setSelectedMember(member);
+      
+                if(member==null){
+                    throw new IllegalArgumentException("did not find any corresponding member");
                 }
                 else
-                {
-                    myFrame.setUser(user);
+                { 
                     myFrame.setContentPane(myFrame.getPanels().get(numPanel));
                     myFrame.pack();
                     myFrame.invalidate();
@@ -92,8 +83,7 @@ public class LoginListener implements ActionListener{
 
             }
             
-            loginField.setText("");
-            pswField.setText("");
+
 
         }
     

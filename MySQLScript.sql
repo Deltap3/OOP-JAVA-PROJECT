@@ -49,12 +49,12 @@ insert into employee (firstName,lastName,login,passw) values
 ('Capucine','DUBOIS','capucine56','cap5');
 
 insert into members (firstName,lastName,mail,login,passw,totalPaid,categoryMember) values
-('Soline','GERMOND','patatedouce@gmail.com','soline789','sol7','10','23'),
-('Guillauem','SAURY','nouillefroide@gmail.com','guillaume56','gui5','5','34'),
-('Alexis','BOYADJAN','tablebasse@gmail.com','alexis002','alex0','9','45'),
-('Alec','PAQUERON','litpose@gmail.com','alec93','ale9','7','56'),
+('Soline','GERMOND','patatedouce@gmail.com','soline789','sol7','100','23'),
+('Guillauem','SAURY','nouillefroide@gmail.com','guillaume56','gui5','52','34'),
+('Alexis','BOYADJAN','tablebasse@gmail.com','alexis002','alex0','92','45'),
+('Alec','PAQUERON','litpose@gmail.com','alec93','ale9','70','56'),
 ('Valentine','LACOTTE','superfraise@gmail.com','valentine352','val3','15','12'),
-('Margaux','GOUJEAU','ultraikea@gmail.com','margaux456','mar4','3','67');
+('Margaux','GOUJEAU','ultraikea@gmail.com','margaux456','mar4','30','67');
 
 
 insert into movies (title,genre,releaseDate,runTime,image) values

@@ -86,10 +86,15 @@ public class AddMemberListener implements ActionListener{
                 JOptionPane.showMessageDialog(null, ex.getMessage(),"",JOptionPane.ERROR_MESSAGE);
 
             }
-            
+
+            //clean all the text fields
+            firstNameField.setText("");
+            lastNameField.setText("");
+            ageField.setText("");
+            mailField.setText("");
             loginField.setText("");
             pswField.setText("");
-
+            
         }
     
 }

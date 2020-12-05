@@ -37,6 +37,7 @@ public class MainFrame extends JFrame{
     private final int WINDOW_WIDTH = 1200;
     private final int WINDOW_HEIGHT = 1400;
     private Person user;
+    private CustomerMember selectedMember;
     private Screening session;
     private Order customerOrder;
     
@@ -110,6 +111,7 @@ public class MainFrame extends JFrame{
         panelsList.set(4,panel4);
         this.add(panel4);
         
+        /*
         //panel 5
         buildPanel5();
         
@@ -122,6 +124,7 @@ public class MainFrame extends JFrame{
         //panel 7
         buildPanel7();
         
+        */
         
         //employee side
         //panel 9
@@ -176,10 +179,20 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
+        //panel 18
+        SearchMemberPanel panel18= new SearchMemberPanel(this, 19);
+        panelsList.set(18, panel18);
+        this.add(panel18);
+ 
         //panel 20
         CreateMemberPanel panel20= new CreateMemberPanel(this);
         panelsList.set(20, panel20);
         this.add(panel20);
+        
+        //panel 21
+        SearchMemberPanel panel21= new SearchMemberPanel(this, 10);
+        panelsList.set(21, panel21);
+        this.add(panel21);
         
         //panel 22
         initMap.put("Most viewed film", 23);
@@ -220,6 +233,38 @@ public class MainFrame extends JFrame{
         panelsList.set(6, panel6);
         this.add(panel6);
     }
+    public void buildMemberInfoPanel(int currentPanel, int nextPanel)
+    {
+        Map<String, Integer> initMap= new LinkedHashMap<>();
+        ArrayList<String> initInfos= new ArrayList<>();
+        
+        initMap.put("ok", nextPanel);
+        
+        initInfos.add("member infos: ");
+        initInfos.add(selectedMember.getFirstName()+" "+selectedMember.getLastName());
+        initInfos.add(selectedMember.getMail());
+        initInfos.add("age: "+selectedMember.getCategoryMember());
+        
+        double totalPaid= selectedMember.getTotalPaid();
+        initInfos.add("total paid: "+ totalPaid);
+        
+        if(totalPaid < 50)
+        {
+            initInfos.add("bronze member");
+        }
+        else if(totalPaid <100)
+        {
+            initInfos.add("silver member");
+        }
+        else
+        {
+            initInfos.add("gold member");
+        }
+        
+        ButtonMenuPanel panel= new ButtonMenuPanel(this, initInfos, initMap);
+        panelsList.set(currentPanel,panel);
+        this.add(panel);
+    }
     public void buildPanel7()
     {
         Map<String, Integer> initMap= new LinkedHashMap<>();
@@ -246,6 +291,14 @@ public class MainFrame extends JFrame{
         StatPanel panel= new StatPanel(this, type);
         panelsList.set(num, panel);
         this.add(panel);
+    }
+
+    public CustomerMember getSelectedMember() {
+        return selectedMember;
+    }
+
+    public void setSelectedMember(CustomerMember selectedMember) {
+        this.selectedMember = selectedMember;
     }
    
     public ArrayList<JPanel> getPanels()
