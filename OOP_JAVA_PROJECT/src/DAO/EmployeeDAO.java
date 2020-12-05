@@ -134,6 +134,29 @@ public class EmployeeDAO extends DAO<Employee>{
             ex.getMessage();
         }
     }
+    
+    //Méthode qui renvoie un booléen si l'employé recherché grâce à son login et mot de passe existe
+    public boolean employeeExist(String login, String password){
+      try
+      {
+         //On essaye de trouver l'employé dans la base de données
+         ResultSet resultSet = this.connect.createStatement().executeQuery("select * from employee\n" +
+                           "where login = '" + login + "' and passw = '" + password + "'");
+         
+         if(resultSet.next())
+             //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête on retourne vrai
+            return true;
+         else
+             //Sinon on retourne faux
+             return false;
+      }
+      catch (SQLException ex)
+      {
+         //Si il y a une erreur avec la requête on l'affiche et on retourne faux
+         ex.printStackTrace();
+         return false;
+      }
+    }
 }
     
 

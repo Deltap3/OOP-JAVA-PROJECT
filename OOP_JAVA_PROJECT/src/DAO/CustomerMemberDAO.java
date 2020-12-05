@@ -138,4 +138,26 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
         //On retourne le grade du membre
         return grade;
     }
+    
+    //Méthode qui renvoie un booléen si le membre recherché grâce à son login et mot de passe existe 
+    public boolean memberExist(String login, String password){
+      try
+      {
+         //On essaye de trouver le membre dans la base de données
+         ResultSet resultSet = this.connect.createStatement().executeQuery("select * from members\n" +
+                           "where login = '" + login + "' and passw = '" + password + "'");
+         if(resultSet.next())
+             //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête on retourne vrai
+            return true;
+         else
+             //Sinon on retourne faux
+             return false;
+      }
+      catch (SQLException ex)
+      {
+         //Si il y a une erreur avec la requête on l'affiche et on retourne faux
+         ex.printStackTrace();
+         return false;
+      }
+    }
 }
