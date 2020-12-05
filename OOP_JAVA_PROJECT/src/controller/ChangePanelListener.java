@@ -38,22 +38,11 @@ public class ChangePanelListener implements ActionListener{
         {
             myFrame.buildPanel7();
         }
-        else if(myInt==23)
+        else if(myInt==23 || myInt==24 || myInt==25 || myInt==26)
         {
-            myFrame.buildPanel23();
+            myFrame.buildStatPanel(myInt, e.getActionCommand());
         }
-        else if(myInt==24)
-        {
-            myFrame.buildPanel24();
-        }
-        else if(myInt==25)
-        {
-            myFrame.buildPanel25();
-        }
-        else if(myInt==26)
-        {
-            myFrame.buildPanel26();
-        }
+        
         //myFrame.setSize(myFrame.getPanels().get(myInt).getSize());
         myFrame.setContentPane(myFrame.getPanels().get(myInt));
         myFrame.pack();

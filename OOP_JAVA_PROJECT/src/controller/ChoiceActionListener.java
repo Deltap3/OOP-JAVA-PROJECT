@@ -32,7 +32,7 @@ public class ChoiceActionListener implements ActionListener{
             frame.setSession(session);
             if(numPanel==5)
             {
-                frame.getPanels().set(numPanel, new BuyPanel(frame, session));
+                frame.buildPanel5();
             }
            // frame.setSize(frame.getPanels().get(numPanel).getSize());
             frame.setContentPane(frame.getPanels().get(numPanel));

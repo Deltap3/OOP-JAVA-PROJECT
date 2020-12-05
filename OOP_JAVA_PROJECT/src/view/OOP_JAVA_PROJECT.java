@@ -6,9 +6,11 @@
 package view;
 
 
+import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import model.Connections;
 
 
@@ -41,10 +43,15 @@ public class OOP_JAVA_PROJECT {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         }*/
 
-
+        /*JFrame outerFrame= new JFrame();
+        outerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        outerFrame.setLayout(new BorderLayout());*/
         
         MainFrame frame= new MainFrame();
-            
+        
+       /* outerFrame.add(frame, BorderLayout.CENTER);
+        outerFrame.setVisible(true);
+            */
         //Statistics stat = new Statistics("Member/Customer Ratio");
 
 

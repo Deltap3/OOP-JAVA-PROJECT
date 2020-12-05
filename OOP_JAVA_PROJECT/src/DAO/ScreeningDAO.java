@@ -69,7 +69,7 @@ public class ScreeningDAO extends DAO<Screening> {
             ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,numberRoom FROM screening, movies\n" +
                 "WHERE screening.movieId = movies.movieId AND datetim = '" + datetime + "'");
             if(result.first()){
-                screening = new Screening(
+               s = new Screening(
                         result.getString("movieId"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
                         result.getInt("discount"),result.getInt("numberRoom"));
@@ -80,7 +80,7 @@ public class ScreeningDAO extends DAO<Screening> {
         }catch(SQLException ex){
             ex.getMessage();
         }
-        return screening;
+        return s;
     
 }//////////////Get Screening by DateTime////////////
     public Screening getScreeningByDateTime(String dateTime){

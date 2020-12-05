@@ -1,3 +1,9 @@
+/**
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
+ */
 package view;
 import model.*;
 import DAO.*;
@@ -13,17 +19,9 @@ import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.MultiplePiePlot;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
-/**
- * ZHONG David
- * MAISTERRENA Pierre
- * DANIEL Juliette
- * ING3 TDE02
- */
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
 import org.jfree.util.TableOrder;
 
 
@@ -60,7 +58,7 @@ public class Statistics extends JPanel {
             ArrayList<Integer> counter = new ArrayList<Integer>();
             for(int i = 0; i < allScreenings.size() ; ++i){
                counter.add(1);
-               select = screenCo.find(allScreenings.get(i).getDateTime());
+               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
                data.addValue(select.getDiscount(),"Screening " + i,select.getMovieName());
             }
             JFreeChart chart = ChartFactory.createBarChart("Discounts Per Screenings",
@@ -92,7 +90,7 @@ public class Statistics extends JPanel {
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             ArrayList<Movie> allMovies = movieCo.getAllMovie();
             for(int i = 0; i < allScreenings.size() ; ++i){
-               select = screenCo.find(allScreenings.get(i).getDateTime());
+               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
                selectMovie = movieCo.find(select.getMovieName());
                numberTickets = select.getTicketsBoughts();
                for(int j = 0; j < allScreenings.size() ; ++j)
@@ -122,7 +120,7 @@ public class Statistics extends JPanel {
             int numberTickets = 0;
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             for(int i = 0; i < allScreenings.size() ; ++i){
-               select = screenCo.find(allScreenings.get(i).getDateTime());
+               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
                numberTickets = select.getTicketsBoughts();
                for(int j = 0; j < allScreenings.size() ; ++j)
                    if(i != j && allScreenings.get(i).getMovieName().equals(allScreenings.get(j).getMovieName()))
@@ -166,10 +164,10 @@ public class Statistics extends JPanel {
             Screening select = new Screening();
             final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             int numberTickets = 0, numberSeats = 0;
-            int counter = 1;
+           // int counter = 1;
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             for(int i = 0; i < allScreenings.size() ; ++i){
-                select = screenCo.find(allScreenings.get(i).getDateTime());
+                select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
                 numberTickets = select.getTicketsBoughts();
                 numberSeats = select.getNumberseat();
                 for(int j = 0; j < allScreenings.size() ; ++j)

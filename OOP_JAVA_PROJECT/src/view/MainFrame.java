@@ -6,6 +6,7 @@
 package view;
 
 import DAO.CustomerMemberDAO;
+import java.awt.BorderLayout;
 import model.*;
 
 import java.awt.Dimension;
@@ -20,6 +21,8 @@ import javax.swing.SpringLayout;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
+import org.jfree.ui.RefineryUtilities;
 
 
 /**
@@ -50,6 +53,8 @@ public class MainFrame extends JFrame{
     }
     private void initComponents()
     {
+        this.setLayout(new BorderLayout());
+        
         customerOrder= new Order();
         user= new CustomerGuest();
         session= new Screening();
@@ -172,8 +177,8 @@ public class MainFrame extends JFrame{
         initInfos.clear();
         
         //panel 22
-        initMap.put("movie with most views", 23);
-        initMap.put("tickets sold / available", 24);
+        initMap.put("Most viewed film", 23);
+        initMap.put("Percentage tickets per seats", 24);
         initMap.put("most view genre", 25);
         initMap.put("Discount per Screenings", 26);
         initMap.put("back", 10);
@@ -231,6 +236,12 @@ public class MainFrame extends JFrame{
         panelsList.set(8, panel8);
         this.add(panel8);
         
+    }
+    public void buildStatPanel(int num, String type)
+    {
+        StatPanel panel= new StatPanel(this, type);
+        panelsList.set(num, panel);
+        this.add(panel);
     }
     public void buildPanel23()
     {
