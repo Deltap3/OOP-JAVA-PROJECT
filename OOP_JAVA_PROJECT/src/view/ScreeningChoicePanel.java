@@ -22,8 +22,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
- *
- * @author Juju
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class ScreeningChoicePanel extends JPanel{
     

@@ -6,8 +6,10 @@
 package model;
 
 /**
- *
- * @author davidzhong
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class Screening {
     
@@ -28,7 +30,7 @@ public class Screening {
         this.number_room=number_room;
     }
     
-    public void getMovieName(String m_id_movie)
+    public void setMovieName(String m_id_movie)
     {
     this.movieName=m_id_movie;
     }

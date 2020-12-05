@@ -21,8 +21,10 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 /**
- *
- * @author Juju
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class BuyPanel extends JPanel{
     
@@ -38,7 +40,7 @@ public class BuyPanel extends JPanel{
         
         try{   
             
-        Connections con= new Connections("project", "root", "projetJava2020");
+        Connections con= new Connections("project", "root", "password");
         MovieDAO movieCo= new MovieDAO(con.getInstance());
         chosenMovie= movieCo.find(session.getMovieName());
         }

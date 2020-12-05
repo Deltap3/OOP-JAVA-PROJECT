@@ -5,18 +5,24 @@
  */
 package view;
 
+import DAO.CustomerMemberDAO;
 import model.*;
 
 import java.awt.Dimension;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- *
- * @author Juju
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class MainFrame extends JFrame{
     
@@ -156,7 +162,6 @@ public class MainFrame extends JFrame{
     {
         Map<String, Integer> initMap= new LinkedHashMap<>();
         ArrayList<String> initInfos= new ArrayList<>();
-        
         initMap.put("Back", 5);
         initMap.put("Buy", 0);
         initInfos.add(session.getMovieName());
@@ -166,13 +171,11 @@ public class MainFrame extends JFrame{
         JPanel panel6= new ButtonMenuPanel(this, initInfos, initMap);
         panelsList.set(6, panel6);
         this.add(panel6);
-
     }
     public void buildPanel7()
     {
         Map<String, Integer> initMap= new LinkedHashMap<>();
         ArrayList<String> initInfos= new ArrayList<>();
-        
         initMap.put("Back", 3);
         initInfos.add("member infos: ");
         initInfos.add(user.getFirstName()+" "+user.getLastName());

@@ -6,8 +6,10 @@
 package model;
 
 /**
- *
- * @author davidzhong
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public abstract class Person {
     
@@ -47,5 +49,4 @@ public abstract class Person {
     public int getCategoryMember() {
         return 0;
     }
-    
 }

@@ -8,8 +8,10 @@ package DAO;
 import model.Connections;
 import java.sql.*;
 /**
- *
- * @author davidzhong
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 public class DAOFactory {
     
