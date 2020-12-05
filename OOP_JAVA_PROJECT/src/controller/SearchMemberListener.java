@@ -41,9 +41,6 @@ public class SearchMemberListener implements ActionListener{
         this.mailField = mailField;
     }
 
-        
-        
-
         public void actionPerformed(ActionEvent e) {
             try {
                 Connections co = new Connections("project", "root", "projetJava2020");

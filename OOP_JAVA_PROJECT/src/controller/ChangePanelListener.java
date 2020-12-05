@@ -39,11 +39,11 @@ public class ChangePanelListener implements ActionListener{
         {
             myFrame.buildMemberInfoPanel(7, 3);
         }
-        else if(myInt==18)
+        else if(myInt==19)
         {
-            myFrame.buildMemberInfoPanel(18, 10);
+            myFrame.buildMemberInfoPanel(19, 10);
         }
-        else if(myInt==23 || myInt==24 || myInt==25 || myInt==26)
+        else if( myInt==24 || myInt==25 || myInt==26 || myInt==27)
         {
             myFrame.buildStatPanel(myInt, e.getActionCommand());
         }

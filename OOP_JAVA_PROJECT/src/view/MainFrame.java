@@ -190,20 +190,20 @@ public class MainFrame extends JFrame{
         this.add(panel20);
         
         //panel 21
-        SearchMemberPanel panel21= new SearchMemberPanel(this, 10);
+        SearchMemberPanel panel21= new SearchMemberPanel(this, 22);
         panelsList.set(21, panel21);
         this.add(panel21);
         
-        //panel 22
-        initMap.put("Most viewed film", 23);
-        initMap.put("Percentage tickets per seats", 24);
-        initMap.put("Most viewed Genre", 25);
-        initMap.put("Discount per Screenings", 26);
+        //panel 23
+        initMap.put("Most viewed film", 24);
+        initMap.put("Percentage tickets per seats", 25);
+        initMap.put("Most viewed Genre", 26);
+        initMap.put("Discount per Screenings", 27);
         initMap.put("back", 10);
         initInfos.add("stats list\n");
-        ButtonMenuPanel panel22=new ButtonMenuPanel(this, initInfos, initMap);
-        panelsList.set(22,panel22);
-        this.add(panel22);
+        ButtonMenuPanel panel23=new ButtonMenuPanel(this, initInfos, initMap);
+        panelsList.set(23,panel23);
+        this.add(panel23);
         initMap.clear();
         initInfos.clear();
         
@@ -232,6 +232,19 @@ public class MainFrame extends JFrame{
         JPanel panel6= new ButtonMenuPanel(this, initInfos, initMap);
         panelsList.set(6, panel6);
         this.add(panel6);
+    }
+    public void buildPanel8()
+    {
+        AgeDiscountPanel panel8= new AgeDiscountPanel(this);
+        panelsList.set(8, panel8);
+        this.add(panel8);
+        
+    }
+    public void buildPanel22()
+    {
+        RemoveMemberPanel panel22= new RemoveMemberPanel(this);
+        panelsList.set(22, panel22);
+        this.add(panel22);
     }
     public void buildMemberInfoPanel(int currentPanel, int nextPanel)
     {
@@ -265,27 +278,8 @@ public class MainFrame extends JFrame{
         panelsList.set(currentPanel,panel);
         this.add(panel);
     }
-    public void buildPanel7()
-    {
-        Map<String, Integer> initMap= new LinkedHashMap<>();
-        ArrayList<String> initInfos= new ArrayList<>();
-        initMap.put("Back", 3);
-        initInfos.add("member infos: ");
-        initInfos.add(user.getFirstName()+" "+user.getLastName());
-        initInfos.add(user.getMail());
-        initInfos.add("age: "+user.getCategoryMember());
-        ButtonMenuPanel panel7= new ButtonMenuPanel(this, initInfos, initMap);
-        panelsList.set(7,panel7);
-        this.add(panel7);
-
-    }
-    public void buildPanel8()
-    {
-        AgeDiscountPanel panel8= new AgeDiscountPanel(this);
-        panelsList.set(8, panel8);
-        this.add(panel8);
-        
-    }
+   
+    
     public void buildStatPanel(int num, String type)
     {
         StatPanel panel= new StatPanel(this, type);
