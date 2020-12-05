@@ -94,7 +94,6 @@ public class LoginPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             try {
                 Connections co = new Connections("project", "root", "password");
-                System.out.println(co.getAllFromTable(""));
                 String login= loginField.getText();
                 String password= new String(pswField.getPassword());
                 boolean correct=false;
@@ -104,14 +103,14 @@ public class LoginPanel extends JPanel {
                     
                  CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
                  user= memberCo.findFromLoginPassword(login, password);
-                 correct= co.memberExist(login, password);
+                 correct= memberCo.memberExist(login, password);
                  
                 }
                 else if(table.equals("employee"))
                 {
                     EmployeeDAO employeeCo= new EmployeeDAO(co.getInstance());
                     user= employeeCo.findFromLoginPassword(login, password);
-                    correct= co.employeeExist(login, password);
+                    correct= employeeCo.employeeExist(login, password);
                 }
                 if (correct) {
                     myFrame.setUser(user);
