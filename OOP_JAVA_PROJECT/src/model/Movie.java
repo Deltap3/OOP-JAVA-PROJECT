@@ -16,9 +16,9 @@ import javax.imageio.ImageIO;
  * ING3 TDE02
  */
 
-//Classe qui gère les films
+//Class that manages the movies
 public class Movie {
-    //Un film est définis par son titre, genre, date de sortie, durée et son affiche
+    //A movie have a title, genre, release date, run time and a poster
     private String title;
     private String genre;
     private String release_date;
@@ -27,7 +27,7 @@ public class Movie {
 
     public Movie(){}
     
-    //Son contructeur initialse toutes les variables à celles passées en paramètre
+    //Its constructor initialize all the atributes with the values passed in parameters
     public Movie(String title, String genre, String release_date, int run_time_minute, String image_name) {
         this.title = title;
         this.genre = genre;
@@ -35,71 +35,71 @@ public class Movie {
         this.run_time_minute = run_time_minute;
         
         try{
-            //On essaye de trouver l'image correspondante
-            //Si on la trouve on l'affecte à "image"
+            //We try to find the corresponding image
+            //If we find it we put it in "image"
             this.image= ImageIO.read(new File("images/"+image_name));
         }
         catch (IOException e) {
-            //Si on ne la trouve pas on en informe l'utilisateur
+            //Else we display the error to the user
             System.out.println("couldn't load image "+image_name);
         }
     }
     
-    //Setter du titre
+    //Title setter
     public void setTitle(String m_title)
     {
     this.title = m_title;
     }
     
-    //Getter du titre
+    //Title getter
     public String getTitle()
     {
     return this.title;
     }
     
-    //Setter du genre
+    //Genre setter
     public void setGenre(String m_genre)
     {
     this.genre = m_genre;
     }
     
-    //Getter du genre
+    //Genre getter
     public String getGenre()
     {
     return this.genre;
     }
     
-    //Setter de la date de sortie
+    //Release date setter
     public void setReleaseDate(String m_release_date)
     {
         this.release_date = m_release_date;
     }
     
-    //Getter de la date de sortie
+    //Release date getter
     public String getReleaseDate()
     {
         return this.release_date;
     }
     
-    //Setter de la durée
+    //Run time setter
     public void setRunTime(int m_run_time)
     {
     this.run_time_minute = m_run_time;
     }
     
-    //Getter de la durée
+    //Run time setter
     public int getRunTime()
     {
     return this.run_time_minute;
     }
     
-    //Setter de l'image
+    //Poster setter
     public void setImage(BufferedImage m_image)
     {
         this.image=m_image;
     }
     
-    //Getter de la durée
+    //Poster getter
     public BufferedImage getImage()
     {
         return this.image;

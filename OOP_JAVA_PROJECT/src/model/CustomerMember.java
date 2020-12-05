@@ -12,26 +12,26 @@ package model;
  * ING3 TDE02
  */
 
-/**Classe qui gère les membres
- * elle hérite de la classe abstraite "Person"
+/**This class manages the members
+ * it extends "Person" class
  */
 public class CustomerMember extends Person{
-    //Le login du membre
+    //Member's login
     private String login_ID;
-    //Son mot de passe
+    //Its password
     private String password;
-    //Son adresse mail
+    //Its mail adress
     private String mail;
-    //Son âge
+    //Its age
     private int category_member;
-    //Le total qu'il à payé sur toutes ces commandes
+    //Its total paid from all its orders
     private double totalPaid;
     
     public CustomerMember(){}
     
-    //Son contructeur initialse toutes les variables à celles passées en paramètre sauf le total payé qui est à 0
+    //Its constructor initialize all the atributes with the values passed in parameters and the total paid is 0
     public CustomerMember(String loginID, String password, String mail, int category_member, String first_name, String last_name) {
-        //Appel du constructeur de "Person"
+        //Calling of the "Person" constructor
         super(first_name, last_name);
         this.login_ID = loginID;
         this.password = password;
@@ -40,9 +40,9 @@ public class CustomerMember extends Person{
         this.totalPaid = 0.0;
     }
     
-    //Si on passe un total payé en paramètre on l'initialise
+    //If total paid is passed in parameters we initialize it
     public CustomerMember(String login_ID, String password, String mail, int category_member, double totalPaid, String first_name, String last_name) {
-        //Appel du constructeur de "Person"
+        //Calling of the "Person" constructor
         super(first_name, last_name);
         this.login_ID = login_ID;
         this.password = password;
@@ -51,67 +51,67 @@ public class CustomerMember extends Person{
         this.totalPaid = totalPaid;
     }
     
-    //Setter pour le login
+    //Login setter
     public void setLoginID(String m_id)
     {
     this.login_ID=m_id;
     }
     
-    //Getter pour le login
+    //Login getter
     public String getLoginID()
     {
     return this.login_ID;
     }
     
-    //Setter pour le mot de passe
+    //Password setter
     public void setPassword(String m_password)
     {
     this.password=m_password;
     }
     
-    //Getter pour le mot de passe
+    //Password getter
     public String getPassword()
     {
     return this.password;
     }
     
-    //Setter pour le mail
+    //Mail setter
     public void setMail(String m_mail)
     {
     this.mail=m_mail;
     }
     
-    //Getter pour le mail
+    //Mail getter
     public String getMail()
     {
     return this.mail;
     }
     
-    //Setter pour l'âge
+    //Age setter
     public void setCategoryMember(int m_categoryMember)
     {
     this.category_member=m_categoryMember;
     }
     
-    //Getter pour l'âge
+    //Age getter
     public int getCategoryMember()
     {
     return this.category_member;
     }
     
-    //Getter pour le total payé
+    //Total paid getter
     public double getTotalPaid(){
     return totalPaid;
     }
     
-    //Renvoie vrai si on demande si l'objet est un membre
+    //Return true because it's a member
     @Override
     public boolean isMember()
     {
         return true;
     }
   
-    //Ajoute un prix au prix total payé
+    //Add the price in parameter to the total price
     public void addPrice(double price){
         totalPaid = totalPaid + price;
     }

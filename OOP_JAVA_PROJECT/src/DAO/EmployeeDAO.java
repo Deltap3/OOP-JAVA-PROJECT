@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,96 +18,96 @@ import model.Employee;
  * ING3 TDE02
  */
 public class EmployeeDAO extends DAO<Employee>{
-    //Cette classe fait le lien des employés entre notre base de données et notre code en java
+    //This class is the link between our java code and our database
     public EmployeeDAO(Connection con)
     {
     super(con);
     }
-    //Ajoute l'employé passé en paramètre dans la base de données
+    //Add the employee passed in parameter in the database
     public Employee add(Employee obj){
       try
       {
-        //On essaye d'ajouter un employé à la table membre
+        //We try to add this employee
         String sql = ("insert into employee (firstName,lastName,login,passw)\n" +
                 "values ('"+obj.getFirstName()+"','"+obj.getLastName()+
                 "','"+obj.getLoginID()+"','"+obj.getPassword()+")");
         PreparedStatement stmt = connect.prepareStatement(sql); 
-        //Si la requête fonctionne le membre est bien ajouté
+            //If the query suceed and the member is well added
           stmt.executeUpdate();
         
       }
       catch (SQLException ex)
       {
-         //Sinon on affiche une erreur
+           //Else we display the error
          ex.printStackTrace();
       }
-      //On retourne l'employé que l'on vient d'ajouter
+        //We return the objet we have just created
       return obj;
     }
   
-  //On supprime un employé de la base de données
+    //We delete a employee from the database
   public void delete(Employee obj)
   {
   try{
-      //On essaye de supprimer l'employé et on le supprime si aucune erreur n'arrive
+      //We try to delete this employee
       this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
       ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM employee WHERE login = '"+ obj.getLoginID() + "'");
     }catch(SQLException ex){
-        //Si il y a une erreur avec la requête on l'affiche
+        //If there's an error we display it
         ex.getMessage();
     }
   }
-  /**
-   * Permet de retrouver un employé dans la base de données
-   * a partir d'un login et de récupérer un objet employé
-   **/
+    /**
+    * Find a employee in the database from a login
+    * and retrun a employee object
+    **/
   public Employee find(String login) {
          Employee emp = new Employee();
         try{
-            //On essaye de trouver l'employé avec son login
+            //We try to find the employee with his login
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM employee WHERE login = '" + login + "'");
-            //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête
+            //If the query suceed and there's at least one element in it
             if(result.first()){
-                //On construit un nouveau employé
+                //We create a new employee
                 emp = new Employee(result.getString("login"),
                         result.getString("passw"),
                         result.getString("firstName"),result.getString("lastName"));
                
             }
         }catch(SQLException ex){
-            //Si la requête n'a pas pu se réaliser on affiche une erreur
+            //If the query failed we display an error message
             ex.getMessage();
         }
-        //On retourne l'employé créé
+        //We return the created member
         return emp;
     }
+  
     /**
-    * Permet de retrouver un employé dans la base de données
-    * a partir d'un login et d'un mot de passe
-    * et de récupérer un objet employé
+    * Find a member in the database from a login and password
+    * and retrun a member object
     **/
     public Employee findFromLoginPassword(String login, String password)
     {
       Employee emp = new Employee();
         try{
-            //On essaye de trouver l'employé avec son login et mot de passe
+            //We try to find this member 
             ResultSet result1 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE login = '" +login+"' AND passw = '" +password+"'");
-            //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête
+            //If the query suceed and there's at least one element in it
             if(result1.first()){
-                //On construit un nouveau employé
+                //We create a new member
                 emp = new Employee(result1.getString("login"), result1.getString("passw"),
                         result1.getString("firstName"),result1.getString("lastName"));
                
             }
         }catch(SQLException ex){
-            //Si il y a une erreur avec la requête on l'affiche
+            //If the query fails we display an error
             ex.getMessage();
         }
-        //On retourne l'employé créé
+        //We return the created member
         return emp;
     }
     
-    //Même méthode que celle pour ajouter un membre mais cette fois à partir d'un employé
+    //Same method than the one that add a member in CustomerMemberDAO
     public CustomerMember addMember(CustomerMember obj){
       try
         {
@@ -125,7 +126,7 @@ public class EmployeeDAO extends DAO<Employee>{
         }
         return obj;
     }
-    //Même méthode que celle pour supprimer un membre mais cette fois à partir d'un employé
+    //Same method than the one that delete a member in CustomerMemberDAO
     public void deleteMember(CustomerMember obj){
       try{
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -135,24 +136,24 @@ public class EmployeeDAO extends DAO<Employee>{
         }
     }
     
-    //Méthode qui renvoie un booléen si l'employé recherché grâce à son login et mot de passe existe
+    //Return a bolean whether the employee we research exists or not    
     public boolean employeeExist(String login, String password){
       try
       {
-         //On essaye de trouver l'employé dans la base de données
+         //We try to find the employee in the database
          ResultSet resultSet = this.connect.createStatement().executeQuery("select * from employee\n" +
                            "where login = '" + login + "' and passw = '" + password + "'");
          
          if(resultSet.next())
-             //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête on retourne vrai
+            //If the query suceed and there's at least one element in it
             return true;
          else
-             //Sinon on retourne faux
+             //Else we return false
              return false;
       }
       catch (SQLException ex)
       {
-         //Si il y a une erreur avec la requête on l'affiche et on retourne faux
+         //If there's an error we display it and return false
          ex.printStackTrace();
          return false;
       }

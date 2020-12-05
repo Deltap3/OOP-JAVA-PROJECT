@@ -13,27 +13,27 @@ import java.sql.*;
  * DANIEL Juliette
  * ING3 TDE02
  */
-///Interface qui permet d'initialiser plusieurs DAO (ici EmployeeDAO, CustomerMemberDAO, ScreeningDAO et MovieDAO)
+//Interface that initialize several DAO (=EmployeeDAO, CustomerMemberDAO, ScreeningDAO and MovieDAO)
 public class DAOFactory {
     
     protected static final Connection conn = Connections.getInstance();
     
-    // Méthodes de récupération de l'implémentation de EmployeeDAO
+    // Methods for recovering the EmployeeDAO implementation
     public static DAO getEmployeeDAO(){
         return new EmployeeDAO(conn);
     }
     
-    /// Méthodes de récupération de l'implémentation du CustomerMemberDAO
+    // Methods for recovering the CustomerMemberDAO implementation
     public static DAO getCustomerMemberDAO(){
         return new CustomerMemberDAO(conn);
     }
     
-    /// Méthodes de récupération de l'implémentation de MovieDAO
+    // Methods for recovering the MovieDAO implementation
     public static DAO getMovieDAO(){
         return new MovieDAO(conn);
     }
     
-    /// Méthodes de récupération de l'implémentation de ScreeningDAO
+    // Methods for recovering the ScreeningDAO implementation
     public static DAO getScreeningDAO(){
         return new ScreeningDAO(conn);
     }

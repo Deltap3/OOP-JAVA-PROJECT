@@ -17,115 +17,115 @@ import java.util.ArrayList;
  * ING3 TDE02
  */
 public class MovieDAO extends DAO<Movie>{
-    //Cette classe fait le lien des films entre notre base de données et notre code en java
+    //This class is the link between our java code and our database
     public MovieDAO(Connection conn)
     {
     super(conn);
     }
 
-    //Ajoute le film passé en paramètre dans la base de données
+    //Add the movie passed in parameter in the database
     public Movie add(Movie obj){
       try
       {
-          //On essaye d'ajouter un film à la table film
+          //We try to add this movie
           String sql = ("insert into movies (title,genre,releaseDate,runTime,image)\n" +
                            "values ('"+obj.getTitle()+"','"+obj.getGenre()+"','"+obj.getReleaseDate()+"',"+obj.getRunTime()+",'"+obj.getImage()+"')");
           PreparedStatement stmt = connect.prepareStatement(sql); 
-          //Si la requête fonctionne le film est bien ajouté
+            //If the query suceed and the movie is well added
           stmt.executeUpdate();
         
       }
       catch (SQLException ex)
       {
-         //Sinon on affiche une erreur
+           //Else we display the error
          ex.printStackTrace();
       }
-      //On retourne le film que l'on vient d'ajouter
+        //We return the objet we have just created
       return obj;
     }
   
-  //On supprime un film de la base de données
+    //We delete a movie from the database
   public void delete(Movie obj)
   {
     try{
-        //On essaye de supprimer le film et on le supprime si aucune erreur n'arrive
+        //We try to delete this movie
         this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
         ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM movies WHERE title = '"+ obj.getTitle()+"'");
     }catch(SQLException ex){
-        //Si il y a une erreur avec la requête on l'affiche
+        //If there's an error we display it
         ex.getMessage();
     }
   }
-  /**
-  * Permet de retrouver un gilm dans la base de données
-  * a partir de son nom et de récupérer un objet film
-  **/
+    /**
+    * Find a movie in the database from a movie name
+    * and retrun a movie object
+    **/
   public Movie find(String movieName) {
          Movie movie = new Movie();
         try{
-            //On essaye de trouver le film avec son nom
+            //We try to find the movie with his login
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM movies WHERE title = '" + movieName +"'");
-            //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête
+            //If the query suceed and there's at least one element in it
             if(result.first()){
-                //On construit un nouveau film
+                //We create a new movie
                 movie = new Movie(result.getString("title"),
                         result.getString("genre"),result.getString("releaseDate"),
                         result.getInt("runTime"),result.getString("image"));
                
             }
         }catch(SQLException ex){
-            //Si la requête n'a pas pu se réaliser on affiche une erreur
+            //If the query failed we display an error message
             ex.getMessage();
         }
-        //On retourne le film créé
+        //We return the created movie
         return movie;
     }
-    //Permet de trouver un film en fonction de la date d'une de ses scéances
+  
+    //Find a movie from its date
     public Movie getMovieByDateTime(String dateTime){
         Movie m = new Movie();
         try{
-            //On essaye de trouver le film correspondant à la scéance que l'on cherche
-            //grâce à sa date
+            //We try to find this movie from its date
             ResultSet result = this.connect.createStatement().executeQuery("select * from movies\n" +
                          "inner join screening on movies.movieId = screening.movieId"+
                          "where datetim = '"+dateTime+"'");
-            //Si elle réussit et pour tous les éléments dans le résultat de la requête
+            //If the query suceed and there's at least one element in it
             while(result.next()){
-                //On construit le nouveau film
+                //We create a new movie
                 m = new Movie(result.getString("title"),
                      result.getString("genre"),result.getString("releaseDate"),
                      result.getInt("runTime"),result.getString("image"));
             }
         }catch(SQLException ex){
-            //Si la requête n'a pas pu se réaliser on affiche une erreur
+            //Else we display an ereor
             ex.printStackTrace();
         }
-        //On retourne le film créé
+        //We return the created movie
         return m;
     }
 
-  //Permet de récupérer tous les films de la base de donnée
+  //Return all the movies from the database
   public ArrayList<Movie> getAllMovie(){
-        //On créé une ArrayList de films pour stocker le résultat de la requête
+        //We create an ArrayList of movies
         ArrayList<Movie> listMovie = new ArrayList<>();
         Movie m = new Movie();
         try{
-            //On essaye de trouver touts les films de la base de donnée
+            //We try to find all the movies
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM movies");
-            //Si elle réussit et pour tous les éléments dans le résultat de la requête
+            //If the query suceed and for all the elements in the query
             while(result.next()){
-                //On construit le nouveau film
+                //We create a new movie
                 m = new Movie(result.getString("title"),
                         result.getString("genre"),result.getString("releaseDate"),
                         result.getInt("runTime"),result.getString("image"));
-                //On l'ajoute à l'ArrayList de films      
+                //We add it to the ArrayList    
                 listMovie.add(m);
             }
         }catch(SQLException ex){
-            //Si la requête n'a pas pu se réaliser on affiche une erreur
+            //If there's an error we display it
             ex.printStackTrace();
         }
-        //On retourne l'ArrayList de films
+        //We return the movie ArrayList
         return listMovie;
     }
   

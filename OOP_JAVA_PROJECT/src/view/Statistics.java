@@ -26,120 +26,115 @@ import org.jfree.util.TableOrder;
  * ING3 TDE02
  */
 
-//Classe qui gère toutes les statistiques
+//Class that manages all the statistics
 public class Statistics extends JFrame {
     
-    //Permet de savoir quelle statistique on veux afficher
+    //Allows you to know which statistic you want to display
     private String statType;
     
-    //On appelle la méthode correspondante à la statistique qu'on veux afficher
+    //We call the method that corresponds to the statistic that we want to display
     public Statistics(String statType) throws HeadlessException {
         this.statType = statType;
-        //Si on veux afficher les films les plus vus 
-        //(qui ont eu le plus de tickets vendus)
+        //If we wznt to display the most viewed movies
+        //(who had the most tickets sold)
         if("Most viewed film".equals(statType)){
             mostViewedFilm();
         }
-        //Si on veux afficher le pourcentage de tickets achetés 
-        //par rapport aux places disponibles de chaque film
+        //If we want to display the percentage of tickets solds compared to empty seats
         else if("Percentage tickets per seats".equals(statType)){
             percentageTicketsPerSeats();
         }
         
-        //Si on veux afficher les genre de films les plus vus 
-        //(qui ont eu le plus de tickets vendus)
+        //If we want to display the most viewed genre
+        //(who had the most tickets sold)
         else if("Most viewed Genre".equals(statType)){
             mostViewedGenre();
         }
         
-        //Si on veux afficher la réduction de chaque scéance
+        //If we want to display the discount of all the screenings
         else if("Discount per Screenings".equals(statType)){
             discountPerScreenings();
         }
     }
     
-    //La statistique qui affiche les réductions de chaque scéances
+    //The statistic that display discounts per screenings
     public void discountPerScreenings(){
         try {
-            //On crée un dataset pour l'histogramme
+            //We create a dataset for the bar chart
             DefaultCategoryDataset data = new DefaultCategoryDataset();
-            //On essaye de se connecter à la base de données
+            //We try to connect to the database
             Connections co = new Connections("project", "root", "password");
-            //On accède au DAO des scéances
+            //We acces screening DAO
             ScreeningDAO screenCo = new ScreeningDAO(co.getInstance());
-            //La scéance qu'on sélectionnera pour l'histogramme
+            //This is the screening we choose for the bar chart
             Screening select = new Screening();
-            //Toutes les scéances de la base de donnée
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
-            //Pour toutes les scéances
+            //For all the screenings
             for(int i = 0; i < allScreenings.size() ; ++i){
-               //On sélectionne une scéance
+               //We select a screening 
                select = screenCo.find(allScreenings.get(i).getDateTime());
-               //On ajoute ses données au dataset
+               //We had its data to the dataset
                data.addValue(select.getDiscount(),"Screening " + i,select.getMovieName());
             }
-            //On créé l'histogramme
+            //We create the bar chart
             JFreeChart chart = ChartFactory.createBarChart("Discounts Per Screenings",
                     "Screenings", "Discount (in percentage)",data,PlotOrientation.VERTICAL,
                     true,true,false);
-            //On créé un panel qui contient cet histogramme et on le rend visible
+            //We create a panel with the bar chart and make this panel visible
             ChartPanel frame = new ChartPanel(chart);
             frame.setVisible(true);
         } catch (SQLException ex) {
-            //Si on ne peux pas se connecter à la base de données on l'affiche
+            //If we cna't connect to the database we displat it
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            //Si on ne trouve pas la classe du DAO on l'affiche
+            //If we don't find the DAO class we display it
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    //La statistique qui affiche les genre de films les plus vus
+    //The statistic that display the most viewed genre
     public void mostViewedGenre(){
         try {
-            //On crée un dataset pour le camembert
+            //We create a dataset for the pie chart
             DefaultPieDataset data = new DefaultPieDataset();
-            //On essaye de se connecter à la base de données
+            //We try to connect to the database
             Connections co = new Connections("project", "root", "password");
-            //On accède au DAO des scéances
+            //We acces screening DAO
             ScreeningDAO screenCo = new ScreeningDAO(co.getInstance());
-            //La scéance qu'on sélectionnera pour le camembert
+            //This is the screening we choose for the bar chart
             Screening select = new Screening();
-            //On accède au DAO des films
+            //We acces movies DAO
             MovieDAO movieCo = new MovieDAO(co.getInstance());
-            //Le film qu'on sélectionnera pour la statistique
+            //This is the movie we choose for the bar chart
             Movie selectMovie = new Movie();
-            //Nombre de tickets qui sera actualisé si un film possède plusieures scéances
+            //Number of total tocikets if a movie had several screenings
             int numberTickets = 0;
-            //Toutes les scéances de la base de donnée
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
-            //Tous les films de la base de donnée
             ArrayList<Movie> allMovies = movieCo.getAllMovie();
-            //Pour toutes les scéances
+            //For all the screenings
             for(int i = 0; i < allScreenings.size() ; ++i){
-               //On sélectionne un film et une scéance
+               //We select a screening and a movie
                select = screenCo.find(allScreenings.get(i).getDateTime());
                selectMovie = movieCo.find(select.getMovieName());
-               //Le nombre de tickets de la scéance sélectionnée
                numberTickets = select.getTicketsBoughts();
-               //On cherche si un genre appartait dans plusieures scéances
+               //We search if a genre appears in several screenings
                for(int j = 0; j < allScreenings.size() ; ++j)
                    if(i != j && allMovies.get(i).getGenre().equals(allMovies.get(j).getGenre()))
-                       //Si il apparati dans plusieures scéances on actualise le nombre de tickets vendus pour ce genre
+                       //If it appears several times we add them
                        numberTickets = numberTickets + allScreenings.get(j).getTicketsBoughts();  
-               //On ajoute les données dans le dataset 
+               //We had its data to the dataset
                data.setValue(selectMovie.getGenre(),numberTickets);
             }
-            //On créé le camembert
+            //We create the pie chart
             JFreeChart chart = ChartFactory.createPieChart("Most Viewed Genre", data, true, true, false);
-            //On créé un panel qui contient ce camembert et on le rend visible
+            //We create a panel with the pie chart and make this panel visible
             ChartPanel frame = new ChartPanel(chart);
             frame.setVisible(true);
         } catch (SQLException ex) {
-            //Si on ne peux pas se connecter à la base de données on l'affiche
+            //If we cna't connect to the database we displat it
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            //Si on ne trouve pas la classe du DAO on l'affiche
+            //If we don't find the DAO class we display it
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -147,62 +142,58 @@ public class Statistics extends JFrame {
     //La statistique qui affiche les films les plus vus
     public void mostViewedFilm(){
         try {
-            //On crée un dataset pour l'histogramme
+            //We create a dataset for the bar chart
             DefaultCategoryDataset data = new DefaultCategoryDataset();
-            //On essaye de se connecter à la base de données
+            //We try to connect to the database
             Connections co = new Connections("project", "root", "password");
-            //On accède au DAO des scéances
+            //We acces screening DAO
             ScreeningDAO screenCo = new ScreeningDAO(co.getInstance());
-            //La scéance qu'on sélectionnera pour l'histogramme
             Screening select = new Screening();
-            //Nombre de tickets qui sera actualisé si un film possède plusieures scéances
+            //Number of total tickets if a movie had several screenings
             int numberTickets = 0;
-            //Toutes les scéances de la base de donnée
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
-            //Pour toutes les scéances
+            //For all the screenings
             for(int i = 0; i < allScreenings.size() ; ++i){
-                //On sélectionne une scéance
+               //We select a screening 
                select = screenCo.find(allScreenings.get(i).getDateTime());
-               //Le nombre de tickets de la scéance sélectionnée
                numberTickets = select.getTicketsBoughts();
-               //On cherche si un film appartait dans plusieures scéances
+               //We search if a movie appears in several screenings
                for(int j = 0; j < allScreenings.size() ; ++j)
                    if(i != j && allScreenings.get(i).getMovieName().equals(allScreenings.get(j).getMovieName()))
-                       //Si il apparati dans plusieures scéances on actualise le nombre de tickets vendus pour ce film
+                       //If it appears several times we add the new number of tickets to the ancient one
                        numberTickets = numberTickets + allScreenings.get(j).getTicketsBoughts();
-               //On ajoute ses données au dataset
+               //We had its data to the dataset
                data.addValue(numberTickets,select.getMovieName(),"Movies");
             }
-            //On créé l'histogramme
+            //We create the bar chart
             JFreeChart chart = ChartFactory.createBarChart("Tickets Boughts Per Movies",
                     "Movie", "Tickets Bought",data,PlotOrientation.VERTICAL,
                     true,true,false);
-            //On créé un panel qui contient cet histogramme et on le rend visible
+            //We create a panel with the bar chart and make this panel visible
             ChartPanel frame = new ChartPanel(chart);
             frame.setVisible(true);
         } catch (SQLException ex) {
-            //Si on ne peux pas se connecter à la base de données on l'affiche
+            //If we cna't connect to the database we displat it
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            //Si on ne trouve pas la classe du DAO on l'affiche
+            //If we don't find the DAO class we display it
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    //La statistique qui affiche le pourcentage de tickets achetés 
-    //par rapport aux places disponibles de chaque film
-    //Ce code à été adapté d'un code trouvé sur internet : http://www.java2s.com/Code/Java/Chart/JFreeChartMultiplePieChartDemo1.htm
+    //The statistic that display the percentage of tickets solds compared to empty seats
+    //This code was arranged from a code found on internet : http://www.java2s.com/Code/Java/Chart/JFreeChartMultiplePieChartDemo1.htm
     public void percentageTicketsPerSeats(){
-        //On créé une statistique avec plusieurs camemberts
+        //We create a multiple pie chart
         final MultiplePieChartDemo1 demo = new MultiplePieChartDemo1("Statistics");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
     }
     
-    //Créé la chart avec tous les camemberts
+    //We create the chart with all the pie charts
     private JFreeChart createChart(final CategoryDataset dataset) {
-        //On créé la chart
+        //We create the chart
         final JFreeChart chart = ChartFactory.createMultiplePieChart(
             "Percentage of tickets boughts per seats",
             dataset,
@@ -211,12 +202,12 @@ public class Statistics extends JFrame {
             true,
             false
         );
-        //On créé le plot
+        //We create the plot
         final MultiplePiePlot plot = (MultiplePiePlot) chart.getPlot();
-        //On créé la sous-chart
+       //We create the subchart
         final JFreeChart subchart = plot.getPieChart();
         final PiePlot p = (PiePlot) subchart.getPlot();
-        //On initialise le label et la police d'écriture
+        //We set the label and font
         p.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}"));
         p.setLabelFont(new Font("SansSerif", Font.PLAIN, 8));
         p.setInteriorGap(0.30);
@@ -224,10 +215,10 @@ public class Statistics extends JFrame {
         return chart;
     }
     
-    //Classe qui créé le multi camembert
+    //Class that create the multiple pie chart
     public class MultiplePieChartDemo1 extends ApplicationFrame {
         public MultiplePieChartDemo1(final String title) {
-            //On créé le multi camembert et on le place dans un panel
+            //We put the multiple pie chatr in a panel
             super(title);
             final CategoryDataset dataset = createDataset();
             final JFreeChart chart = createChart(dataset);
@@ -236,47 +227,43 @@ public class Statistics extends JFrame {
             setContentPane(chartPanel);
         }
         
-        //On créé le dataset pour le multi camembert
+        //We create the dataset for this chart
         private CategoryDataset createDataset() {
             try {
-                //On essaye de se connecter à la base de données
+                //We try to connect to the database
                 Connections co = new Connections("project", "root", "password");
-                //On accède au DAO des scéances
+                //We acces screening DAO
                 ScreeningDAO screenCo = new ScreeningDAO(co.getInstance());
-                //La scéance qu'on sélectionnera pour le camembert
                 Screening select = new Screening();
-                //On crée un dataset pour le multi camembert
+                //We create a dataset for the multiple pie chart
                 final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                //Nombre de tickets et de places qui sera actualisé si un film possède plusieures scéances
+                //Number of total tickets and seats if a movie had several screenings
                 int numberTickets = 0, numberSeats = 0;
-                //Toutes les scéances de la base de donnée
                 ArrayList<Screening> allScreenings = screenCo.getAllScreening();
-                //Pour toutes les scéances
+                //For all the screenings
                 for(int i = 0; i < allScreenings.size() ; ++i){
-                    //On sélectionne une scéance
+                    //We select a screening
                     select = screenCo.find(allScreenings.get(i).getDateTime());
-                    //Le nombre de tickets de la scéance sélectionnée
                     numberTickets = select.getTicketsBoughts();
-                    //Le nombre de places de la scéance sélectionnée
                     numberSeats = select.getNumberseat();
-                    //On cherche si un film appartait dans plusieures scéances
+                    //We search if a movie appears in several screenings
                     for(int j = 0; j < allScreenings.size() ; ++j)
                        if(i != j && allScreenings.get(i).getMovieName().equals(allScreenings.get(j).getMovieName())){
-                           //Si il apparati dans plusieures scéances on actualise le nombre de tickets vendus et de places pour ce film
+                            //If it appears several times we add the new number of tickets and seats to the ancient one
                             numberTickets = numberTickets + allScreenings.get(j).getTicketsBoughts(); 
                             numberSeats = numberSeats + allScreenings.get(j).getNumberseat();
                        }
-                    //On ajoute ses données au dataset
+                    //We add the data in the dataset
                     dataset.addValue(numberTickets, select.getMovieName(), "Taken Seats");
                     dataset.addValue(numberSeats-numberTickets, select.getMovieName(), "Empty Seats");
                 }
                 return dataset;
             } catch (SQLException ex) {
-                //Si on ne peux pas se connecter à la base de données on l'affiche et on ne retourne rien
+                //If we cna't connect to the database we displat it
                 Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             } catch (ClassNotFoundException ex) {
-                //Si on ne trouve pas la classe du DAO on l'affiche et on ne retourne rien
+                //If we don't find the DAO class we display it
                 Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
