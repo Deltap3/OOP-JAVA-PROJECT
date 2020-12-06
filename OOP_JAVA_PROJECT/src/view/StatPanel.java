@@ -6,10 +6,8 @@
 package view;
 
 import controller.ChangePanelListener;
-import controller.StatListener;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 

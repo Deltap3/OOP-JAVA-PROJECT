@@ -156,6 +156,11 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
+        //panel 12
+        CreateScreeningPanel panel12= new CreateScreeningPanel(this);
+        panelsList.set(12, panel12);
+        this.add(panel12);
+        
         //panel 14
         initMap.put("by movie played", 15);
         initMap.put("by screening schedule", 16);
@@ -184,6 +189,8 @@ public class MainFrame extends JFrame{
         panelsList.set(18, panel18);
         this.add(panel18);
  
+        //panel 19 need to be actualised
+        
         //panel 20
         CreateMemberPanel panel20= new CreateMemberPanel(this);
         panelsList.set(20, panel20);

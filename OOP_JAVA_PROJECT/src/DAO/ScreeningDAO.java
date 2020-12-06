@@ -106,6 +106,27 @@ public class ScreeningDAO extends DAO<Screening> {
         //On retourne la scéance créée
         return s;
     }
+    
+    //indicate if a room is already taken
+    public boolean roomIsTaken(String dateTime, int roomNumber)
+    {
+        boolean bool= false;
+        
+        try{
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
+                "WHERE screening.movieId = movies.movieId AND datetim = '" + dateTime + "' AND roomNumber = '" + roomNumber + "'");
+            
+            //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête
+            if(result.next()){
+                bool=true;
+     
+            }
+        }catch(SQLException ex){
+            //Si la requête n'a pas pu se réaliser on affiche une erreur
+            ex.printStackTrace();
+        }
+        return bool;
+    }
   //Permet de récupérer toutes les scéances de la base de donnée
   public ArrayList<Screening> getAllScreening(){
         //On créé une ArrayList de scéances pour stocker le résultat de la requête

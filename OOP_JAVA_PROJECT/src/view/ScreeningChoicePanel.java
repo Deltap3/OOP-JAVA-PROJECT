@@ -34,8 +34,7 @@ public class ScreeningChoicePanel extends JPanel{
         setSize(new Dimension(1200,1400));
         setPreferredSize(new Dimension(1200,1400));
         setLayout(new SpringLayout());
-        
-        ButtonGroup group= new ButtonGroup();
+
         ArrayList<Screening> sessions= new ArrayList<>();
         
         try{

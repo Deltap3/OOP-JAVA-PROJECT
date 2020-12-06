@@ -7,6 +7,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JLabel;
 import model.Screening;
 import view.BuyPanel;
 import view.MainFrame;
@@ -19,6 +20,7 @@ public class ChoiceActionListener implements ActionListener{
         private MainFrame frame;
         private int numPanel;
         private Screening session;
+        private JLabel movieTitle;
         
         public ChoiceActionListener(MainFrame frame, int numPanel, Screening session)
         {
@@ -26,18 +28,29 @@ public class ChoiceActionListener implements ActionListener{
             this.numPanel=numPanel;
             this.session=session;
         }
-        
+
+        public ChoiceActionListener(JLabel movieTitle) {
+
+            this.movieTitle = movieTitle;
+            numPanel=-1;
+        }
+
         public void actionPerformed(ActionEvent e)
         {
-            frame.setSession(session);
+            
             if(numPanel==5)
             {
+                frame.setSession(session);
                 frame.buildPanel5();
+                frame.setContentPane(frame.getPanels().get(numPanel));
+                frame.invalidate();
+                frame.validate();
+                frame.repaint();
             }
-           // frame.setSize(frame.getPanels().get(numPanel).getSize());
-            frame.setContentPane(frame.getPanels().get(numPanel));
-            frame.invalidate();
-            frame.validate();
-            frame.repaint();
+          
+            else if(numPanel==-1)
+            {
+                movieTitle.setText(e.getActionCommand());
+            }
         }
     }
