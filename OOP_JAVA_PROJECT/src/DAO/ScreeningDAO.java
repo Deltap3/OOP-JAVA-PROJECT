@@ -147,7 +147,7 @@ public class ScreeningDAO extends DAO<Screening> {
         }
     }
     
-    //Sets the movie foreign key in the database
+    //Sets the movie foreign key in the database for this screening
     public boolean setMovie(Movie mov){
         try{
             //We try to fid the movie key with its name
