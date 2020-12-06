@@ -1,4 +1,5 @@
 create database if not exists project ;
+use project;
 create table if not exists movies
 (
 	movieId int primary key auto_increment,
@@ -24,7 +25,7 @@ create table if not exists members
     mail varchar(50),
     login varchar(100),
     passw varchar(50),
-    ticketsBought int not null,
+    totalPaid double not null,
     categoryMember int not null
 );
 create table if not exists screening
@@ -47,21 +48,14 @@ insert into employee (firstName,lastName,login,passw) values
 ('Marie','DUPUIS','marie12','mar1'),
 ('Capucine','DUBOIS','capucine56','cap5');
 
-insert into members (firstName,lastName,mail,login,passw,ticketsBought,categoryMember) values
-('Soline','GERMOND','patatedouce@gmail.com','soline789','sol7','10','23'),
-('Guillauem','SAURY','nouillefroide@gmail.com','guillaume56','gui5','5','34'),
-('Alexis','BOYADJAN','tablebasse@gmail.com','alexis002','alex0','9','45'),
-('Alec','PAQUERON','litpose@gmail.com','alec93','ale9','7','56'),
+insert into members (firstName,lastName,mail,login,passw,totalPaid,categoryMember) values
+('Soline','GERMOND','patatedouce@gmail.com','soline789','sol7','100','23'),
+('Guillauem','SAURY','nouillefroide@gmail.com','guillaume56','gui5','52','34'),
+('Alexis','BOYADJAN','tablebasse@gmail.com','alexis002','alex0','92','45'),
+('Alec','PAQUERON','litpose@gmail.com','alec93','ale9','70','56'),
 ('Valentine','LACOTTE','superfraise@gmail.com','valentine352','val3','15','12'),
-('Margaux','GOUJEAU','ultraikea@gmail.com','margaux456','mar4','3','67');
+('Margaux','GOUJEAU','ultraikea@gmail.com','margaux456','mar4','30','67');
 
-insert into members (firstName,lastName,ticketsBought,categoryMember) values
-('Xavier','DANG','7','47'),
-('Adrien','NOUGARET','8','64'),
-('Bob','LENNON','10','25'),
-('Fred','DU GRENIER','13','32'),
-('Ponce','LES FLEURS','5','12'),
-('Lucas','HAUCHARD','3','25');
 
 insert into movies (title,genre,releaseDate,runTime,image) values
 ('Shrek','Animation','2001-07-04','90','shrek.jpg'),
@@ -75,6 +69,6 @@ insert into screening (movieId,datetim,numberSeat,ticketsBoughts,discount,roomNu
 ('1','2020-12-05 08:30:00','100','70','0','1'),
 ('2','2020-12-05 12:50:00','400','350','10','2'),
 ('3','2020-12-05 16:00:00','250','230','15','3'),
-('1','2020-12-12 14:15:00','370','120','20','1'),
-('4','2020-12-12 13:30:00','60','60','25','2'),
-('5','2020-12-22 17:45:00','230','210','30','1');
+('1','2020-12-12 14:15:00','100','80','20','1'),
+('4','2020-12-12 13:30:00','400','400','25','2'),
+('5','2020-12-22 17:45:00','100','100','30','1');

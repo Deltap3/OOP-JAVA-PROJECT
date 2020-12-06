@@ -1,3 +1,9 @@
+/**
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
+ */
 package view;
 import model.*;
 import DAO.*;
@@ -16,23 +22,21 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
 import org.jfree.util.TableOrder;
-/**
- * ZHONG David
- * MAISTERRENA Pierre
- * DANIEL Juliette
- * ING3 TDE02
- */
-public class Statistics extends JFrame {
+
+
+public class Statistics extends JPanel {
+
     private String statType;
     public Statistics(String statType) throws HeadlessException {
         this.statType = statType;
-        if("Most viewed film".equals(statType)){
+
+        
+        if(statType.equals("Most viewed film") ){
             mostViewedFilm();
         }
-        else if("Percentage tickets per seats".equals(statType)){
+        else if(statType.equals("Percentage tickets per seats")){
+
             percentageTicketsPerSeats();
         }
         else if("Most viewed Genre".equals(statType)){
@@ -41,6 +45,7 @@ public class Statistics extends JFrame {
         else if("Discount per Screenings".equals(statType)){
             discountPerScreenings();
         }
+                
     }
     public void discountPerScreenings(){
         try {
@@ -59,8 +64,14 @@ public class Statistics extends JFrame {
             JFreeChart chart = ChartFactory.createBarChart("Discounts Per Screenings",
                     "Screenings", "Discount (in percentage)",data,PlotOrientation.VERTICAL,
                     true,true,false);
-            ChartFrame frame = new ChartFrame("stats",chart);
-            frame.setVisible(true);
+
+            
+
+            ChartPanel panel = new ChartPanel(chart);
+            this.add(panel);
+	   // panel.setVisible(true);
+
+
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -87,9 +98,13 @@ public class Statistics extends JFrame {
                        numberTickets = numberTickets + allScreenings.get(j).getTicketsBoughts();     
                data.setValue(selectMovie.getGenre(),numberTickets);
             }
+
+
             JFreeChart chart = ChartFactory.createPieChart("Most Viewed Genre", data, true, true, false);
-            ChartPanel frame = new ChartPanel(chart);
-            frame.setVisible(true);
+            ChartPanel panel = new ChartPanel(chart);
+            this.add(panel);
+            //panel.setVisible(true);
+
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -115,8 +130,10 @@ public class Statistics extends JFrame {
             JFreeChart chart = ChartFactory.createBarChart("Tickets Boughts Per Movies",
                     "Movie", "Tickets Bought",data,PlotOrientation.VERTICAL,
                     true,true,false);
-            ChartPanel frame = new ChartPanel(chart);
-            frame.setVisible(true);
+            ChartPanel panel = new ChartPanel(chart);
+            this.add(panel);
+           // panel.setVisible(true);
+            
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -125,18 +142,19 @@ public class Statistics extends JFrame {
     }
     public void percentageTicketsPerSeats(){
         final MultiplePieChartDemo1 demo = new MultiplePieChartDemo1("Statistics");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
+        
+        this.add(demo);
+      //  RefineryUtilities.centerFrameOnScreen(demo);
+        //demo.setVisible(true);
     }
-    public class MultiplePieChartDemo1 extends ApplicationFrame {
+    public class MultiplePieChartDemo1 extends JPanel {
     public MultiplePieChartDemo1(final String title) {
-        super(title);
+        super();
         final CategoryDataset dataset = createDataset();
         final JFreeChart chart = createChart(dataset);
         final ChartPanel chartPanel = new ChartPanel(chart, true, true, true, false, true);
-        chartPanel.setPreferredSize(new java.awt.Dimension(1366, 768));
-        setContentPane(chartPanel);
+        //chartPanel.setPreferredSize(new java.awt.Dimension(1366, 768));
+        this.add(chartPanel);
 
     }
     private CategoryDataset createDataset() {
@@ -146,7 +164,7 @@ public class Statistics extends JFrame {
             Screening select = new Screening();
             final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             int numberTickets = 0, numberSeats = 0;
-            int counter = 1;
+           // int counter = 1;
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             for(int i = 0; i < allScreenings.size() ; ++i){
                 select = screenCo.find(allScreenings.get(i).getDateTime());

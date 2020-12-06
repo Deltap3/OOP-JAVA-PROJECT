@@ -13,18 +13,18 @@ import java.sql.Connection;
  * DANIEL Juliette
  * ING3 TDE02
  */
-//Interface qui permet de créer le lien entre les classes Java et la base de données
+//Interface that act like a link between java classes and database
 public abstract class DAO<T>{
     protected Connection connect = null;
     
     public DAO(Connection con){
         this.connect = con;
     }
-    //Permet d'ajouter dans la base de données un élément de la classe souhaité
+    //Add a element in the database
     public abstract T add(T obj);
-    //Permet de supprimer de la base de données un élément de la classe souhaité
+    //Delete a element in the database
     public abstract void delete(T obj);
-    //Permet de trouver dans la base de données un élément de la classe souhaité
+    //Find a element in the database
     public abstract T find(String id);
     
 }

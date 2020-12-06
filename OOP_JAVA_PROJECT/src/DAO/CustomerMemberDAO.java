@@ -108,6 +108,33 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
         //On retourne le membre créé
         return member;
     }
+    /**
+    * find a member in the database
+    * from his first name, last name and mail adress
+    * returns the member found
+    **/
+    public CustomerMember findFromNameEmail(String fName, String lName, String mail)
+    {
+      CustomerMember member = new CustomerMember();
+        try{
+            //try to find the member with its name and mail adress
+            ResultSet result1 = this.connect.createStatement().executeQuery("SELECT * FROM members WHERE firstName = '" +fName+"' AND lastName = '" +lName
+                    +"' AND mail = '" +mail+"'");
+            //if it is a success, there will be at least 1 element in the request
+            if(result1.first()){
+                //create the object member
+                member = new CustomerMember(result1.getString("login"),
+                        result1.getString("passw"),result1.getString("mail"),result1.getInt("categoryMember"),result1.getDouble("totalPaid"),
+                        result1.getString("firstName"),result1.getString("lastName"));
+               
+            }
+        }catch(SQLException ex){
+            //if there is an error
+            ex.getMessage();
+        }
+        //returns the created member
+        return member;
+    }
     
     /**
      * Permet d'obtenir le grade d'un membre en fonction 
@@ -138,4 +165,7 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
         //On retourne le grade du membre
         return grade;
     }
+    
+    
+    
 }

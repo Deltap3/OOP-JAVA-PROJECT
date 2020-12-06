@@ -13,172 +13,50 @@ package model;
  */
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+//This class manage the connection to the database
 public class Connections {
-    
+    //Connection to the databade
     private static Connection conn;
+    //Alows to send a query to the database
     private Statement stmt;
+    //Alows to get the result of the query
     private ResultSet rset;
+    //Alows to have meta data about the query
     private ResultSetMetaData rsetMeta;
+    //Stocks our database URL
     private static String urlDatabase;
+    //Stocks our database login
     private static String loginDatabase;
+    //Stocks our database password
     private static String passwordDatabase;
     
+    //We connect to the databade from its name, login and password
     public Connections(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException{
-        // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
-        // url de connexion
         this.urlDatabase = "jdbc:mysql://localhost:3306/" + nameDatabase+"?useSSL=false";
         this.loginDatabase=loginDatabase;
         this.passwordDatabase=passwordDatabase;
         getInstance();
-        // création d'un ordre SQL (statement)
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     }
     
+    //Return the instance of the database
      public static Connection getInstance(){
+       //If there's no connection
        if(conn == null){
-           try{
-               conn = DriverManager.getConnection(urlDatabase,loginDatabase,passwordDatabase);
-               System.out.println("Connexion BDD réussie");
-           }catch (SQLException ex){
-               ex.getMessage();
-               System.out.println("Connexion BDD ratée");
-           }
-           
+         try{
+             //We try to connect to the database
+             conn = DriverManager.getConnection(urlDatabase,loginDatabase,passwordDatabase);
+             //If it suceed we display it to the user
+             System.out.println("Database connection suceed");
+         }catch (SQLException ex){
+             //If it failed we display it to the user
+             ex.getMessage();
+             System.out.println("Database connection failed");
+         }
        }
+       //If there's already a connection we return it
        return conn;
    }
- 
-    
-    private ArrayList<String> getResult(ResultSet resultSet){
-        try {
-            ArrayList<String> result = new ArrayList<String>();
-            int numRows = resultSet.getRow();
-            ResultSetMetaData meta = resultSet.getMetaData();
-            for (int row = 0; row < numRows; row++)
-            {
-                for (int col = 0; col < meta.getColumnCount(); col++)
-                    result.add(resultSet.getString(col + 1));
-                resultSet.next();
-            }
-            return result;
-        } catch (SQLException ex) {
-            Logger.getLogger(Connections.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-    public ArrayList<String> getAllFromTable(String query) throws SQLException {
-      try
-      {
-         ResultSet resultSet = stmt.executeQuery("SELECT * FROM " + query);
-         return getResult(resultSet);
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return null;
-      }
-    }
-    
-    public boolean memberExist(String login, String password){
-      try
-      {
-         ResultSet resultSet = stmt.executeQuery("select * from members\n" +
-                           "where login = '" + login + "' and passw = '" + password + "'");
-         if(resultSet.next())
-            return true;
-         else
-             return false;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-          System.out.println("non");
-         return false;
-      }
-    }
-    public boolean employeeExist(String login, String password){
-      try
-      {
-         ResultSet resultSet = stmt.executeQuery("select * from employee\n" +
-                           "where login = '" + login + "' and passw = '" + password + "'");
-         if(resultSet.next())
-            return true;
-         else
-             return false;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-          System.out.println("non");
-         return false;
-      }
-    }
-    
-    
-  
-    public boolean addDiscount(String start, String end, int discount){
-      try
-      {
-        ResultSet resultSet = stmt.executeQuery("update screening\n" +
-                                                "set discount ='"+discount+"'\n" +
-                                                "where datetim <'"+end+"' and datetim >'"+start+"'");
-         return true;
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return false;
-      }
-    }
-    
-    
-    public ArrayList<String> findClient(String firstName, String lastName, String mail){
-        try
-        {
-          ResultSet resultSet = stmt.executeQuery("select * from members\n" +
-                            "where firstName = '"+firstName+"' and lastName = '"+lastName+"' and mail = '"+mail+"'");
-          return getResult(resultSet);
-        }
-        catch (SQLException ex)
-        {
-           ex.printStackTrace();
-           return null;
-        }
-    }
-    public ArrayList<String> getMoviesWihtoutScreenings(String dateTime){
-      try
-      {
-        ResultSet resultSet = stmt.executeQuery("select * from movies\n" +
-                        "inner join screening on movies.movieId = screening.movieId\n" +
-                        "where screening.movieId is null");
-        return getResult(resultSet);
-      }
-      catch (SQLException ex)
-      {
-         ex.printStackTrace();
-         return null;
-      }
-    }
-    public int getNbRows(String query){
-        ArrayList<String> result = new ArrayList<String>();
-        try {
-            result = getAllFromTable(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(Connections.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return result.size();
-    }
-    public void disconnect(){
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Connections.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

@@ -11,10 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import model.*;
 import DAO.*;
+import controller.ChoiceActionListener;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -35,8 +34,7 @@ public class ScreeningChoicePanel extends JPanel{
         setSize(new Dimension(1200,1400));
         setPreferredSize(new Dimension(1200,1400));
         setLayout(new SpringLayout());
-        
-        ButtonGroup group= new ButtonGroup();
+
         ArrayList<Screening> sessions= new ArrayList<>();
         
         try{
@@ -75,32 +73,7 @@ public class ScreeningChoicePanel extends JPanel{
     }
     
     
-    public class ChoiceActionListener implements ActionListener{
-        private MainFrame frame;
-        private int numPanel;
-        private Screening session;
-        
-        public ChoiceActionListener(MainFrame frame, int numPanel, Screening session)
-        {
-            this.frame=frame;
-            this.numPanel=numPanel;
-            this.session=session;
-        }
-        
-        public void actionPerformed(ActionEvent e)
-        {
-            frame.setSession(session);
-            if(numPanel==5)
-            {
-                frame.getPanels().set(numPanel, new BuyPanel(frame, session));
-            }
-            frame.setSize(frame.getPanels().get(numPanel).getSize());
-            frame.setContentPane(frame.getPanels().get(numPanel));
-            invalidate();
-            validate();
-            repaint();
-        }
-    }
+    
     
    
 }

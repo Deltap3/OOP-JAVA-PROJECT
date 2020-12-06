@@ -19,134 +19,179 @@ import model.Screening;
  * ING3 TDE02
  */
 public class ScreeningDAO extends DAO<Screening> {
-    //Cette classe fait le lien des scéances entre notre base de données et notre code en java
+    //This class is the link between our java code and our database
     public ScreeningDAO(Connection conn)
     {
         super(conn);
     }
     
-    //Ajoute la scéance passée en paramètre dans la base de données
+    //Add the screening passed in parameters in the database
     public Screening add(Screening obj){
       try
       {
-          //On essaye d'ajouter une scéance à la table scéance
-          String sql = ("insert into screening (tim,numberSeat,ticketsBoughts,discount,numberRoom)\n" +
-                           "values ('"+obj.getDateTime()+"',"+obj.getNumberseat()+","+obj.getTicketsBoughts()+","+obj.getDiscount()+","+obj.getNumberRoom()+")");
+          //We try to add the screening
+          String sql = ("insert into screening (movieId,datetim,numberSeat,ticketsBoughts,discount,roomNumber)\n" +
+                           "values ('"+getMovieId(obj.getMovieName())+"','"+obj.getDateTime()+"','"+obj.getNumberseat()+"','"+obj.getTicketsBoughts()+"','"+obj.getDiscount()+"','"+obj.getNumberRoom()+"')");
+          
           PreparedStatement stmt = connect.prepareStatement(sql); 
-          //Si la requête fonctionne la scéance est bien ajouté
+          //If the query suceed the screening is well added
           stmt.executeUpdate();
-      
+          
       }
       catch (SQLException ex)
       {
-         //Sinon on affiche une erreur
+         //Else we display the error
          ex.printStackTrace();
       }
-      //On retourne la scéance que l'on vient d'ajouter
+      //We return the created screening
       return obj;
     }
   
-  //On supprime une scéance de la base de données
+  //Dekete a screening from the database
   public void delete(Screening obj)
   {
-    //On essaye de supprimer la scéance et on la supprime si aucune erreur n'arrive
+    //We try to delete a screening
     try{
         this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
         ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE datetim = '"+ obj.getDateTime()+"'");
     }catch(SQLException ex){
-        //Si il y a une erreur avec la requête on l'affiche
+        //If there's an error we display it
         ex.getMessage();
     }
   }
+  
   /**
-  * Permet de retrouver une scéance dans la base de données
-  * a partir de sa date et de récupérer un objet scéance
+  * Find a screening in the database from its date and return a screening object
   **/
   public Screening find(String datetime) {
         Screening s = new Screening();
         try{
-            //On essaye de trouver la scéance avec sa date
+            //We try to find the screening from its date
             ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
                 "WHERE screening.movieId = movies.movieId AND datetim = '" + datetime + "'");
-            //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête
+            //If the query suceed and there's at least one element in it
             if(result.next()){
-                //On construit la nouvelle scéance
+                //We create the new screening
                 s = new Screening(
                         result.getString("title"),result.getString("datetim"),
                         result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
                         result.getInt("discount"),result.getInt("roomNumber"));
             }
         }catch(SQLException ex){
-            //Si la requête n'a pas pu se réaliser on affiche une erreur
+            //If there's an error we display it
             ex.printStackTrace();
         }
-        //On retourne la scéance créée
+        //We return the created screening
         return s;
     }
-  //Permet de récupérer toutes les scéances de la base de donnée
-  public ArrayList<Screening> getAllScreening(){
-        //On créé une ArrayList de scéances pour stocker le résultat de la requête
-        ArrayList<Screening> listScreening = new ArrayList<>();
-        Screening s = new Screening();
+
+    
+    //indicate if a room is already taken
+    public boolean roomIsTaken(String dateTime, int roomNumber)
+    {
+        boolean bool= false;
+        
         try{
-            //On essaye de trouver toutes les scéances de la base de donnée
             ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
-                                                                            "WHERE screening.movieId = movies.movieId");
-            //Si elle réussit et pour tous les éléments dans le résultat de la requête
-            while(result.next()){
-                //On construit la nouvelle scéance
-                s = new Screening(result.getString("title"),result.getString("datetim"),
-                        result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
-                        result.getInt("discount"),result.getInt("roomNumber"));
-                //On l'ajoute à l'ArrayList de scéances       
-                listScreening.add(s);
+                "WHERE screening.movieId = movies.movieId AND datetim = '" + dateTime + "' AND roomNumber = '" + roomNumber + "'");
+            
+            //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête
+            if(result.next()){
+                bool=true;
+     
             }
         }catch(SQLException ex){
             //Si la requête n'a pas pu se réaliser on affiche une erreur
             ex.printStackTrace();
         }
-        //On retourne l'ArrayList de scéances
+        return bool;
+    }
+
+  //Return all the screenings from the database
+  public ArrayList<Screening> getAllScreening(){
+        //We create an ArrayList of screenings
+        ArrayList<Screening> listScreening = new ArrayList<>();
+        Screening s = new Screening();
+        try{
+            //We try to find all the screenings
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
+                                                                            "WHERE screening.movieId = movies.movieId");
+            //If the query suceed and for all the elements in the query
+            while(result.next()){
+                //We create a new screening
+                s = new Screening(result.getString("title"),result.getString("datetim"),
+                        result.getInt("numberSeat"),result.getInt("ticketsBoughts"),
+                        result.getInt("discount"),result.getInt("roomNumber"));
+                //We add it to the ArrayList    
+                listScreening.add(s);
+            }
+        }catch(SQLException ex){
+            //If there's an error we display it
+            ex.printStackTrace();
+        }
+        //We return the screening ArrayList
         return listScreening;
     }
   
     /**
-    * Permet d'actualiser le nombre de tickets achetés pour une scéance
-    * et de renvoyer un booléen pour si la fonction à réussit ou pas
+    * Update the number of tickets bought for a screening
+    * and returns a boolean for whether the function to succeed or not
     **/ 
     public boolean addTickets (int tickets, String dateTime){
        try{
-            //On essaye d'actualiser le nombre de tickets dans la base de données
+            //We try to update the number of tickets boughts
             this.connect.createStatement().executeUpdate("update screening \n" +
                                     "set ticketsBoughts = ticketsBoughts + "+tickets+"\n" +
                                     "where datetim = '"+dateTime+"'");
-            //Si elle réussit on retourne que la requête c'est bien déroulée
+            //If the query succed we return true
             return true;
         }    
         catch(SQLException ex){
-            //Sinon on affiche l'erreur et on retourne que la requête ne s'est pas bien déroulée
+            //Else we display the error and return false
             ex.getMessage();
             return false;
         }
     }
     
     /**
-    * Permet d'actualiser la réduction  pour une scéance
-    * et de renvoyer un booléen pour si la fonction à réussit ou pas
+    * Update the discount for a screening
+    * and returns a boolean for whether the function to succeed or not
     **/ 
     public boolean setDiscount(Screening obj){
         try{
-            //On essaye d'actualiser la réduction d'une scéance dans la base de données
+            //We try to update the discount of a screening
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+obj.getDiscount()+"' WHERE datetim = '"+ obj.getDateTime()+"'");
-            //Si elle réussit on retourne que la requête c'est bien déroulée
+            //If the query suceed we return true
             return true;
         }catch(SQLException ex){
-            //Sinon on affiche l'erreur et on retourne que la requête ne s'est pas bien déroulée
+            //Else we display the error and return false
             ex.getMessage();
             return false;
         }
     }
-}
+    
+    //return the foreign key movie Id 
+    //from the movie title in a Screening object
+    //(used when we add a new screening to the database)
+    public int getMovieId(String movieTitle)
+    {
+        int id=0;
+        try{
+            //We try to fid the movie key with its name
+            ResultSet result = this.connect.createStatement().executeQuery("select movieId from movies where title = '"+movieTitle+"'");
+            if(result.next())
+                id=result.getInt("movieId");
+            
+        }    
+        catch(SQLException ex){
+            //Else we display the error and return false
+            ex.getMessage();
+            
+        }
+        return id;
+    }
+} 
 
   
   
