@@ -11,25 +11,36 @@ import javax.swing.JLabel;
 import model.Screening;
 import view.BuyPanel;
 import view.MainFrame;
+import view.RemoveScreeningPanel;
 
 /**
- *
- * @author Juju
+ *Manages all the actions
+ * whenever a screening session is selected
+ * customer screening choice, 
+ * employee create or remove a screening session
  */
-public class ChoiceActionListener implements ActionListener{
+public class ScreeningChoiceListener implements ActionListener{
+    
         private MainFrame frame;
+        private RemoveScreeningPanel sPanel;
         private int numPanel;
         private Screening session;
         private JLabel movieTitle;
         
-        public ChoiceActionListener(MainFrame frame, int numPanel, Screening session)
+        public ScreeningChoiceListener(MainFrame frame, int numPanel, Screening session)
         {
             this.frame=frame;
             this.numPanel=numPanel;
             this.session=session;
         }
 
-        public ChoiceActionListener(JLabel movieTitle) {
+        public ScreeningChoiceListener(RemoveScreeningPanel sPanel, Screening session) {
+            this.sPanel = sPanel;
+            this.session = session;
+            numPanel=0;
+        }
+        
+        public ScreeningChoiceListener(JLabel movieTitle) {
 
             this.movieTitle = movieTitle;
             numPanel=-1;
@@ -47,7 +58,10 @@ public class ChoiceActionListener implements ActionListener{
                 frame.validate();
                 frame.repaint();
             }
-          
+            else if(numPanel==0)
+            {
+                sPanel.setSelectedSession(session);
+            }
             else if(numPanel==-1)
             {
                 movieTitle.setText(e.getActionCommand());

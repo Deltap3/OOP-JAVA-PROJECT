@@ -53,7 +53,8 @@ public class ScreeningDAO extends DAO<Screening> {
     //We try to delete a screening
     try{
         this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-        ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE datetim = '"+ obj.getDateTime()+"'");
+        ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE datetim = '"+ obj.getDateTime()
+                                                    + "' AND roomNumber= '"+obj.getNumberRoom()+"' ");
     }catch(SQLException ex){
         //If there's an error we display it
         ex.getMessage();

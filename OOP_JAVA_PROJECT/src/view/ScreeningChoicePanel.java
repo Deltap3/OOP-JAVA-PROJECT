@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import model.*;
 import DAO.*;
-import controller.ChoiceActionListener;
+import controller.ScreeningChoiceListener;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class ScreeningChoicePanel extends JPanel{
             final Movie m= movieCo.find(s.getMovieName());
             Image scaledImage = m.getImage().getScaledInstance(this.getWidth()/6,this.getHeight()/(sessions.size()*2),Image.SCALE_SMOOTH);
             JButton btn= new JButton(new ImageIcon(scaledImage));
-            btn.addActionListener(new ChoiceActionListener(frame, nextPanel,s));
+            btn.addActionListener(new ScreeningChoiceListener(frame, nextPanel,s));
             this.add(btn);     
             this.add(new JLabel(s.getMovieName()));
             this.add(new JLabel(s.getDateTime()));

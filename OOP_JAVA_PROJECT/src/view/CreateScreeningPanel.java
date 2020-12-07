@@ -8,7 +8,7 @@ package view;
 import DAO.MovieDAO;
 import controller.AddScreeningListener;
 import controller.ChangePanelListener;
-import controller.ChoiceActionListener;
+import controller.ScreeningChoiceListener;
 import controller.RoomAndSeatsListener;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -56,7 +56,7 @@ public class CreateScreeningPanel extends JPanel{
         {
  
             JRadioButton btn= new JRadioButton(m.getTitle());
-            btn.addActionListener(new ChoiceActionListener(movieLabel));
+            btn.addActionListener(new ScreeningChoiceListener(movieLabel));
             
             group.add(btn);
             titlePanel.add(btn);     
