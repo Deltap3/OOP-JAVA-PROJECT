@@ -6,6 +6,7 @@
 package controller;
 
 import DAO.CustomerMemberDAO;
+import DAO.ScreeningDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -14,22 +15,25 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Connections;
 import model.CustomerMember;
+import model.Screening;
 import view.MainFrame;
 import view.OOP_JAVA_PROJECT;
+import view.RemoveScreeningPanel;
 
 /**
  *
  * @author Juju
  */
-public class RemoveMemberListener implements ActionListener{
-    
+public class RemoveScreeningListener implements ActionListener{
         private MainFrame myFrame;
-        private CustomerMember member;
+        private RemoveScreeningPanel sPanel;
 
-    public RemoveMemberListener(MainFrame myFrame, CustomerMember member) {
+    public RemoveScreeningListener(MainFrame myFrame, RemoveScreeningPanel sPanel) {
         this.myFrame = myFrame;
-        this.member = member;
+        this.sPanel = sPanel;
     }
+
+        
 
         public void actionPerformed(ActionEvent e) {
             
@@ -37,11 +41,11 @@ public class RemoveMemberListener implements ActionListener{
             try {
                 //delete the member from the database
                 Connections co = new Connections("project", "root", "password");
-                CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
-                memberCo.delete(member);
+                ScreeningDAO screeningCo= new ScreeningDAO(co.getInstance());
+                screeningCo.delete(sPanel.getSelectedSession());
 
-                JOptionPane.showConfirmDialog(null, "the member has successfully been deleted from the database",
-                        "",JOptionPane.DEFAULT_OPTION);
+                JOptionPane.showConfirmDialog(null, "the screening session has "
+                        + "successfully been deleted from the database", "",JOptionPane.DEFAULT_OPTION);
                 
                 // go to the next panel
                 myFrame.setContentPane(myFrame.getPanels().get(10));
@@ -57,5 +61,4 @@ public class RemoveMemberListener implements ActionListener{
             }
 
         }
-    
 }

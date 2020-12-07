@@ -90,7 +90,7 @@ public class Statistics extends JPanel {
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             ArrayList<Movie> allMovies = movieCo.getAllMovie();
             for(int i = 0; i < allScreenings.size() ; ++i){
-               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+               select = screenCo.find(allScreenings.get(i).getDateTime());
                selectMovie = movieCo.find(select.getMovieName());
                numberTickets = select.getTicketsBoughts();
                for(int j = 0; j < allScreenings.size() ; ++j)
@@ -120,7 +120,7 @@ public class Statistics extends JPanel {
             int numberTickets = 0;
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             for(int i = 0; i < allScreenings.size() ; ++i){
-               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+               select = screenCo.find(allScreenings.get(i).getDateTime());
                numberTickets = select.getTicketsBoughts();
                for(int j = 0; j < allScreenings.size() ; ++j)
                    if(i != j && allScreenings.get(i).getMovieName().equals(allScreenings.get(j).getMovieName()))
@@ -167,7 +167,7 @@ public class Statistics extends JPanel {
            // int counter = 1;
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             for(int i = 0; i < allScreenings.size() ; ++i){
-                select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+                select = screenCo.find(allScreenings.get(i).getDateTime());
                 numberTickets = select.getTicketsBoughts();
                 numberSeats = select.getNumberseat();
                 for(int j = 0; j < allScreenings.size() ; ++j)

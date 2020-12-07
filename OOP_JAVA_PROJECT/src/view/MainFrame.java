@@ -156,6 +156,16 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
+        //panel 12
+        CreateScreeningPanel panel12= new CreateScreeningPanel(this);
+        panelsList.set(12, panel12);
+        this.add(panel12);
+        
+        //panel13
+        RemoveScreeningPanel panel13= new RemoveScreeningPanel(this);
+        panelsList.set(13, panel13);
+        this.add(panel13);
+        
         //panel 14
         initMap.put("by movie played", 15);
         initMap.put("by screening schedule", 16);
@@ -184,6 +194,8 @@ public class MainFrame extends JFrame{
         panelsList.set(18, panel18);
         this.add(panel18);
  
+        //panel 19 need to be actualised
+        
         //panel 20
         CreateMemberPanel panel20= new CreateMemberPanel(this);
         panelsList.set(20, panel20);
@@ -193,6 +205,8 @@ public class MainFrame extends JFrame{
         SearchMemberPanel panel21= new SearchMemberPanel(this, 22);
         panelsList.set(21, panel21);
         this.add(panel21);
+        
+        //panel 22 will be updated so it has its own build method
         
         //panel 23
         initMap.put("Most viewed film", 24);

@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Movie;
 import model.Screening;
 
 /**
@@ -31,12 +30,13 @@ public class ScreeningDAO extends DAO<Screening> {
       try
       {
           //We try to add the screening
-          String sql = ("insert into screening (tim,numberSeat,ticketsBoughts,discount,numberRoom)\n" +
-                           "values ('"+obj.getDateTime()+"',"+obj.getNumberseat()+","+obj.getTicketsBoughts()+","+obj.getDiscount()+","+obj.getNumberRoom()+")");
+          String sql = ("insert into screening (movieId,datetim,numberSeat,ticketsBoughts,discount,roomNumber)\n" +
+                           "values ('"+getMovieId(obj.getMovieName())+"','"+obj.getDateTime()+"','"+obj.getNumberseat()+"','"+obj.getTicketsBoughts()+"','"+obj.getDiscount()+"','"+obj.getNumberRoom()+"')");
+          
           PreparedStatement stmt = connect.prepareStatement(sql); 
           //If the query suceed the screening is well added
           stmt.executeUpdate();
-      
+          
       }
       catch (SQLException ex)
       {
@@ -53,12 +53,14 @@ public class ScreeningDAO extends DAO<Screening> {
     //We try to delete a screening
     try{
         this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-        ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE datetim = '"+ obj.getDateTime()+"'");
+        ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE datetim = '"+ obj.getDateTime()
+                                                    + "' AND roomNumber= '"+obj.getNumberRoom()+"' ");
     }catch(SQLException ex){
         //If there's an error we display it
         ex.getMessage();
     }
   }
+  
   /**
   * Find a screening in the database from its date and return a screening object
   **/
@@ -83,6 +85,29 @@ public class ScreeningDAO extends DAO<Screening> {
         //We return the created screening
         return s;
     }
+
+    
+    //indicate if a room is already taken
+    public boolean roomIsTaken(String dateTime, int roomNumber)
+    {
+        boolean bool= false;
+        
+        try{
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT  title, datetim,numberSeat,ticketsBoughts,discount,roomNumber FROM screening, movies\n" +
+                "WHERE screening.movieId = movies.movieId AND datetim = '" + dateTime + "' AND roomNumber = '" + roomNumber + "'");
+            
+            //Si elle réussit et qu'il y a au moins un élément dans le résultat de la requête
+            if(result.next()){
+                bool=true;
+     
+            }
+        }catch(SQLException ex){
+            //Si la requête n'a pas pu se réaliser on affiche une erreur
+            ex.printStackTrace();
+        }
+        return bool;
+    }
+
   //Return all the screenings from the database
   public ArrayList<Screening> getAllScreening(){
         //We create an ArrayList of screenings
@@ -147,21 +172,25 @@ public class ScreeningDAO extends DAO<Screening> {
         }
     }
     
-    //Sets the movie foreign key in the database for this screening
-    public boolean setMovie(Movie mov){
+    //return the foreign key movie Id 
+    //from the movie title in a Screening object
+    //(used when we add a new screening to the database)
+    public int getMovieId(String movieTitle)
+    {
+        int id=0;
         try{
             //We try to fid the movie key with its name
-            ResultSet result = this.connect.createStatement().executeQuery("select movieId from movies where title = '"+mov.getTitle()+"'");
-            //We try to update the screening with this id
-            this.connect.createStatement().executeUpdate("update screening set movieId = '"+result.getString("movieId")+"' where movieId is null");
-            //If the query succed we return true
-            return true;
+            ResultSet result = this.connect.createStatement().executeQuery("select movieId from movies where title = '"+movieTitle+"'");
+            if(result.next())
+                id=result.getInt("movieId");
+            
         }    
         catch(SQLException ex){
             //Else we display the error and return false
             ex.getMessage();
-            return false;
+            
         }
+        return id;
     }
 } 
 

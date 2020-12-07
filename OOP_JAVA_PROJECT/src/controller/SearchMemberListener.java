@@ -6,18 +6,15 @@
 package controller;
 
 import DAO.CustomerMemberDAO;
-import DAO.EmployeeDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import model.Connections;
 import model.CustomerMember;
-import model.Person;
 import view.MainFrame;
 import view.OOP_JAVA_PROJECT;
 
@@ -44,7 +41,6 @@ public class SearchMemberListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             try {
                 Connections co = new Connections("project", "root", "password");
-               // System.out.println(co.getAllFromTable(""));
                 String fName= firstNameField.getText();
                 String lName= lastNameField.getText();
                 String mail= mailField.getText();
@@ -52,7 +48,7 @@ public class SearchMemberListener implements ActionListener{
                 CustomerMember member= new CustomerMember();
    
                  CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
-                 //member= memberCo.find
+                 member= memberCo.findFromNameEmail(fName, lName, mail);
                  myFrame.setSelectedMember(member);
       
                 if(member==null){
@@ -60,6 +56,15 @@ public class SearchMemberListener implements ActionListener{
                 }
                 else
                 { 
+                    if(numPanel==19)
+                    {
+                        myFrame.buildMemberInfoPanel(numPanel, 10);
+                    }
+                    else if(numPanel==22)
+                    {
+                        myFrame.buildPanel22();
+                    }
+                    
                     myFrame.setContentPane(myFrame.getPanels().get(numPanel));
                     myFrame.pack();
                     myFrame.invalidate();
