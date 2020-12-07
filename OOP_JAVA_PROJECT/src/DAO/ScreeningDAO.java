@@ -196,10 +196,10 @@ public class ScreeningDAO extends DAO<Screening> {
     public boolean setDiscountWithMovieTitle(String title, double discount){
         try{
             int id = -1;
+            
             //We try to update the discount of a screening
-            ResultSet result = this.connect.createStatement().executeQuery("select movieId from movies where title = '"+title+"'");
-            if(result.next())
-                id=result.getInt("movieId");
+            id=getMovieId(title);
+            
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+discount+"' WHERE movieId = '"+id+"'");
             //If the query suceed we return true
@@ -211,11 +211,11 @@ public class ScreeningDAO extends DAO<Screening> {
         }
     }
     
-    public boolean setDiscountWithDate(String stratDate, String endDate, double discount){
+    public boolean setDiscountWithDate(String startDate, String endDate, double discount){
         try{
             //We try to update the discount of a screening
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+discount+"' WHERE datetim > '"+stratDate+"' AND datetim < '"+endDate+"'");
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+discount+"' WHERE datetim > '"+startDate+"' AND datetim < '"+endDate+"'");
             //If the query suceed we return true
             return true;
         }catch(SQLException ex){
