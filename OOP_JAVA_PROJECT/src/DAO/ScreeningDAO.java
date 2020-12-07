@@ -133,11 +133,11 @@ public class ScreeningDAO extends DAO<Screening> {
     * Update the discount for a screening
     * and returns a boolean for whether the function to succeed or not
     **/ 
-    public boolean setDiscount(Screening obj){
+    public boolean setDiscount(Screening obj, double discount){
         try{
             //We try to update the discount of a screening
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+obj.getDiscount()+"' WHERE datetim = '"+ obj.getDateTime()+"'");
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+discount+"' WHERE datetim = '"+ obj.getDateTime()+"'");
             //If the query suceed we return true
             return true;
         }catch(SQLException ex){

@@ -58,7 +58,7 @@ public class Statistics extends JPanel {
             ArrayList<Integer> counter = new ArrayList<Integer>();
             for(int i = 0; i < allScreenings.size() ; ++i){
                counter.add(1);
-               select = screenCo.getScreeningByDateTime(allScreenings.get(i).getDateTime());
+               select = screenCo.find(allScreenings.get(i).getDateTime());
                data.addValue(select.getDiscount(),"Screening " + i,select.getMovieName());
             }
             JFreeChart chart = ChartFactory.createBarChart("Discounts Per Screenings",
