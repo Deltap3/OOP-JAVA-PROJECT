@@ -68,7 +68,8 @@ public class AddMemberListener implements ActionListener{
                 CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
                 memberCo.add(member);
 
-                JOptionPane.showConfirmDialog(null, "the new member has successfully been added to the database");
+                JOptionPane.showConfirmDialog(null, "the new member has successfully been added to the database"
+                                                ,"",JOptionPane.DEFAULT_OPTION);
                 //finally we go to the next panel
                 myFrame.setContentPane(myFrame.getPanels().get(10));
                 myFrame.pack();

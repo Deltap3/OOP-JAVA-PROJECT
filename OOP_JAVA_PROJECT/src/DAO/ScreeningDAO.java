@@ -53,7 +53,8 @@ public class ScreeningDAO extends DAO<Screening> {
     //We try to delete a screening
     try{
         this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-        ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE datetim = '"+ obj.getDateTime()+"'");
+        ResultSet.CONCUR_UPDATABLE).executeUpdate("DELETE FROM screening WHERE datetim = '"+ obj.getDateTime()
+                                                    + "' AND roomNumber= '"+obj.getNumberRoom()+"' ");
     }catch(SQLException ex){
         //If there's an error we display it
         ex.getMessage();
@@ -157,11 +158,11 @@ public class ScreeningDAO extends DAO<Screening> {
     * Update the discount for a screening
     * and returns a boolean for whether the function to succeed or not
     **/ 
-    public boolean setDiscount(Screening obj){
+    public boolean setDiscount(Screening obj, double discount){
         try{
             //We try to update the discount of a screening
             this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+obj.getDiscount()+"' WHERE datetim = '"+ obj.getDateTime()+"'");
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+discount+"' WHERE datetim = '"+ obj.getDateTime()+"'");
             //If the query suceed we return true
             return true;
         }catch(SQLException ex){
@@ -190,6 +191,41 @@ public class ScreeningDAO extends DAO<Screening> {
             
         }
         return id;
+    }
+    
+    //Set a discount of every screening with the movie passed in parameters
+    public boolean setDiscountWithMovieTitle(String title, double discount){
+        try{
+            int id = -1;
+
+            //We try to update the discount of a screening
+            id=getMovieId(title);
+            this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+discount+"' WHERE movieId = '"+id+"'");
+            
+	    //If the query suceed we return true
+            return true;
+        }catch(SQLException ex){
+            //Else we display the error and return false
+            ex.getMessage();
+            return false;
+        }
+    }
+
+    //Set a discount of every screening that is between the starting and ending date
+    public boolean setDiscountWithDate(String startDate, String endDate, double discount){
+
+        try{
+            //We try to update the discount of a screening
+            this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet.CONCUR_UPDATABLE).executeUpdate("UPDATE screening SET discount = '"+discount+"' WHERE datetim > '"+startDate+"' AND datetim < '"+endDate+"'");
+            //If the query suceed we return true
+            return true;
+        }catch(SQLException ex){
+            //Else we display the error and return false
+            ex.getMessage();
+            return false;
+        }
     }
 } 
 

@@ -68,7 +68,7 @@ public class MainFrame extends JFrame{
         {
             panelsList.add(new JPanel());
         }
-        //panel 0
+        //panel 0: home screen / side choice
         initMap.put("Customer", 1);
         initMap.put("Employee", 9);
         initInfos.add("welcome\n are you a custommer or an employee?\n");
@@ -79,7 +79,7 @@ public class MainFrame extends JFrame{
         initInfos.clear();
         
         //customer side
-        //panel 1
+        //panel 1: guest or member choice
         initMap.put("Guest", 4);
         initMap.put("Member", 2);
         initMap.put("back", 0);
@@ -90,12 +90,12 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
-        //panel 2
+        //panel 2: login as member
         LoginPanel panel2= new LoginPanel(this, "members", 1, 3);
         panelsList.set(2,panel2);
         this.add(panel2);
         
-        //panel 3
+        //panel 3: member options screen
         initMap.put("buy tickets", 4);
         initMap.put("display info", 7);
         initMap.put("back", 2);
@@ -106,33 +106,26 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
-        //panel 4
+        //panel 4: screening session choice
         ScreeningChoicePanel panel4= new ScreeningChoicePanel(this, 5);
         panelsList.set(4,panel4);
         this.add(panel4);
         
-        /*
-        //panel 5
-        buildPanel5();
-        
-        //panel 6
-        buildPanel6();
-        
-        //panel 8
-        buildPanel8();
-        
-        //panel 7
-        buildPanel7();
-        
-        */
-        
+        //the panels 5 to 8 need to be actualised
+        //therfore they have their own build method
+
+        //panel 5: film infos and number of tickets selection
+        //panel 8: age discount selection by ticket
+        //panel 6: buy receipe and last confirmation 
+        //panel 7: member info panel
+
         //employee side
-        //panel 9
+        //panel 9: login as employee
         LoginPanel panel9= new LoginPanel(this, "employee", 0, 10);
         panelsList.set(9,panel9);
         this.add(panel9);
         
-        //panel 10
+        //panel 10: main employee options menu
         initMap.put("manage screenings", 11);
         initMap.put("manage discounts", 14);
         initMap.put("manage members customers",17);
@@ -145,7 +138,7 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
-        //panel 11
+        //panel 11: screening management menu
         initMap.put("add screening session", 12);
         initMap.put("Remove screening session", 13);
         initMap.put("back", 10);
@@ -156,12 +149,17 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
-        //panel 12
+        //panel 12: create a new screening session
         CreateScreeningPanel panel12= new CreateScreeningPanel(this);
         panelsList.set(12, panel12);
         this.add(panel12);
         
-        //panel 14
+        //panel13: remove an existing screening session
+        RemoveScreeningPanel panel13= new RemoveScreeningPanel(this);
+        panelsList.set(13, panel13);
+        this.add(panel13);
+        
+        //panel 14: discount management menu
         initMap.put("by movie played", 15);
         initMap.put("by screening schedule", 16);
         initMap.put("back", 10);
@@ -171,8 +169,18 @@ public class MainFrame extends JFrame{
         this.add(panel14);
         initMap.clear();
         initInfos.clear();
-
-        //panel 17
+        
+        //panel 15: discount by movie played
+        MovieDiscountPanel panel15= new MovieDiscountPanel(this);
+        panelsList.set(15,panel15);
+        this.add(panel15);
+        
+        //panel 16: discount between 2 dates
+        TimeDiscountPanel panel16= new TimeDiscountPanel(this);
+        panelsList.set(16, panel16);
+        this.add(panel16);
+        
+        //panel 17: member management menu
         initMap.put("see a member's info", 18);
         initMap.put("Remove a member", 21);
         initMap.put("add a new member", 20);
@@ -184,24 +192,28 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
-        //panel 18
+        //panel 18: search for a member (to show its infos)
         SearchMemberPanel panel18= new SearchMemberPanel(this, 19);
         panelsList.set(18, panel18);
         this.add(panel18);
  
-        //panel 19 need to be actualised
+        //panel 19 : show this member's infos
+        //need to be actualised
         
-        //panel 20
+        //panel 20 : create a new member
         CreateMemberPanel panel20= new CreateMemberPanel(this);
         panelsList.set(20, panel20);
         this.add(panel20);
         
-        //panel 21
+        //panel 21 : search for a member (to delete it)
         SearchMemberPanel panel21= new SearchMemberPanel(this, 22);
         panelsList.set(21, panel21);
         this.add(panel21);
         
-        //panel 23
+        //panel 22 : delete said member 
+        //need to be updated so it has its own build method
+        
+        //panel 23 : stats menu
         initMap.put("Most viewed film", 24);
         initMap.put("Percentage tickets per seats", 25);
         initMap.put("Most viewed Genre", 26);
