@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import model.Connections;
 import model.Movie;
+import org.jfree.ui.DateChooserPanel;
 
 /**
  *
@@ -96,65 +97,9 @@ public class CreateScreeningPanel extends JPanel{
         
         this.add(roomPanel);
         
-        //date
-        JPanel datePanel= new JPanel();
-        datePanel.setLayout(new SpringLayout());
-        JLabel dateLabel= new JLabel("date: ");
-        dateLabel.setLabelFor(datePanel);
-        this.add(dateLabel);
-        
-        JLabel yearLabel= new JLabel("yyyy");
-        JTextField yearField= new JTextField();
-        yearField.setText("2020");
-        yearField.setMaximumSize(yearField.getPreferredSize());
-        
-        JLabel monthLabel= new JLabel("mm");
-        JTextField monthField= new JTextField();
-        monthField.setText("12");
-        monthField.setMaximumSize(monthField.getPreferredSize());
-          
-        JLabel dayLabel= new JLabel("dd"); 
-        JTextField dayField= new JTextField();
-        dayField.setText("15");
-        dayField.setMaximumSize(dayField.getPreferredSize());
-        
-        
-        datePanel.add(yearLabel);
-        datePanel.add(monthLabel);
-        datePanel.add(dayLabel);
-        datePanel.add(yearField);
-        datePanel.add(monthField);
-        datePanel.add(dayField);
-        
-        SpringUtilities.makeCompactGrid(datePanel,
-                2, 3, //rows, cols 
-                6, 6, //initX, initY
-                6, 6); //xPad, yPad
-        this.add(datePanel);
-        
-        //time
-        JPanel timePanel= new JPanel();
-        timePanel.setLayout(new SpringLayout());
-        JLabel timeLabel= new JLabel("time: ");
-        timeLabel.setLabelFor(timePanel);
-        this.add(timeLabel);
-        
-        JTextField hourField= new JTextField();
-        hourField.setText("08");
-        hourField.setMaximumSize(hourField.getPreferredSize());
-        timePanel.add(hourField);
-        
-        JTextField minuteField= new JTextField();
-        minuteField.setText("30");
-        minuteField.setMaximumSize(minuteField.getPreferredSize());
-        timePanel.add(minuteField);
-        
-        SpringUtilities.makeCompactGrid(timePanel,
-                1, 2, //rows, cols 
-                6, 6, //initX, initY
-                6, 6); //xPad, yPad
-        
-        this.add(timePanel);
+        //date and time
+        DateTimePanel dateTimePanel= new DateTimePanel();
+        this.add(dateTimePanel);
         
         //discount
         JPanel discountPanel= new JPanel();
@@ -186,13 +131,13 @@ public class CreateScreeningPanel extends JPanel{
         backButton.addActionListener(new ChangePanelListener(frame, 11));
         buttonPanel.add(backButton);
         JButton addButton= new JButton("ADD");
-        addButton.addActionListener(new AddScreeningListener(frame, movieLabel, roomNumberList, numberOfSeatsLabel, yearField, monthField, dayField, hourField, minuteField, discountField));
+        addButton.addActionListener(new AddScreeningListener(frame, movieLabel, roomNumberList, numberOfSeatsLabel, dateTimePanel, discountField));
         buttonPanel.add(addButton);
         
         this.add(buttonPanel);
         
         SpringUtilities.makeCompactGrid(this,
-                8, 1, //rows, cols 
+                5, 1, //rows, cols 
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
         

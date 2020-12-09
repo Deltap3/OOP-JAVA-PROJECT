@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import model.Connections;
 import model.CustomerMember;
 import model.Screening;
+import view.DateTimePanel;
 import view.MainFrame;
 import view.OOP_JAVA_PROJECT;
 
@@ -32,38 +33,25 @@ public class AddScreeningListener implements ActionListener {
         private JLabel movieTitle;
         private JComboBox roomField;
         private JLabel seatLabel;
-        private JTextField yearField;
-        private JTextField monthField;
-        private JTextField dayField;
-        private JTextField hourField;
-        private JTextField minuteField;
+        private DateTimePanel dateTimePanel;
         private JTextField discountField;
 
-    public AddScreeningListener(MainFrame myFrame, JLabel movieTitle, 
-            JComboBox roomField, JLabel numberOfSeats, 
-            JTextField yearField, JTextField monthField, JTextField dayField, 
-            JTextField hourField, JTextField minuteField, 
-            JTextField discountField)
-    {
+    
+
+    public AddScreeningListener(MainFrame myFrame, JLabel movieTitle, JComboBox roomField, JLabel seatLabel,DateTimePanel dateTimePanel, JTextField discountField) {
         this.myFrame = myFrame;
         this.movieTitle = movieTitle;
         this.roomField = roomField;
-        this.seatLabel = numberOfSeats;
-        this.yearField = yearField;
-        this.monthField = monthField;
-        this.dayField = dayField;
-        this.hourField = hourField;
-        this.minuteField = minuteField;
+        this.seatLabel = seatLabel;
+        this.dateTimePanel= dateTimePanel;
         this.discountField = discountField;
     }
+    
 
         public void actionPerformed(ActionEvent e) {
             
-            String dateTime=yearField.getText()+"-"+monthField.getText()+"-"+dayField.getText()
-                    +" "+hourField.getText()+":"+minuteField.getText()+":00";
-            
-           
-            
+            String dateTime=dateTimePanel.getDateTime();
+         
             try {
                 Integer roomNumber= Integer.parseInt((String) roomField.getSelectedItem());
                 Integer numberOfSeats= Integer.parseInt(seatLabel.getText());
@@ -114,8 +102,6 @@ public class AddScreeningListener implements ActionListener {
 
             }
 
-            //clean all the text fields
-
-            
+      
         }
 }

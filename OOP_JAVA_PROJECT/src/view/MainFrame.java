@@ -176,7 +176,10 @@ public class MainFrame extends JFrame{
         this.add(panel15);
         
         //panel 16: discount between 2 dates
-
+        TimeDiscountPanel panel16= new TimeDiscountPanel(this);
+        panelsList.set(16, panel16);
+        this.add(panel16);
+        
         //panel 17: member management menu
         initMap.put("see a member's info", 18);
         initMap.put("Remove a member", 21);
