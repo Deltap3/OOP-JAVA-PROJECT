@@ -171,6 +171,9 @@ public class MainFrame extends JFrame{
         initInfos.clear();
         
         //panel 15: discount by movie played
+        MovieDiscountPanel panel15= new MovieDiscountPanel(this);
+        panelsList.set(15,panel15);
+        this.add(panel15);
         
         //panel 16: discount between 2 dates
 
