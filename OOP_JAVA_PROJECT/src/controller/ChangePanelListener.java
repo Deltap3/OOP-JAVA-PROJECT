@@ -27,6 +27,11 @@ public class ChangePanelListener implements ActionListener{
     }
     public void actionPerformed(ActionEvent e)
     {
+        if(myInt==0 && e.getActionCommand().equals("Buy"))
+        {
+            myFrame.getCustomerOrder().placeOrder();
+        }
+        
         if(myInt==4 && e.getActionCommand().equals("Guest"))
         {
             myFrame.setUser(new CustomerGuest());

@@ -5,7 +5,13 @@
  */
 package model;
 
+import DAO.CustomerMemberDAO;
+import DAO.ScreeningDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import view.OOP_JAVA_PROJECT;
 
 /**
  * ZHONG David
@@ -72,6 +78,40 @@ public class Order {
         }
         
         return totalPrice;
+    }
+    public void placeOrder()
+    {
+        boolean screeningUpdate=false, memberUpdate=false;
+        try{
+            Connections co= new Connections("project", "root", "password");
+            
+            //first we update the number of tickets broughts in our database
+            ScreeningDAO screeningCo= new ScreeningDAO(co.getInstance());
+            screeningUpdate=screeningCo.addTickets(ticketsNumber+session.getTicketsBoughts(), session.getDateTime(), session.getNumberRoom());
+            
+            if(screeningUpdate)
+            System.out.println("screening update successfull");
+            
+            //then we update the total paid in member if the custommer is a memeber
+            if(customer.isMember())
+            {
+                CustomerMember member= (CustomerMember) customer; 
+                CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
+                memberUpdate=memberCo.addToTotalPaid(computePrice()+member.getTotalPaid(), member.getLoginID());
+               
+                if(memberUpdate)
+                System.out.println("member update successfull");
+            }
+        }
+        catch (SQLException ex) {
+                Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            catch (ClassNotFoundException ex) {
+                Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+        
     }
     public double getUnitPrice() {
         return unitPrice;
