@@ -138,12 +138,12 @@ public class ScreeningDAO extends DAO<Screening> {
     * Update the number of tickets bought for a screening
     * and returns a boolean for whether the function to succeed or not
     **/ 
-    public boolean addTickets (int tickets, String dateTime){
+    public boolean addTickets (int tickets, String dateTime, int roomNumber){
        try{
             //We try to update the number of tickets boughts
             this.connect.createStatement().executeUpdate("update screening \n" +
-                                    "set ticketsBoughts = ticketsBoughts + "+tickets+"\n" +
-                                    "where datetim = '"+dateTime+"'");
+                                    "set ticketsBoughts = '"+tickets+"'\n" +
+                                    "where datetim = '"+dateTime+"' AND roomNumber = '" + roomNumber + "'");
             //If the query succed we return true
             return true;
         }    

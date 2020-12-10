@@ -166,6 +166,21 @@ public class CustomerMemberDAO extends DAO<CustomerMember>{
         return grade;
     }
     
-    
+    public boolean addToTotalPaid (double amount, String login){
+       try{
+            //We try to update the number of tickets boughts
+            this.connect.createStatement().executeUpdate("update members \n" +
+                                    "set totalPaid = ' "+amount+"' \n" +
+                                    "WHERE login = '" +login + "'");
+            
+            //If the query succed we return true
+            return true;
+        }    
+        catch(SQLException ex){
+            //Else we display the error and return false
+            ex.getMessage();
+            return false;
+        }
+    }
     
 }
