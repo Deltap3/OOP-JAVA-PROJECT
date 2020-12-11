@@ -74,6 +74,7 @@ public class LoginListener implements ActionListener{
                     myFrame.setUser(user);
                     myFrame.setContentPane(myFrame.getPanels().get(numPanel));
                     myFrame.pack();
+                    myFrame.centerFrame();
                     myFrame.invalidate();
                     myFrame.validate();
                     myFrame.repaint();

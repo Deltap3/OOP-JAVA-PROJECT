@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import model.*;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -50,6 +51,7 @@ public class MainFrame extends JFrame{
         initComponents();
         setSize(panelsList.get(0).getSize());
         setContentPane(panelsList.get(0));
+        centerFrame();
         setVisible(true);
     }
     private void initComponents()
@@ -304,6 +306,18 @@ public class MainFrame extends JFrame{
         StatPanel panel= new StatPanel(this, type);
         panelsList.set(num, panel);
         this.add(panel);
+    }
+    
+    public void centerFrame()
+    {
+        // make the frame half the height and width
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        this.setSize(width/2, height/2);
+
+        // center the jframe on screen
+        this.setLocationRelativeTo(null);
     }
 
     public CustomerMember getSelectedMember() {

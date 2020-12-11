@@ -71,6 +71,7 @@ public class AddMemberListener implements ActionListener {
                     //finally we go to the next panel
                     myFrame.setContentPane(myFrame.getPanels().get(10));
                     myFrame.pack();
+                    myFrame.centerFrame();
                     myFrame.invalidate();
                     myFrame.validate();
                     myFrame.repaint();

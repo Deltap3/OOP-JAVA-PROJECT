@@ -67,6 +67,7 @@ public class SearchMemberListener implements ActionListener{
                     
                     myFrame.setContentPane(myFrame.getPanels().get(numPanel));
                     myFrame.pack();
+                    myFrame.centerFrame();
                     myFrame.invalidate();
                     myFrame.validate();
                     myFrame.repaint();
