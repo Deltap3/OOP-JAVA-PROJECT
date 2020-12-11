@@ -47,8 +47,8 @@ public class BuyActionListener implements ActionListener{
         myFrame.setCustomerOrder(customOrder);
 
         myFrame.buildPanel8();
-       
-        myFrame.makeContentPane(myFrame.getPanels().get(8));
+       // myFrame.setSize(myFrame.getPanels().get(8).getSize());
+        myFrame.setContentPane(myFrame.getPanels().get(8));
 
         }
 
@@ -58,8 +58,6 @@ public class BuyActionListener implements ActionListener{
             JOptionPane.showMessageDialog(null, ex.getMessage(),"",JOptionPane.ERROR_MESSAGE);
 
         }
-        myFrame.pack();
-        myFrame.centerFrame();
         myFrame.invalidate();
         myFrame.validate();
         myFrame.repaint();

@@ -31,11 +31,6 @@ public class ChangePanelListener implements ActionListener{
         {
             myFrame.getCustomerOrder().placeOrder();
         }
-        if(myInt==1 && e.getActionCommand().equals("Back"))
-        {
-            if (myFrame.getUser().isMember())
-                myInt=3;
-        }
         
         if(myInt==4 && e.getActionCommand().equals("Guest"))
         {
@@ -59,12 +54,8 @@ public class ChangePanelListener implements ActionListener{
         }
         
         //myFrame.setSize(myFrame.getPanels().get(myInt).getSize());
-       // myFrame.setContentPane(myFrame.getPanels().get(myInt));
-        
-        myFrame.makeContentPane(myFrame.getPanels().get(myInt));
-        
+        myFrame.setContentPane(myFrame.getPanels().get(myInt));
         myFrame.pack();
-        myFrame.centerFrame();
         myFrame.invalidate();
         myFrame.validate();
         myFrame.repaint();

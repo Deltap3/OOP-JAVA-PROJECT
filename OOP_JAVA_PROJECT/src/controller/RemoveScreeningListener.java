@@ -48,9 +48,8 @@ public class RemoveScreeningListener implements ActionListener{
                         + "successfully been deleted from the database", "",JOptionPane.DEFAULT_OPTION);
                 
                 // go to the next panel
-                myFrame.makeContentPane(myFrame.getPanels().get(10));
+                myFrame.setContentPane(myFrame.getPanels().get(10));
                 myFrame.pack();
-                myFrame.centerFrame();
                 myFrame.invalidate();
                 myFrame.validate();
                 myFrame.repaint();

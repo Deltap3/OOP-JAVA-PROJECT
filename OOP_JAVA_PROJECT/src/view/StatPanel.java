@@ -7,8 +7,6 @@ package view;
 
 import controller.ChangePanelListener;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,12 +20,6 @@ public class StatPanel extends JPanel{
     public StatPanel(MainFrame frame, String statType)
     {
         super();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int height = screenSize.height;
-        int width = screenSize.width;
-        this.setPreferredSize(new Dimension(width/2, height/2));
-        this.setSize(new Dimension(width/2, height/2));
-        
         this.setLayout(new BorderLayout());
         JLabel label= new JLabel(statType);
         this.add(label, BorderLayout.NORTH);

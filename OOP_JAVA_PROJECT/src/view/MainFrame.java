@@ -10,11 +10,6 @@ import java.awt.BorderLayout;
 import model.*;
 
 import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -26,10 +21,7 @@ import javax.swing.SpringLayout;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import org.jfree.ui.RefineryUtilities;
 
 
@@ -57,8 +49,7 @@ public class MainFrame extends JFrame{
         setTitle("My movie theater");
         initComponents();
         setSize(panelsList.get(0).getSize());
-        makeContentPane(panelsList.get(0));
-        centerFrame();
+        setContentPane(panelsList.get(0));
         setVisible(true);
     }
     private void initComponents()
@@ -314,60 +305,7 @@ public class MainFrame extends JFrame{
         panelsList.set(num, panel);
         this.add(panel);
     }
-    
-    public void centerFrame()
-    {
-        // make the frame half the height and width
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int height = screenSize.height;
-        int width = screenSize.width;
-        this.setSize(width/2, height/2);
 
-        // center the jframe on screen
-        this.setLocationRelativeTo(null);
-    }
-    public void makeContentPane(JPanel content)
-    {
-        JPanel contentPanel= new JPanel();
-        contentPanel.setLayout(new BorderLayout());
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int height = screenSize.height;
-        int width = screenSize.width;
-        contentPanel.setSize(width/2, height/2);
-        
-        int fillWidth=((int)contentPanel.getSize().getWidth()-(int)content.getSize().getWidth())/2;
-        int fillHeight=((int)contentPanel.getSize().getHeight()-(int)content.getSize().getHeight())/2;
-        
-        BufferedImage fillIn=null;
-        try {
-             fillIn= ImageIO.read(new File("images/background.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(fillWidth>0)
-        {
-            Image fillVertical = fillIn.getScaledInstance(fillWidth, contentPanel.getHeight(),Image.SCALE_SMOOTH);
-            ImageIcon vertIcon=new ImageIcon(fillVertical);
-            contentPanel.add(new JLabel(vertIcon),BorderLayout.EAST);
-            contentPanel.add(new JLabel(vertIcon), BorderLayout.WEST);
-        }
-        if(fillHeight>0)
-        {
-            Image fillHorizontal=fillIn.getScaledInstance(contentPanel.getWidth(), fillHeight,Image.SCALE_SMOOTH);
-            ImageIcon horIcon=new ImageIcon(fillHorizontal);
-          //  contentPanel.add(new JLabel(horIcon), BorderLayout.NORTH);
-           // contentPanel.add(new JLabel(horIcon), BorderLayout.SOUTH);
-        }
-        //JLabel label= new JLabel(icon);
-        
-       
-        
-        
-        contentPanel.add(content, BorderLayout.CENTER);
-        
-        this.setContentPane(contentPanel);
-        
-    }
     public CustomerMember getSelectedMember() {
         return selectedMember;
     }
