@@ -340,7 +340,7 @@ public class MainFrame extends JFrame{
         
         BufferedImage fillIn=null;
         try {
-             fillIn= ImageIO.read(new File("images/black.jpg"));
+             fillIn= ImageIO.read(new File("images/background.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
