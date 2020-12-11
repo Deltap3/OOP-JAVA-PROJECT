@@ -306,6 +306,54 @@ public class MainFrame extends JFrame{
         this.add(panel);
     }
 
+<<<<<<< HEAD
+=======
+        // center the jframe on screen
+        this.setLocationRelativeTo(null);
+    }
+    public void makeContentPane(JPanel content)
+    {
+        JPanel contentPanel= new JPanel();
+        contentPanel.setLayout(new BorderLayout());
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        contentPanel.setSize(width/2, height/2);
+        
+        int fillWidth=((int)contentPanel.getSize().getWidth()-(int)content.getSize().getWidth())/2;
+        int fillHeight=((int)contentPanel.getSize().getHeight()-(int)content.getSize().getHeight())/2;
+        
+        BufferedImage fillIn=null;
+        try {
+             fillIn= ImageIO.read(new File("images/black.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(fillWidth>0)
+        {
+            Image fillVertical = fillIn.getScaledInstance(fillWidth, contentPanel.getHeight(),Image.SCALE_SMOOTH);
+            ImageIcon vertIcon=new ImageIcon(fillVertical);
+            contentPanel.add(new JLabel(vertIcon),BorderLayout.EAST);
+            contentPanel.add(new JLabel(vertIcon), BorderLayout.WEST);
+        }
+        if(fillHeight>0)
+        {
+            Image fillHorizontal=fillIn.getScaledInstance(contentPanel.getWidth(), fillHeight,Image.SCALE_SMOOTH);
+            ImageIcon horIcon=new ImageIcon(fillHorizontal);
+          //  contentPanel.add(new JLabel(horIcon), BorderLayout.NORTH);
+           // contentPanel.add(new JLabel(horIcon), BorderLayout.SOUTH);
+        }
+        //JLabel label= new JLabel(icon);
+        
+       
+        
+        
+        contentPanel.add(content, BorderLayout.CENTER);
+        
+        this.setContentPane(contentPanel);
+        
+    }
+>>>>>>> parent of 4673e16... better background
     public CustomerMember getSelectedMember() {
         return selectedMember;
     }
