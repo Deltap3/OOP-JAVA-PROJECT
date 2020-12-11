@@ -93,13 +93,12 @@ public class Statistics extends JPanel {
                select = screenCo.find(allScreenings.get(i).getDateTime());
                selectMovie = movieCo.find(select.getMovieName());
                numberTickets = select.getTicketsBoughts();
-               for(int j = 0; j < allScreenings.size() ; ++j)
-                   if(i != j && allMovies.get(i).getGenre().equals(allMovies.get(j).getGenre()))
-                       numberTickets = numberTickets + allScreenings.get(j).getTicketsBoughts();     
+               for(int j = 0; j < i ; ++j)
+                   if(j > 0 && selectMovie.getGenre().equals(data.getKey(j-1))){
+                       numberTickets = (int) ((double)data.getValue(j-1) + allScreenings.get(i).getTicketsBoughts());   
+                System.out.println("lol");}
                data.setValue(selectMovie.getGenre(),numberTickets);
             }
-
-
             JFreeChart chart = ChartFactory.createPieChart("Most Viewed Genre", data, true, true, false);
             ChartPanel panel = new ChartPanel(chart);
             this.add(panel);

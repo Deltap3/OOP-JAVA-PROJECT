@@ -10,6 +10,11 @@ import java.awt.BorderLayout;
 import model.*;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -21,7 +26,10 @@ import javax.swing.SpringLayout;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import org.jfree.ui.RefineryUtilities;
 
 
@@ -304,10 +312,6 @@ public class MainFrame extends JFrame{
         StatPanel panel= new StatPanel(this, type);
         panelsList.set(num, panel);
         this.add(panel);
-    }
-
-<<<<<<< HEAD
-=======
         // center the jframe on screen
         this.setLocationRelativeTo(null);
     }
@@ -353,7 +357,6 @@ public class MainFrame extends JFrame{
         this.setContentPane(contentPanel);
         
     }
->>>>>>> parent of 4673e16... better background
     public CustomerMember getSelectedMember() {
         return selectedMember;
     }
