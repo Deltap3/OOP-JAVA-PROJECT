@@ -69,7 +69,7 @@ public class AddMemberListener implements ActionListener {
 
                     JOptionPane.showConfirmDialog(null, "the new member has successfully been added to the database", "", JOptionPane.DEFAULT_OPTION);
                     //finally we go to the next panel
-                    myFrame.setContentPane(myFrame.getPanels().get(10));
+                    myFrame.makeContentPane(myFrame.getPanels().get(10));
                     myFrame.pack();
                     myFrame.centerFrame();
                     myFrame.invalidate();

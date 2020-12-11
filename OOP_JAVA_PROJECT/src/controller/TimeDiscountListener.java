@@ -62,7 +62,7 @@ public class TimeDiscountListener implements ActionListener{
                                             +startTime+" and "+endTime, "",JOptionPane.DEFAULT_OPTION);
                 
                 //finally we go to the next panel
-                myFrame.setContentPane(myFrame.getPanels().get(10));
+                myFrame.makeContentPane(myFrame.getPanels().get(10));
                 myFrame.pack();
                 myFrame.centerFrame();
                 myFrame.invalidate();

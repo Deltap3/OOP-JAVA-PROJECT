@@ -8,6 +8,7 @@ package view;
 import controller.ChangePanelListener;
 import controller.ComboBoxListener;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -23,6 +24,9 @@ public class AgeDiscountPanel extends JPanel{
     public AgeDiscountPanel(MainFrame frame)
     {
         super();
+        
+
+        
         this.setLayout(new SpringLayout());
         
         int numberTickets= frame.getCustomerOrder().getTicketsNumber();
@@ -47,7 +51,7 @@ public class AgeDiscountPanel extends JPanel{
         
         SpringUtilities.makeCompactGrid(this,
                 numberTickets+4, 1, //rows, cols
-                6, 6, //initX, initY
+                6,6, //initX, initY
                 6, 6); //xPad, yPad
     }
     

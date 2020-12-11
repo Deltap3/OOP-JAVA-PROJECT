@@ -44,7 +44,7 @@ public class RemoveMemberListener implements ActionListener{
                         "",JOptionPane.DEFAULT_OPTION);
                 
                 // go to the next panel
-                myFrame.setContentPane(myFrame.getPanels().get(10));
+                myFrame.makeContentPane(myFrame.getPanels().get(10));
                 myFrame.pack();
                 myFrame.centerFrame();
                 myFrame.invalidate();

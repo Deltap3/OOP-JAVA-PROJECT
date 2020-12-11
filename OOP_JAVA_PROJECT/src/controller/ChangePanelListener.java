@@ -59,7 +59,10 @@ public class ChangePanelListener implements ActionListener{
         }
         
         //myFrame.setSize(myFrame.getPanels().get(myInt).getSize());
-        myFrame.setContentPane(myFrame.getPanels().get(myInt));
+       // myFrame.setContentPane(myFrame.getPanels().get(myInt));
+        
+        myFrame.makeContentPane(myFrame.getPanels().get(myInt));
+        
         myFrame.pack();
         myFrame.centerFrame();
         myFrame.invalidate();

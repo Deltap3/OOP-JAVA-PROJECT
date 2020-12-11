@@ -53,7 +53,7 @@ public class ScreeningChoiceListener implements ActionListener{
             {
                 frame.setSession(session);
                 frame.buildPanel5();
-                frame.setContentPane(frame.getPanels().get(numPanel));
+                frame.makeContentPane(frame.getPanels().get(numPanel));
                 frame.pack();
                 frame.centerFrame();
                 frame.invalidate();

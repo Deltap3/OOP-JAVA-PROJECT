@@ -48,7 +48,7 @@ public class BuyActionListener implements ActionListener{
 
         myFrame.buildPanel8();
        
-        myFrame.setContentPane(myFrame.getPanels().get(8));
+        myFrame.makeContentPane(myFrame.getPanels().get(8));
 
         }
 

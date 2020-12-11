@@ -8,6 +8,7 @@ package view;
 import DAO.*;
 import controller.ChangePanelListener;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class ButtonMenuPanel extends JPanel{
     {
         super();
         
+        
+        
         //making a vertical alligned layout
         this.setLayout(new SpringLayout());
         
@@ -52,10 +55,12 @@ public class ButtonMenuPanel extends JPanel{
             this.add(btn);
         }
         
-        this.setSize(new Dimension(320,((buttonLink.size()+infos.size())*20)+200));
+        this.setSize(new Dimension(400,((buttonLink.size()+infos.size())*20)+200));
+        int inX= this.getWidth()/6;
+        int inY=this.getHeight()/6;
         SpringUtilities.makeCompactGrid(this,
                 (buttonLink.size()+infos.size()), 1, //rows, cols
-                6, 6, //initX, initY
+                inX,inY, //initX, initY
                 6, 6); //xPad, yPad
         
     }

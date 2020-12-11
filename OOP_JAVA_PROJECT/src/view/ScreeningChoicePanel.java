@@ -39,6 +39,7 @@ public class ScreeningChoicePanel extends JPanel{
         int height = screenSize.height;
         int width = screenSize.width;
         this.setPreferredSize(new Dimension(width/2, height/2));
+        this.setSize(new Dimension(width/2, height/2));
         
         JPanel screeningPanel= new JPanel();
         screeningPanel.setSize(1200,1400);
@@ -93,6 +94,8 @@ public class ScreeningChoicePanel extends JPanel{
         backButton.addActionListener(new ChangePanelListener(frame, 1));
         panel2.add(backButton);
         this.add(panel2);
+        
+        
                 
     }
     
