@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ public class BuyPanel extends JPanel{
     public BuyPanel(MainFrame frame, Screening session)
     {
         super();
+        
         setLayout(new SpringLayout());
         setSize(new Dimension(500,700));
         
@@ -85,9 +87,11 @@ public class BuyPanel extends JPanel{
         
         this.add(backButton);
         
+        
+        
         SpringUtilities.makeCompactGrid(this,
                 5, 2, //rows, cols 
-                6, 6, //initX, initY
+                6,6, //initX, initY
                 6, 6); //xPad, yPad
     }
     

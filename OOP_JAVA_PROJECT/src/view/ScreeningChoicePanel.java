@@ -11,14 +11,17 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import model.*;
 import DAO.*;
+import controller.ChangePanelListener;
 import controller.ScreeningChoiceListener;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 /**
  * ZHONG David
@@ -31,9 +34,17 @@ public class ScreeningChoicePanel extends JPanel{
     public ScreeningChoicePanel(MainFrame frame, int nextPanel)
     {
         super();
-        setSize(new Dimension(1200,1400));
-        setPreferredSize(new Dimension(1200,1400));
-        setLayout(new SpringLayout());
+      
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        this.setPreferredSize(new Dimension(width/2, height/2));
+        this.setSize(new Dimension(width/2, height/2));
+        
+        JPanel screeningPanel= new JPanel();
+        screeningPanel.setSize(1200,1400);
+        screeningPanel.setPreferredSize(new Dimension(1200,1400));
+        screeningPanel.setLayout(new SpringLayout());
 
         ArrayList<Screening> sessions= new ArrayList<>();
         
@@ -50,12 +61,12 @@ public class ScreeningChoicePanel extends JPanel{
             
             
             final Movie m= movieCo.find(s.getMovieName());
-            Image scaledImage = m.getImage().getScaledInstance(this.getWidth()/6,this.getHeight()/(sessions.size()*2),Image.SCALE_SMOOTH);
+            Image scaledImage = m.getImage().getScaledInstance(screeningPanel.getWidth()/6, screeningPanel.getHeight()/(int)(sessions.size()*1.2),Image.SCALE_SMOOTH);
             JButton btn= new JButton(new ImageIcon(scaledImage));
             btn.addActionListener(new ScreeningChoiceListener(frame, nextPanel,s));
-            this.add(btn);     
-            this.add(new JLabel(s.getMovieName()));
-            this.add(new JLabel(s.getDateTime()));
+            screeningPanel.add(btn);     
+            screeningPanel.add(new JLabel(s.getMovieName()));
+            screeningPanel.add(new JLabel(s.getDateTime()));
             
         }
         
@@ -66,10 +77,26 @@ public class ScreeningChoicePanel extends JPanel{
         }
         
         
-        SpringUtilities.makeCompactGrid(this,
+        SpringUtilities.makeCompactGrid(screeningPanel,
                 sessions.size(), 3, //rows, cols 
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
+        
+        JScrollPane scrollPanel= new JScrollPane(screeningPanel);
+        scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+        scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPanel.setPreferredSize(new Dimension((width/2), (height/3)));
+        this.add(scrollPanel);
+        
+        
+        JPanel panel2= new JPanel();
+        JButton backButton=new JButton("Back");
+        backButton.addActionListener(new ChangePanelListener(frame, 1));
+        panel2.add(backButton);
+        this.add(panel2);
+        
+        
+                
     }
     
     
