@@ -10,6 +10,7 @@ import controller.AddScreeningListener;
 import controller.ChangePanelListener;
 import controller.MovieDiscountListener;
 import controller.ScreeningChoiceListener;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -105,7 +106,7 @@ public class MovieDiscountPanel extends JPanel{
         buttonPanel.add(addButton);
         
         this.add(buttonPanel);
-        
+        this.setSize(new Dimension(500,700));
         SpringUtilities.makeCompactGrid(this,
                 3, 1, //rows, cols 
                 6, 6, //initX, initY

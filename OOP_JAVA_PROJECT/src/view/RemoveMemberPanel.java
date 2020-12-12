@@ -7,6 +7,7 @@ package view;
 
 import controller.ChangePanelListener;
 import controller.RemoveMemberListener;
+import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -60,7 +61,7 @@ public class RemoveMemberPanel extends JPanel{
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
         this.add(buttonPanel);
-        
+        this.setSize(new Dimension(400,600));
          SpringUtilities.makeCompactGrid(this,
                 2, 1, //rows, cols
                 6, 6, //initX, initY

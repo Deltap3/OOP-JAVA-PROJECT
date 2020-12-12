@@ -45,7 +45,7 @@ public class RemoveMemberListener implements ActionListener{
                 
                 // go to the next panel
                 myFrame.makeContentPane(myFrame.getPanels().get(10));
-                myFrame.pack();
+                //myFrame.pack();
                 myFrame.centerFrame();
                 myFrame.invalidate();
                 myFrame.validate();

@@ -8,6 +8,7 @@ package view;
 import controller.ChangePanelListener;
 import controller.MovieDiscountListener;
 import controller.TimeDiscountListener;
+import java.awt.Dimension;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -73,7 +74,7 @@ public class TimeDiscountPanel extends JPanel{
         buttonPanel.add(addButton);
         
         this.add(buttonPanel);
-        
+        this.setSize(new Dimension(500,800));
         SpringUtilities.makeCompactGrid(this,
                 6, 1, //rows, cols 
                 6, 6, //initX, initY

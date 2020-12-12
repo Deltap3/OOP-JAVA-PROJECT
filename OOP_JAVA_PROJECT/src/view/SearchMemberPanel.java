@@ -60,7 +60,8 @@ public class SearchMemberPanel extends JPanel{
         this.add(backButton);
         this.add(searchButton);
         
-        this.setSize(new Dimension(800,1000));
+        this.setSize(new Dimension(500,700));
+        
         SpringUtilities.makeCompactGrid(this,
                 4, 2, //rows, cols
                 6, 6, //initX, initY

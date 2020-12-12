@@ -33,8 +33,9 @@ public class BuyPanel extends JPanel{
     {
         super();
         
-        setLayout(new SpringLayout());
-        setSize(new Dimension(500,700));
+        JPanel contentPanel= new JPanel();
+        contentPanel.setLayout(new SpringLayout());
+        contentPanel.setSize(new Dimension(500,700));
         
         Movie chosenMovie = new Movie();
         
@@ -52,47 +53,51 @@ public class BuyPanel extends JPanel{
         System.out.println(chosenMovie.getTitle());
         //1st row
         JLabel titleLabel= new JLabel(chosenMovie.getTitle());
-        this.add(titleLabel);
+        contentPanel.add(titleLabel);
         JLabel genrelabel= new JLabel(chosenMovie.getGenre());
-        this.add(genrelabel);
+        contentPanel.add(genrelabel);
         //2nd row
         JLabel startLabel= new JLabel(session.getDateTime());
-        this.add(startLabel);
+        contentPanel.add(startLabel);
         JLabel runTimeLabel= new JLabel("run time: "+chosenMovie.getRunTime()+" min");
-        this.add(runTimeLabel);
+        contentPanel.add(runTimeLabel);
         //3rd row
         JLabel roomLabel= new JLabel("room "+session.getNumberRoom());
-        this.add(roomLabel);
+        contentPanel.add(roomLabel);
         JLabel discountLabel= new JLabel("");
         if(session.getDiscount()>0)
         {
             discountLabel.setText("member only extra "+session.getDiscount()+"% discount");
         }
-        this.add(discountLabel);
+        contentPanel.add(discountLabel);
         
         //4th row: number of tickets choice
         JLabel nbTicketsLabel=new JLabel("number of tickets: ");
         nbTicketsField= new JTextField();
         nbTicketsField.setMaximumSize(nbTicketsField.getPreferredSize());
         nbTicketsLabel.setLabelFor(nbTicketsField);
-        this.add(nbTicketsLabel);
-        this.add(nbTicketsField);
+        contentPanel.add(nbTicketsLabel);
+        contentPanel.add(nbTicketsField);
         
         //last row: buy/ go back
         JButton buyButton= new JButton("Buy");
         buyButton.addActionListener(new BuyActionListener(frame, session, nbTicketsField));
-        this.add(buyButton);
+        contentPanel.add(buyButton);
         JButton backButton= new JButton("Back");
         backButton.addActionListener(new ChangePanelListener(frame, 4));
         
-        this.add(backButton);
+        contentPanel.add(backButton);
         
-        
-        
-        SpringUtilities.makeCompactGrid(this,
+        SpringUtilities.makeCompactGrid(contentPanel,
                 5, 2, //rows, cols 
                 6,6, //initX, initY
                 6, 6); //xPad, yPad
+        
+        this.add(contentPanel);
+        this.setSize(new Dimension(500,700));
+        this.setPreferredSize(new Dimension(500,700));
+        
+        
     }
     
     

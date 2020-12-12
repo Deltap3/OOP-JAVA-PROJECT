@@ -136,6 +136,7 @@ public class CreateScreeningPanel extends JPanel{
         
         this.add(buttonPanel);
         
+        this.setSize(new Dimension(500,700));
         SpringUtilities.makeCompactGrid(this,
                 5, 1, //rows, cols 
                 6, 6, //initX, initY

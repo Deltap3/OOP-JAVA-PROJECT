@@ -55,10 +55,15 @@ public class MainFrame extends JFrame{
        // setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         
         setTitle("My movie theater");
+       // this.setSize(new Dimension(980, 1080/2+20));
         initComponents();
-        setSize(panelsList.get(0).getSize());
+        
+       // setSize(panelsList.get(0).getSize());
         makeContentPane(panelsList.get(0));
-        centerFrame();
+     
+        pack();
+        
+        this.setResizable(false);
         setVisible(true);
     }
     private void initComponents()
@@ -317,26 +322,26 @@ public class MainFrame extends JFrame{
     
     public void centerFrame()
     {
-        // make the frame half the height and width
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int height = screenSize.height;
-        int width = screenSize.width;
-        this.setSize(width/2, height/2);
+       //this.setSize(this.getContentPane().getSize());
 
         // center the jframe on screen
-        this.setLocationRelativeTo(null);
+      //  this.setLocationRelativeTo(null);
     }
-    public void makeContentPane(JPanel content)
+    public void makeContentPane(final JPanel content)
     {
         JPanel contentPanel= new JPanel();
-        contentPanel.setLayout(new BorderLayout());
+        
+        contentPanel.setLayout(new SpringLayout());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
         contentPanel.setSize(width/2, height/2);
         
-        int fillWidth=((int)contentPanel.getSize().getWidth()-(int)content.getSize().getWidth())/2;
-        int fillHeight=((int)contentPanel.getSize().getHeight()-(int)content.getSize().getHeight())/2;
+         int fillWidth=(width/2-content.getWidth())/2;
+        int fillHeight=(height/2-(int)content.getSize().getHeight())/2;
+        
+        JPanel westPaddingPanel=new JPanel();
+        JPanel eastPaddingPanel=new JPanel();
         
         BufferedImage fillIn=null;
         try {
@@ -344,29 +349,43 @@ public class MainFrame extends JFrame{
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         if(fillWidth>0)
         {
-            Image fillVertical = fillIn.getScaledInstance(fillWidth, contentPanel.getHeight(),Image.SCALE_SMOOTH);
+            Image fillVertical = fillIn.getScaledInstance(fillWidth, height/2,Image.SCALE_SMOOTH);
             ImageIcon vertIcon=new ImageIcon(fillVertical);
-            contentPanel.add(new JLabel(vertIcon),BorderLayout.EAST);
-            contentPanel.add(new JLabel(vertIcon), BorderLayout.WEST);
-        }
+            
+            westPaddingPanel.add(new JLabel(vertIcon));
+            
+            
+            
+            eastPaddingPanel.add(new JLabel(vertIcon));
+            
+        } //960  
+        
+        contentPanel.add(westPaddingPanel);
+        contentPanel.add(content);
+        contentPanel.add(eastPaddingPanel);
+        /*
         if(fillHeight>0)
         {
-            Image fillHorizontal=fillIn.getScaledInstance(contentPanel.getWidth(), fillHeight,Image.SCALE_SMOOTH);
+            Image fillHorizontal=fillIn.getScaledInstance(width/2, fillHeight,Image.SCALE_SMOOTH);
             ImageIcon horIcon=new ImageIcon(fillHorizontal);
           //  contentPanel.add(new JLabel(horIcon), BorderLayout.NORTH);
            // contentPanel.add(new JLabel(horIcon), BorderLayout.SOUTH);
         }
         //JLabel label= new JLabel(icon);
-        
-       
-        
-        
-        contentPanel.add(content, BorderLayout.CENTER);
+        */
+    
         
         this.setContentPane(contentPanel);
-        
+        //this.setSize(new Dimension(width/2+20, height/2+20));
+        this.setLocationRelativeTo(null);
+     //   this.centerFrame();
+         SpringUtilities.makeCompactGrid(contentPanel,
+                1, 3, //rows, cols
+                1,1, //initX, initY
+                1, 1); //xPad, yPad
     }
     public CustomerMember getSelectedMember() {
         return selectedMember;

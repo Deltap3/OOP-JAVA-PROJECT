@@ -58,7 +58,7 @@ public class BuyActionListener implements ActionListener{
             JOptionPane.showMessageDialog(null, ex.getMessage(),"",JOptionPane.ERROR_MESSAGE);
 
         }
-        myFrame.pack();
+       // myFrame.pack();
         myFrame.centerFrame();
         myFrame.invalidate();
         myFrame.validate();

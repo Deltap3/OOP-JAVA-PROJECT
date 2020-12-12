@@ -10,6 +10,7 @@ import DAO.ScreeningDAO;
 import controller.ChangePanelListener;
 import controller.RemoveScreeningListener;
 import controller.ScreeningChoiceListener;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class RemoveScreeningPanel extends JPanel{
         buttonPanel.add(deleteButton);
         
         this.add(buttonPanel);
-        
+        this.setSize(new Dimension(500,700));
         SpringUtilities.makeCompactGrid(this,
                 2, 1, //rows, cols 
                 6, 6, //initX, initY

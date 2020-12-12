@@ -58,10 +58,10 @@ public class LoginPanel extends JPanel {
         this.add(backButton);
         this.add(okButton);
 
-        this.setSize(new Dimension(800,600));
+        this.setSize(new Dimension(400,300));
         SpringUtilities.makeCompactGrid(this,
                 3, 2, //rows, cols
-                200,200, //initX, initY
+                6,100, //initX, initY
                 6, 6); //xPad, yPad
 
     }

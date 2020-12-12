@@ -29,15 +29,15 @@ public class StatPanel extends JPanel{
         this.setSize(new Dimension(width/2, height/2));
         
         this.setLayout(new BorderLayout());
-        JLabel label= new JLabel(statType);
+        JLabel label= new JLabel("");
         this.add(label, BorderLayout.NORTH);
-        Statistics statFrame= new Statistics(statType);
-        this.add(statFrame, BorderLayout.CENTER);
+        Statistics statContent= new Statistics(statType);
+        this.add(statContent, BorderLayout.CENTER);
         JButton btn= new JButton("ok");
         btn.addActionListener(new ChangePanelListener(frame, 23));
         this.add(btn, BorderLayout.SOUTH);
         
-        statFrame.setVisible(true);
+        statContent.setVisible(true);
         
     }
     
