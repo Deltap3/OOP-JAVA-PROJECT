@@ -9,6 +9,7 @@ import controller.AddMemberListener;
 import controller.ChangePanelListener;
 import controller.LoginListener;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +25,8 @@ public class CreateMemberPanel extends JPanel{
     public CreateMemberPanel(MainFrame frame)
     {
         super();
+        
+        
         this.setLayout(new SpringLayout());
         
         JLabel firstNameLabel = new JLabel("first name: ");
@@ -84,7 +87,7 @@ public class CreateMemberPanel extends JPanel{
         this.add(backButton);
         this.add(addButton);
         
-        this.setSize(new Dimension(500,700));
+        
         SpringUtilities.makeCompactGrid(this,
                 7, 2, //rows, cols
                 6, 6, //initX, initY

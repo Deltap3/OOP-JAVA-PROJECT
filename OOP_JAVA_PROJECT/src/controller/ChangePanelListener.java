@@ -63,8 +63,7 @@ public class ChangePanelListener implements ActionListener{
         
         myFrame.makeContentPane(myFrame.getPanels().get(myInt));
         
-       // myFrame.pack();
-      //  myFrame.centerFrame();
+       
         myFrame.invalidate();
         myFrame.validate();
         myFrame.repaint();

@@ -12,6 +12,7 @@ import controller.ScreeningChoiceListener;
 import controller.RoomAndSeatsListener;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -38,8 +39,13 @@ public class CreateScreeningPanel extends JPanel{
         
         super();
       
-       // setSize(new Dimension(1200,1400));
-      //  setPreferredSize(new Dimension(1200,1400));
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        this.setPreferredSize(new Dimension(width/2, height/2));
+        this.setSize(new Dimension(width/2, height/2));
+        
+       
         this.setLayout(new SpringLayout());
         
         //movie selection
@@ -136,7 +142,7 @@ public class CreateScreeningPanel extends JPanel{
         
         this.add(buttonPanel);
         
-        this.setSize(new Dimension(500,700));
+        
         SpringUtilities.makeCompactGrid(this,
                 5, 1, //rows, cols 
                 6, 6, //initX, initY
