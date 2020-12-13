@@ -13,6 +13,7 @@ import model.*;
 import DAO.*;
 import controller.ChangePanelListener;
 import controller.ScreeningChoiceListener;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -40,8 +41,11 @@ public class ScreeningChoicePanel extends JPanel{
         int width = screenSize.width;
         this.setPreferredSize(new Dimension(width/2, height/2));
         this.setSize(new Dimension(width/2, height/2));
+        this.setBackground(Color.white);
         
         JPanel screeningPanel= new JPanel();
+        screeningPanel.setBackground(Color.white);
+        
         screeningPanel.setSize(1200,1400);
         screeningPanel.setPreferredSize(new Dimension(1200,1400));
         screeningPanel.setLayout(new SpringLayout());
@@ -83,6 +87,7 @@ public class ScreeningChoicePanel extends JPanel{
                 6, 6); //xPad, yPad
         
         JScrollPane scrollPanel= new JScrollPane(screeningPanel);
+        scrollPanel.setBackground(Color.white);
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
         scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPanel.setPreferredSize(new Dimension((width/2), (height/3)));
@@ -90,6 +95,7 @@ public class ScreeningChoicePanel extends JPanel{
         
         
         JPanel panel2= new JPanel();
+        panel2.setBackground(Color.white);
         JButton backButton=new JButton("Back");
         backButton.addActionListener(new ChangePanelListener(frame, 1));
         panel2.add(backButton);

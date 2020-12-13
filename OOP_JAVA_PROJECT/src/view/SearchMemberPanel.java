@@ -8,6 +8,7 @@ package view;
 import controller.AddMemberListener;
 import controller.ChangePanelListener;
 import controller.SearchMemberListener;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ public class SearchMemberPanel extends JPanel{
     {
         super();
         this.setLayout(new SpringLayout());
+        this.setBackground(Color.white);
         
         JLabel firstNameLabel = new JLabel("first name: ");
         JTextField firstNameField = new JTextField();
@@ -64,7 +66,7 @@ public class SearchMemberPanel extends JPanel{
         
         SpringUtilities.makeCompactGrid(this,
                 4, 2, //rows, cols
-                6, 6, //initX, initY
+                6, 100, //initX, initY
                 6, 6); //xPad, yPad
         
     }

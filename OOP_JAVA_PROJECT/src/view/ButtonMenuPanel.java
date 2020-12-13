@@ -7,6 +7,7 @@ package view;
 
 import DAO.*;
 import controller.ChangePanelListener;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -54,7 +55,7 @@ public class ButtonMenuPanel extends JPanel{
             btn.addActionListener(new ChangePanelListener(frame, e.getValue()));
             contentPanel.add(btn);
         }
-        
+        contentPanel.setBackground(Color.white);
         contentPanel.setSize(new Dimension(400,((buttonLink.size()+infos.size())*20)+200));
         contentPanel.setPreferredSize(new Dimension(400,((buttonLink.size()+infos.size())*20)+200));
         
@@ -65,9 +66,9 @@ public class ButtonMenuPanel extends JPanel{
                 10, 10); //xPad, yPad
         
         this.add(contentPanel);
-        
-        this.setSize(new Dimension(410,contentPanel.getHeight()+10));
-        this.setPreferredSize(new Dimension(410,contentPanel.getHeight()+10));
+        this.setBackground(Color.white);
+        this.setSize(new Dimension(410,contentPanel.getHeight()));
+        this.setPreferredSize(new Dimension(410,contentPanel.getHeight()));
     }
     
     

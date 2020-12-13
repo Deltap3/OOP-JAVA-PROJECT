@@ -5,10 +5,13 @@
  */
 package view;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -29,10 +32,14 @@ public class DateTimePanel extends JPanel{
         
         //date
         JPanel datePanel= new JPanel();
+        
+        TitledBorder dateBorder= BorderFactory.createTitledBorder("date");
+        datePanel.setBorder(dateBorder);
+        
         datePanel.setLayout(new SpringLayout());
-        JLabel dateLabel= new JLabel("date: ");
-        dateLabel.setLabelFor(datePanel);
-        this.add(dateLabel);
+       // JLabel dateLabel= new JLabel("date: ");
+      //  dateLabel.setLabelFor(datePanel);
+      //  this.add(dateLabel);
         
         JLabel yearLabel= new JLabel("yyyy");
         yearField= new JTextField();
@@ -61,15 +68,20 @@ public class DateTimePanel extends JPanel{
                 2, 3, //rows, cols 
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
+        datePanel.setBackground(Color.white);
         
         this.add(datePanel);
         
         //time
         JPanel timePanel= new JPanel();
         timePanel.setLayout(new SpringLayout());
-        JLabel timeLabel= new JLabel("time: ");
-        timeLabel.setLabelFor(timePanel);
-        this.add(timeLabel);
+        
+        TitledBorder timeBorder= BorderFactory.createTitledBorder("time");
+        timePanel.setBorder(timeBorder);
+        timePanel.setBackground(Color.white);
+        //JLabel timeLabel= new JLabel("time: ");
+       // timeLabel.setLabelFor(timePanel);
+       // this.add(timeLabel);
         
         hourField= new JTextField();
         hourField.setText("08");
@@ -87,9 +99,10 @@ public class DateTimePanel extends JPanel{
                 6, 6); //xPad, yPad
         
         this.add(timePanel);
+        this.setBackground(Color.white);
         
         SpringUtilities.makeCompactGrid(this,
-                4, 1, //rows, cols 
+                2, 1, //rows, cols 
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
     }

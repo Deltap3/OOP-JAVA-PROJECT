@@ -7,6 +7,7 @@ package view;
 
 import controller.ChangePanelListener;
 import controller.ComboBoxListener;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JButton;
@@ -53,6 +54,7 @@ public class AgeDiscountPanel extends JPanel{
                 numberTickets+4, 1, //rows, cols
                 6,6, //initX, initY
                 6, 6); //xPad, yPad
+        this.setBackground(Color.white);
     }
     
     public JPanel buildIndividualPanel(MainFrame frame, int i)
@@ -72,7 +74,7 @@ public class AgeDiscountPanel extends JPanel{
                 2, 1, //rows, cols
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
-        
+        contentPanel.setBackground(Color.white);
         return contentPanel;
     }
 }

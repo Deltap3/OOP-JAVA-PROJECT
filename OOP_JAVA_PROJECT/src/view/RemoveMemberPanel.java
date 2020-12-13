@@ -7,6 +7,7 @@ package view;
 
 import controller.ChangePanelListener;
 import controller.RemoveMemberListener;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ public class RemoveMemberPanel extends JPanel{
         this.setLayout(new SpringLayout());
         
         JPanel infoPanel= new JPanel();
+        infoPanel.setBackground(Color.white);
         infoPanel.setLayout(new SpringLayout());
         
         JLabel label1= new JLabel("Do you want to remove this member?");
@@ -46,6 +48,7 @@ public class RemoveMemberPanel extends JPanel{
         this.add(infoPanel);
         
         JPanel buttonPanel= new JPanel();
+        buttonPanel.setBackground(Color.white);
         buttonPanel.setLayout(new SpringLayout());
         
         JButton yesButton= new JButton("YES");
@@ -62,6 +65,8 @@ public class RemoveMemberPanel extends JPanel{
                 6, 6); //xPad, yPad
         this.add(buttonPanel);
         this.setSize(new Dimension(400,600));
+        
+        this.setBackground(Color.white);
          SpringUtilities.makeCompactGrid(this,
                 2, 1, //rows, cols
                 6, 6, //initX, initY

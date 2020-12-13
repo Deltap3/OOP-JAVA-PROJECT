@@ -7,6 +7,7 @@ package view;
 
 import controller.ChangePanelListener;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ public class StatPanel extends JPanel{
     public StatPanel(MainFrame frame, String statType)
     {
         super();
+        this.setBackground(Color.white);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;

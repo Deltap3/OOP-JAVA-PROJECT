@@ -30,7 +30,7 @@ public class Statistics extends JPanel {
     private String statType;
     public Statistics(String statType) throws HeadlessException {
         this.statType = statType;
-
+        this.setBackground(Color.white);
         
         if(statType.equals("Most viewed film") ){
             mostViewedFilm();

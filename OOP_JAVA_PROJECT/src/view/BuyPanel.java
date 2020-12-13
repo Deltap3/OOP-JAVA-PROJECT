@@ -8,6 +8,7 @@ import model.*;
 import DAO.*;
 import controller.BuyActionListener;
 import controller.ChangePanelListener;
+import java.awt.Color;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -92,7 +93,7 @@ public class BuyPanel extends JPanel{
                 5, 2, //rows, cols 
                 6,6, //initX, initY
                 6, 6); //xPad, yPad
-        
+        contentPanel.setBackground(Color.white);
         this.add(contentPanel);
         this.setSize(new Dimension(500,700));
         this.setPreferredSize(new Dimension(500,700));

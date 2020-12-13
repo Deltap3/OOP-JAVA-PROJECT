@@ -7,6 +7,7 @@ package view;
 
 import DAO.CustomerMemberDAO;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import model.*;
 
 import java.awt.Dimension;
@@ -341,7 +342,9 @@ public class MainFrame extends JFrame{
         int fillHeight=(height/2-(int)content.getSize().getHeight())/2;
         
         JPanel westPaddingPanel=new JPanel();
+        westPaddingPanel.setBackground(Color.white);
         JPanel eastPaddingPanel=new JPanel();
+        eastPaddingPanel.setBackground(Color.white);
         
         BufferedImage fillIn=null;
         try {
@@ -366,18 +369,8 @@ public class MainFrame extends JFrame{
         contentPanel.add(westPaddingPanel);
         contentPanel.add(content);
         contentPanel.add(eastPaddingPanel);
-        /*
-        if(fillHeight>0)
-        {
-            Image fillHorizontal=fillIn.getScaledInstance(width/2, fillHeight,Image.SCALE_SMOOTH);
-            ImageIcon horIcon=new ImageIcon(fillHorizontal);
-          //  contentPanel.add(new JLabel(horIcon), BorderLayout.NORTH);
-           // contentPanel.add(new JLabel(horIcon), BorderLayout.SOUTH);
-        }
-        //JLabel label= new JLabel(icon);
-        */
-    
-        
+
+        contentPanel.setBackground(Color.white);
         this.setContentPane(contentPanel);
         //this.setSize(new Dimension(width/2+20, height/2+20));
         this.setLocationRelativeTo(null);

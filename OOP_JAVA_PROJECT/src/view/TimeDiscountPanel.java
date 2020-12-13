@@ -8,6 +8,7 @@ package view;
 import controller.ChangePanelListener;
 import controller.MovieDiscountListener;
 import controller.TimeDiscountListener;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Date;
 import javax.swing.JButton;
@@ -26,6 +27,7 @@ public class TimeDiscountPanel extends JPanel{
         
         super();
         this.setLayout(new SpringLayout());
+        this.setBackground(Color.white);
         
         //dateTime selection
         
@@ -42,6 +44,8 @@ public class TimeDiscountPanel extends JPanel{
         
         //discount selection
         JPanel discountPanel= new JPanel();
+        discountPanel.setBackground(Color.white);
+        
         discountPanel.setLayout(new SpringLayout());
         JLabel label3= new JLabel("discount ");
         discountPanel.add(label3);
@@ -66,6 +70,8 @@ public class TimeDiscountPanel extends JPanel{
         
         //navigation buttons
         JPanel buttonPanel= new JPanel();
+        buttonPanel.setBackground(Color.white);
+        
         JButton backButton= new JButton("BACK");
         backButton.addActionListener(new ChangePanelListener(frame, 14));
         buttonPanel.add(backButton);
