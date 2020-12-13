@@ -7,7 +7,9 @@ package view;
 
 import DAO.*;
 import controller.ChangePanelListener;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -34,14 +36,16 @@ public class ButtonMenuPanel extends JPanel{
     {
         super();
         
+        JPanel contentPanel= new JPanel();
+        
         //making a vertical alligned layout
-        this.setLayout(new SpringLayout());
+        contentPanel.setLayout(new SpringLayout());
         
         
         for(String str: infos)
         {
-            JLabel label=new JLabel(str);
-            this.add(label);
+            JLabel label=new JLabel("<html><br/>"+str+"</html>");
+            contentPanel.add(label);
         }
         
         
@@ -49,15 +53,22 @@ public class ButtonMenuPanel extends JPanel{
         {
             JButton btn= new JButton(e.getKey());
             btn.addActionListener(new ChangePanelListener(frame, e.getValue()));
-            this.add(btn);
+            contentPanel.add(btn);
         }
+        contentPanel.setBackground(Color.white);
+        contentPanel.setSize(new Dimension(400,((buttonLink.size()+infos.size())*20)+200));
+        contentPanel.setPreferredSize(new Dimension(400,((buttonLink.size()+infos.size())*20)+200));
         
-        this.setSize(new Dimension(320,((buttonLink.size()+infos.size())*20)+200));
-        SpringUtilities.makeCompactGrid(this,
+        int inY=contentPanel.getHeight()/6;
+        SpringUtilities.makeCompactGrid(contentPanel,
                 (buttonLink.size()+infos.size()), 1, //rows, cols
-                6, 6, //initX, initY
-                6, 6); //xPad, yPad
+                20,inY, //initX, initY
+                10, 10); //xPad, yPad
         
+        this.add(contentPanel);
+        this.setBackground(Color.white);
+        this.setSize(new Dimension(410,contentPanel.getHeight()));
+        this.setPreferredSize(new Dimension(410,contentPanel.getHeight()));
     }
     
     

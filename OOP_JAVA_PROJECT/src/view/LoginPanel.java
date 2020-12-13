@@ -9,6 +9,7 @@ import model.*;
 import DAO.*;
 import controller.ChangePanelListener;
 import controller.LoginListener;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -58,10 +59,11 @@ public class LoginPanel extends JPanel {
         this.add(backButton);
         this.add(okButton);
 
-        this.setSize(new Dimension(800,600));
+        this.setBackground(Color.white);
+        this.setSize(new Dimension(400,300));
         SpringUtilities.makeCompactGrid(this,
                 3, 2, //rows, cols
-                6, 6, //initX, initY
+                6,100, //initX, initY
                 6, 6); //xPad, yPad
 
     }

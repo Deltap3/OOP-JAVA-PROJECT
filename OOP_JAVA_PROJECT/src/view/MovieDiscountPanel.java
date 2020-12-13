@@ -10,7 +10,10 @@ import controller.AddScreeningListener;
 import controller.ChangePanelListener;
 import controller.MovieDiscountListener;
 import controller.ScreeningChoiceListener;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+import javax.swing.border.TitledBorder;
 import model.Connections;
 import model.Movie;
 
@@ -34,11 +38,18 @@ public class MovieDiscountPanel extends JPanel{
     public MovieDiscountPanel(MainFrame frame)
     {
         super();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        this.setPreferredSize(new Dimension(width/2, height/2));
+        this.setSize(new Dimension(width/2, height/2));
+        
         this.setLayout(new SpringLayout());
         
         //movie selection
         JPanel titlePanel= new JPanel(new GridLayout(0,3));
-        
+        titlePanel.setBorder(new TitledBorder("movie: "));
+        titlePanel.setBackground(Color.white);
         //this label will stay hidden
         //it is there to store the title of the
         //selected movie
@@ -58,7 +69,7 @@ public class MovieDiscountPanel extends JPanel{
  
             JRadioButton btn= new JRadioButton(m.getTitle());
             btn.addActionListener(new ScreeningChoiceListener(movieLabel));
-            
+            btn.setBackground(Color.white);
             group.add(btn);
             titlePanel.add(btn);     
         
@@ -74,6 +85,8 @@ public class MovieDiscountPanel extends JPanel{
         //discount selection
         JPanel discountPanel= new JPanel();
         discountPanel.setLayout(new SpringLayout());
+        discountPanel.setBackground(Color.white);
+        discountPanel.setBorder(new TitledBorder("new discount "));
         JLabel label1= new JLabel("discount ");
         discountPanel.add(label1);
         
@@ -97,6 +110,7 @@ public class MovieDiscountPanel extends JPanel{
         
         //navigation buttons
         JPanel buttonPanel= new JPanel();
+        buttonPanel.setBackground(Color.white);
         JButton backButton= new JButton("BACK");
         backButton.addActionListener(new ChangePanelListener(frame, 14));
         buttonPanel.add(backButton);
@@ -110,5 +124,6 @@ public class MovieDiscountPanel extends JPanel{
                 3, 1, //rows, cols 
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
+        this.setBackground(Color.white);
     }
 }

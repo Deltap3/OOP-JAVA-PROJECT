@@ -7,9 +7,15 @@ package view;
 
 import DAO.CustomerMemberDAO;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import model.*;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -21,7 +27,10 @@ import javax.swing.SpringLayout;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import org.jfree.ui.RefineryUtilities;
 
 
@@ -47,9 +56,15 @@ public class MainFrame extends JFrame{
        // setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         
         setTitle("My movie theater");
+       // this.setSize(new Dimension(980, 1080/2+20));
         initComponents();
-        setSize(panelsList.get(0).getSize());
-        setContentPane(panelsList.get(0));
+        
+       // setSize(panelsList.get(0).getSize());
+        makeContentPane(panelsList.get(0));
+     
+        pack();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         setVisible(true);
     }
     private void initComponents()
@@ -305,7 +320,66 @@ public class MainFrame extends JFrame{
         panelsList.set(num, panel);
         this.add(panel);
     }
+    
+    public void centerFrame()
+    {
+       //this.setSize(this.getContentPane().getSize());
 
+        // center the jframe on screen
+      //  this.setLocationRelativeTo(null);
+    }
+    public void makeContentPane(final JPanel content)
+    {
+        JPanel contentPanel= new JPanel();
+        
+        contentPanel.setLayout(new SpringLayout());
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        contentPanel.setSize(width/2, height/2);
+        
+         int fillWidth=(width/2-content.getWidth())/2;
+        int fillHeight=(height/2-(int)content.getSize().getHeight())/2;
+        
+        JPanel westPaddingPanel=new JPanel();
+        westPaddingPanel.setBackground(Color.white);
+        JPanel eastPaddingPanel=new JPanel();
+        eastPaddingPanel.setBackground(Color.white);
+        
+        BufferedImage fillIn=null;
+        try {
+             fillIn= ImageIO.read(new File("images/background.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(fillWidth>0)
+        {
+            Image fillVertical = fillIn.getScaledInstance(fillWidth, height/2,Image.SCALE_SMOOTH);
+            ImageIcon vertIcon=new ImageIcon(fillVertical);
+            
+            westPaddingPanel.add(new JLabel(vertIcon));
+            
+            
+            
+            eastPaddingPanel.add(new JLabel(vertIcon));
+            
+        } //960  
+        
+        contentPanel.add(westPaddingPanel);
+        contentPanel.add(content);
+        contentPanel.add(eastPaddingPanel);
+
+        contentPanel.setBackground(Color.white);
+        this.setContentPane(contentPanel);
+        //this.setSize(new Dimension(width/2+20, height/2+20));
+        this.setLocationRelativeTo(null);
+     //   this.centerFrame();
+         SpringUtilities.makeCompactGrid(contentPanel,
+                1, 3, //rows, cols
+                1,1, //initX, initY
+                1, 1); //xPad, yPad
+    }
     public CustomerMember getSelectedMember() {
         return selectedMember;
     }
