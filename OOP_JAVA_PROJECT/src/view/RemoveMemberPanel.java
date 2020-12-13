@@ -56,7 +56,7 @@ public class RemoveMemberPanel extends JPanel{
         buttonPanel.add(yesButton); 
         
         JButton noButton= new JButton("NO");
-        noButton.addActionListener(new ChangePanelListener(frame, 20));
+        noButton.addActionListener(new ChangePanelListener(frame, 21));
         buttonPanel.add(noButton);
         
         SpringUtilities.makeCompactGrid(buttonPanel,
