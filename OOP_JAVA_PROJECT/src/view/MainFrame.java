@@ -63,7 +63,7 @@ public class MainFrame extends JFrame{
         makeContentPane(panelsList.get(0));
      
         pack();
-        
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
         setVisible(true);
     }
