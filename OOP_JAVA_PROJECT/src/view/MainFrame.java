@@ -31,6 +31,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import org.jfree.ui.RefineryUtilities;
 
 
@@ -359,15 +360,18 @@ public class MainFrame extends JFrame{
             ImageIcon vertIcon=new ImageIcon(fillVertical);
             
             westPaddingPanel.add(new JLabel(vertIcon));
-            
-            
-            
             eastPaddingPanel.add(new JLabel(vertIcon));
             
         } //960  
         
+        JScrollPane adjustPanel= new JScrollPane(content,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        adjustPanel.setSize(new Dimension(content.getWidth(),contentPanel.getHeight()));
+        adjustPanel.setBackground(Color.white);
+        
         contentPanel.add(westPaddingPanel);
-        contentPanel.add(content);
+        contentPanel.add(adjustPanel);
         contentPanel.add(eastPaddingPanel);
 
         contentPanel.setBackground(Color.white);
