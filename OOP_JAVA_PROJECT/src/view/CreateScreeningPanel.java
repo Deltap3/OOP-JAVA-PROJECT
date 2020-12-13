@@ -45,8 +45,8 @@ public class CreateScreeningPanel extends JPanel{
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
-        this.setPreferredSize(new Dimension((width/2)-10, (height/2)-10));
-        this.setSize(new Dimension((width/2)-10, (height/2)-10));
+        this.setPreferredSize(new Dimension((width/2)+10, (height/2)+10));
+        this.setSize(new Dimension((width/2)+10, (height/2)+10));
         
        
         this.setLayout(new SpringLayout());
