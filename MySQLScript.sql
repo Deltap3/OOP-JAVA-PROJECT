@@ -22,9 +22,9 @@ create table if not exists members
 	personId int primary key auto_increment,
 	firstName varchar(50) not null,
     lastName varchar(50) not null,
-    mail varchar(50),
-    login varchar(100),
-    passw varchar(50),
+    mail varchar(50) not null,
+    login varchar(100) not null,
+    passw varchar(50) not null,
     totalPaid double not null,
     categoryMember int not null
 );

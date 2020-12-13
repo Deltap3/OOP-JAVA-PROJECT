@@ -10,8 +10,10 @@ import controller.AddScreeningListener;
 import controller.ChangePanelListener;
 import controller.ScreeningChoiceListener;
 import controller.RoomAndSeatsListener;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -24,6 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import model.Connections;
 import model.Movie;
 import org.jfree.ui.DateChooserPanel;
@@ -38,8 +42,13 @@ public class CreateScreeningPanel extends JPanel{
         
         super();
       
-       // setSize(new Dimension(1200,1400));
-      //  setPreferredSize(new Dimension(1200,1400));
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        this.setPreferredSize(new Dimension((width/2)+10, (height/2)+10));
+        this.setSize(new Dimension((width/2)+10, (height/2)+10));
+        
+       
         this.setLayout(new SpringLayout());
         
         //movie selection
@@ -58,7 +67,7 @@ public class CreateScreeningPanel extends JPanel{
  
             JRadioButton btn= new JRadioButton(m.getTitle());
             btn.addActionListener(new ScreeningChoiceListener(movieLabel));
-            
+            btn.setBackground(Color.white);
             group.add(btn);
             titlePanel.add(btn);     
         
@@ -69,6 +78,8 @@ public class CreateScreeningPanel extends JPanel{
         {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         }
+        titlePanel.setBorder(new TitledBorder("movie "));
+        titlePanel.setBackground(Color.white);
         this.add(titlePanel);
         
         //room number and total seat number
@@ -95,6 +106,8 @@ public class CreateScreeningPanel extends JPanel{
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
         
+        roomPanel.setBorder(new TitledBorder("room choice"));
+        roomPanel.setBackground(Color.white);
         this.add(roomPanel);
         
         //date and time
@@ -123,6 +136,9 @@ public class CreateScreeningPanel extends JPanel{
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
         
+        discountPanel.setBorder(new TitledBorder("discount "));
+        
+        discountPanel.setBackground(Color.white);
         this.add(discountPanel);
         
         //navigation buttons
@@ -133,14 +149,15 @@ public class CreateScreeningPanel extends JPanel{
         JButton addButton= new JButton("ADD");
         addButton.addActionListener(new AddScreeningListener(frame, movieLabel, roomNumberList, numberOfSeatsLabel, dateTimePanel, discountField));
         buttonPanel.add(addButton);
-        
+        buttonPanel.setBackground(Color.white);
         this.add(buttonPanel);
+        
         
         SpringUtilities.makeCompactGrid(this,
                 5, 1, //rows, cols 
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
-        
+        this.setBackground(Color.white);
     }
     
     

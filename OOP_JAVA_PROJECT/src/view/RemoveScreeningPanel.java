@@ -10,6 +10,8 @@ import DAO.ScreeningDAO;
 import controller.ChangePanelListener;
 import controller.RemoveScreeningListener;
 import controller.ScreeningChoiceListener;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,8 +40,11 @@ public class RemoveScreeningPanel extends JPanel{
         
         super();
         this.setLayout(new SpringLayout());
+        this.setBackground(Color.white);
         
         JPanel screeningPanel= new JPanel();
+        screeningPanel.setBackground(Color.white);
+        
         screeningPanel.setLayout(new SpringLayout());
         selectedSession=null;
         ButtonGroup group= new ButtonGroup();
@@ -58,6 +63,7 @@ public class RemoveScreeningPanel extends JPanel{
    
             JRadioButton btn= new JRadioButton(s.getDateTime());
             btn.addActionListener(new ScreeningChoiceListener(this,s));
+            btn.setBackground(Color.white);
             group.add(btn);
             screeningPanel.add(btn);     
             screeningPanel.add(new JLabel("room "+s.getNumberRoom()));
@@ -80,6 +86,7 @@ public class RemoveScreeningPanel extends JPanel{
         this.add(screeningPanel);
         
         JPanel buttonPanel= new JPanel();
+        buttonPanel.setBackground(Color.white);
         JButton backButton= new JButton("BACK");
         backButton.addActionListener(new ChangePanelListener(frame, 11));
         buttonPanel.add(backButton);
@@ -89,6 +96,7 @@ public class RemoveScreeningPanel extends JPanel{
         buttonPanel.add(deleteButton);
         
         this.add(buttonPanel);
+        this.setSize(new Dimension(500,700));
         
         SpringUtilities.makeCompactGrid(this,
                 2, 1, //rows, cols 

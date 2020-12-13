@@ -30,7 +30,7 @@ public class Statistics extends JPanel {
     private String statType;
     public Statistics(String statType) throws HeadlessException {
         this.statType = statType;
-
+        this.setBackground(Color.white);
         
         if(statType.equals("Most viewed film") ){
             mostViewedFilm();
@@ -94,9 +94,8 @@ public class Statistics extends JPanel {
                selectMovie = movieCo.find(select.getMovieName());
                numberTickets = select.getTicketsBoughts();
                for(int j = 0; j < i ; ++j)
-                   if(j > 0 && selectMovie.getGenre().equals(data.getKey(j-1))){
+                   if(j > 0 && selectMovie.getGenre().equals(data.getKey(j-1)))
                        numberTickets = (int) ((double)data.getValue(j-1) + allScreenings.get(i).getTicketsBoughts());   
-                System.out.println("lol");}
                data.setValue(selectMovie.getGenre(),numberTickets);
             }
             JFreeChart chart = ChartFactory.createPieChart("Most Viewed Genre", data, true, true, false);
