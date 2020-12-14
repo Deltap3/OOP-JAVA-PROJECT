@@ -69,7 +69,7 @@ public class Statistics extends JPanel {
 
             ChartPanel panel = new ChartPanel(chart);
             this.add(panel);
-	   // panel.setVisible(true);
+	   
 
 
         } catch (SQLException ex) {
@@ -101,7 +101,7 @@ public class Statistics extends JPanel {
             JFreeChart chart = ChartFactory.createPieChart("Most Viewed Genre", data, true, true, false);
             ChartPanel panel = new ChartPanel(chart);
             this.add(panel);
-            //panel.setVisible(true);
+           
 
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
