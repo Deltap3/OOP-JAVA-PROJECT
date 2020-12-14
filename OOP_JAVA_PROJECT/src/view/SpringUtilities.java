@@ -1,5 +1,9 @@
 //https://www.zentut.com/java-swing/creating-password-field-by-using-jpasswordfield-class/
 
+//disclaimer: we are not the ones that coded this class
+//please refers to the following link for more informations:
+//https://docs.oracle.com/javase/tutorial/uiswing/examples/layout/SpringGridProject/src/layout/SpringUtilities.java
+
 package view;
 import javax.swing.*;
 import javax.swing.SpringLayout;

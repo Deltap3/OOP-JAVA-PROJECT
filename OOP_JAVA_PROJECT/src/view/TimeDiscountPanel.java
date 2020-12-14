@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
 import controller.ChangePanelListener;
-import controller.MovieDiscountListener;
 import controller.TimeDiscountListener;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,10 +13,15 @@ import javax.swing.SpringLayout;
 
 /**
  *
- * @author Juju
+ * create a discount that applies
+ * to all screenings between 2 dateTimes
  */
 public class TimeDiscountPanel extends JPanel{
 
+    /**
+     * constructor
+     * @param frame the main frame
+     */
     public TimeDiscountPanel(MainFrame frame) {
         
         super();
@@ -30,7 +29,7 @@ public class TimeDiscountPanel extends JPanel{
         this.setBackground(Color.white);
         
         //dateTime selection
-        
+        //we use ours DateTimePanels
         JLabel label1= new JLabel("from: ");
         this.add(label1);
         DateTimePanel startPanel=new DateTimePanel();

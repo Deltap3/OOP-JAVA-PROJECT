@@ -16,15 +16,19 @@ import javax.swing.border.TitledBorder;
 /**
  *
  * @author Juju
+ * panel used to select a date and time
  */
 public class DateTimePanel extends JPanel{
+    //attributes
+    private JTextField yearField;
+    private JTextField monthField;
+    private JTextField dayField;
+    private JTextField hourField;
+    private JTextField minuteField;
     
-    JTextField yearField;
-    JTextField monthField;
-    JTextField dayField;
-    JTextField hourField;
-    JTextField minuteField;
-    
+    /**
+     * no necessary parameter
+     */
     public DateTimePanel()
     {
         super();
@@ -37,20 +41,17 @@ public class DateTimePanel extends JPanel{
         datePanel.setBorder(dateBorder);
         
         datePanel.setLayout(new SpringLayout());
-       // JLabel dateLabel= new JLabel("date: ");
-      //  dateLabel.setLabelFor(datePanel);
-      //  this.add(dateLabel);
-        
+        //year
         JLabel yearLabel= new JLabel("yyyy");
         yearField= new JTextField();
         yearField.setText("2020");
         yearField.setMaximumSize(yearField.getPreferredSize());
-        
+        //month
         JLabel monthLabel= new JLabel("mm");
         monthField= new JTextField();
         monthField.setText("12");
         monthField.setMaximumSize(monthField.getPreferredSize());
-          
+        //day  
         JLabel dayLabel= new JLabel("dd"); 
         dayField= new JTextField();
         dayField.setText("15");
@@ -79,15 +80,13 @@ public class DateTimePanel extends JPanel{
         TitledBorder timeBorder= BorderFactory.createTitledBorder("time");
         timePanel.setBorder(timeBorder);
         timePanel.setBackground(Color.white);
-        //JLabel timeLabel= new JLabel("time: ");
-       // timeLabel.setLabelFor(timePanel);
-       // this.add(timeLabel);
-        
+
+        //hour
         hourField= new JTextField();
         hourField.setText("08");
         hourField.setMaximumSize(hourField.getPreferredSize());
         timePanel.add(hourField);
-        
+        //minute
         minuteField= new JTextField();
         minuteField.setText("30");
         minuteField.setMaximumSize(minuteField.getPreferredSize());
@@ -127,6 +126,12 @@ public class DateTimePanel extends JPanel{
         return minuteField;
     }
     
+    /**
+     *
+     * @return dateTime: the current dateTime
+     * entered in the textFields
+     * it is already formated 
+     */
     public String getDateTime()
     {
         String dateTime=yearField.getText()+"-"+monthField.getText()+"-"+dayField.getText()

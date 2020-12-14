@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
 import DAO.MovieDAO;
-import controller.AddScreeningListener;
 import controller.ChangePanelListener;
 import controller.MovieDiscountListener;
 import controller.ScreeningChoiceListener;
@@ -30,14 +25,20 @@ import model.Connections;
 import model.Movie;
 
 /**
- *
- * @author Juju
+ * select a discount to apply on
+ * all screenings playing 
+ * a selected movie
  */
 public class MovieDiscountPanel extends JPanel{
     
+    /**
+     * constructor
+     * @param frame the main frame
+     */
     public MovieDiscountPanel(MainFrame frame)
     {
         super();
+        //set the dimensions
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
@@ -50,6 +51,7 @@ public class MovieDiscountPanel extends JPanel{
         JPanel titlePanel= new JPanel(new GridLayout(0,3));
         titlePanel.setBorder(new TitledBorder("movie: "));
         titlePanel.setBackground(Color.white);
+        
         //this label will stay hidden
         //it is there to store the title of the
         //selected movie
@@ -59,11 +61,12 @@ public class MovieDiscountPanel extends JPanel{
         ArrayList<Movie> movies= new ArrayList<>();
         
         try{
-            
+         //connect with database   
         Connections con= new Connections("project", "root", "password");
         MovieDAO movieCo= new MovieDAO(con.getInstance());
         movies=movieCo.getAllMovie();
         
+        //for each movie, we add a button
         for(Movie m: movies)
         {
  

@@ -1,73 +1,75 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package view;
-
-import DAO.CustomerMemberDAO;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import model.*;
-
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.util.Map;
-
-import javax.swing.SpringLayout;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import org.jfree.ui.RefineryUtilities;
-
-
 /**
  * ZHONG David
  * MAISTERRENA Pierre
  * DANIEL Juliette
  * ING3 TDE02
  */
+package view;
+
+import model.*;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.SpringLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author Juju
+ * main frame that manages the programm
+ * all the panels will be added to it
+ * and it will navigate between them
+ * 
+ */
 public class MainFrame extends JFrame{
     
-    private ArrayList<JPanel> panelsList;
+    //attributes
+    private ArrayList<JPanel> panelsList;//all the panels
     private final int WINDOW_WIDTH = 1200;
     private final int WINDOW_HEIGHT = 1400;
-    private Person user;
+    private Person user;//can be a member, a guest or an employee
     private CustomerMember selectedMember;
     private Screening session;
     private Order customerOrder;
     
+    /**
+     * constructor
+     */
     public MainFrame()
     {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       // setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setTitle("My movie theater");
-       // this.setSize(new Dimension(980, 1080/2+20));
+
         initComponents();
-        
-       // setSize(panelsList.get(0).getSize());
-        makeContentPane(panelsList.get(0));
-     
+
+        makeContentPane(panelsList.get(0));     
         pack();
+        
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         setVisible(true);
     }
+    /**
+     * initialize all the components 
+     * and make all the panels that don't 
+     * need to be updated
+     */
     private void initComponents()
     {
         this.setLayout(new BorderLayout());
@@ -76,14 +78,18 @@ public class MainFrame extends JFrame{
         user= new CustomerGuest();
         session= new Screening();
         panelsList= new ArrayList<>();
-        Map<String, Integer> initMap= new LinkedHashMap<>();
-        ArrayList<String> initInfos= new ArrayList<>();
-        //map based on insertion order
         
+        //these will be used to make all the menu panels
+        Map<String, Integer> initMap= new LinkedHashMap<>();//map based on insertion order
+        ArrayList<String> initInfos= new ArrayList<>();
+        
+        //we allocate the space for all of the JPanels
+        //they will be replaced as need be
         for(int i=0;i<28;i++)
         {
             panelsList.add(new JPanel());
         }
+        
         //panel 0: home screen / side choice
         initMap.put("Customer", 1);
         initMap.put("Employee", 9);
@@ -94,7 +100,9 @@ public class MainFrame extends JFrame{
         initMap.clear();
         initInfos.clear();
         
-        //customer side
+        ///customer side
+        
+        
         //panel 1: guest or member choice
         initMap.put("Guest", 4);
         initMap.put("Member", 2);
@@ -135,7 +143,10 @@ public class MainFrame extends JFrame{
         //panel 6: buy receipe and last confirmation 
         //panel 7: member info panel
 
-        //employee side
+        
+        ///employee side
+        
+        
         //panel 9: login as employee
         LoginPanel panel9= new LoginPanel(this, "employee", 0, 10);
         panelsList.set(9,panel9);
@@ -246,8 +257,11 @@ public class MainFrame extends JFrame{
         //have their own build method
         //since they need to be updated
         
-        pack();
+        
     }
+    //independent build methods
+    //for all the panels that need
+    //to be actualized
     public void buildPanel5()
     {
         BuyPanel panel5= new BuyPanel(this, session);
@@ -296,6 +310,7 @@ public class MainFrame extends JFrame{
         double totalPaid= selectedMember.getTotalPaid();
         initInfos.add("total paid: "+ totalPaid);
         
+        //member grade
         if(totalPaid < 50)
         {
             initInfos.add("bronze member");
@@ -314,39 +329,40 @@ public class MainFrame extends JFrame{
         this.add(panel);
     }
    
-    
     public void buildStatPanel(int num, String type)
     {
         StatPanel panel= new StatPanel(this, type);
         panelsList.set(num, panel);
         this.add(panel);
     }
-    
-    public void centerFrame()
-    {
-       //this.setSize(this.getContentPane().getSize());
 
-        // center the jframe on screen
-      //  this.setLocationRelativeTo(null);
-    }
+    /**
+     * adjust so that the panels will fit and be centered
+     * in the main screen
+     * fill the side gaps with images
+     * @param content the panel that will be displayed
+     */
     public void makeContentPane(final JPanel content)
     {
         JPanel contentPanel= new JPanel();
         
         contentPanel.setLayout(new SpringLayout());
+        //set the new content panel to the right size
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
         contentPanel.setSize(width/2, height/2);
         
-         int fillWidth=(width/2-content.getWidth())/2;
-        int fillHeight=(height/2-(int)content.getSize().getHeight())/2;
-        
+        //calculate how large are the gaps on the side
+        int fillWidth=(width/2-content.getWidth())/2;
+ 
+        //create padding panels
         JPanel westPaddingPanel=new JPanel();
         westPaddingPanel.setBackground(Color.white);
         JPanel eastPaddingPanel=new JPanel();
         eastPaddingPanel.setBackground(Color.white);
         
+        //charges the image for fill in
         BufferedImage fillIn=null;
         try {
              fillIn= ImageIO.read(new File("images/background.jpg"));
@@ -354,6 +370,8 @@ public class MainFrame extends JFrame{
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        //if there is a gap to compensate,
+        //adjust the image and add it to the side panels
         if(fillWidth>0)
         {
             Image fillVertical = fillIn.getScaledInstance(fillWidth, height/2,Image.SCALE_SMOOTH);
@@ -362,28 +380,33 @@ public class MainFrame extends JFrame{
             westPaddingPanel.add(new JLabel(vertIcon));
             eastPaddingPanel.add(new JLabel(vertIcon));
             
-        } //960  
+        }  
         
+        //put the panel that will be displayed in a scroll panel
+        //that way if the center panel is too big we can still
+        //see it with the scroll bars
         JScrollPane adjustPanel= new JScrollPane(content,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         adjustPanel.setSize(new Dimension(content.getWidth(),contentPanel.getHeight()));
         adjustPanel.setBackground(Color.white);
         
+        //add the panels to the new content panel
         contentPanel.add(westPaddingPanel);
         contentPanel.add(adjustPanel);
         contentPanel.add(eastPaddingPanel);
 
         contentPanel.setBackground(Color.white);
         this.setContentPane(contentPanel);
-        //this.setSize(new Dimension(width/2+20, height/2+20));
         this.setLocationRelativeTo(null);
-     //   this.centerFrame();
+
          SpringUtilities.makeCompactGrid(contentPanel,
                 1, 3, //rows, cols
                 1,1, //initX, initY
                 1, 1); //xPad, yPad
     }
+    
+    //getters and setters
     public CustomerMember getSelectedMember() {
         return selectedMember;
     }

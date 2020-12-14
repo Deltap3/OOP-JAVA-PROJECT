@@ -9,7 +9,6 @@ import controller.ChangePanelListener;
 import controller.ComboBoxListener;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -19,21 +18,21 @@ import javax.swing.SpringLayout;
 /**
  *
  * @author Juju
+ * create a panel to select the
+ * age category of each ticket purchased
  */
 public class AgeDiscountPanel extends JPanel{
     
     public AgeDiscountPanel(MainFrame frame)
     {
-        super();
-        
-
-        
+        super(); 
         this.setLayout(new SpringLayout());
         
         int numberTickets= frame.getCustomerOrder().getTicketsNumber();
         
         this.setSize(new Dimension(500,numberTickets*150));
         
+        //infos on top of the panel
         JLabel label1= new JLabel("please select the corresponding age range for each ticket: \n");
         this.add(label1);
         JLabel label2= new JLabel("children= under 15, regular= between 15 and 60, senior= over 60 \n");
@@ -41,11 +40,14 @@ public class AgeDiscountPanel extends JPanel{
         JLabel label3= new JLabel("employees may ask for proof \n");
         this.add(label3);
         
+        //create as many individual panels
+        //as there are tickets purchased
         for(int i=0;i<numberTickets;i++)
         {
             JPanel contentPanel=buildIndividualPanel(frame, i);
             this.add(contentPanel);
         }
+        //add the confirm button
         JButton okButton= new JButton("next");
         okButton.addActionListener(new ChangePanelListener(frame, 6));
         this.add(okButton);
@@ -54,9 +56,11 @@ public class AgeDiscountPanel extends JPanel{
                 numberTickets+4, 1, //rows, cols
                 6,6, //initX, initY
                 6, 6); //xPad, yPad
+        
         this.setBackground(Color.white);
     }
     
+    //build one panel to select the category of one ticket
     public JPanel buildIndividualPanel(MainFrame frame, int i)
     {
         

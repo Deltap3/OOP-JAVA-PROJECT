@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 package view;
 import model.*;
@@ -14,33 +15,41 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+
+
 /**
- * ZHONG David
- * MAISTERRENA Pierre
- * DANIEL Juliette
- * ING3 TDE02
+ * panel that display the infos on the chosen
+ * screening session and
+ * let the user select how many tickets
+ * he wants to buy
  */
 public class BuyPanel extends JPanel{
-    
+    //attribut
     private JTextField nbTicketsField;
+
+    /**
+     * constructeur
+     * @param frame the main frame
+     * @param session selected session
+     */
     public BuyPanel(MainFrame frame, Screening session)
     {
         super();
-        
+        //intermediate content panel
         JPanel contentPanel= new JPanel();
+        
         contentPanel.setLayout(new SpringLayout());
         contentPanel.setSize(new Dimension(500,700));
         
+        //informations on the screening session
         Movie chosenMovie = new Movie();
-        
-        
+ 
         try{   
             
         Connections con= new Connections("project", "root", "password");
@@ -51,7 +60,7 @@ public class BuyPanel extends JPanel{
         {
             Logger.getLogger(OOP_JAVA_PROJECT.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(chosenMovie.getTitle());
+        
         //1st row
         JLabel titleLabel= new JLabel(chosenMovie.getTitle());
         contentPanel.add(titleLabel);
@@ -89,12 +98,15 @@ public class BuyPanel extends JPanel{
         
         contentPanel.add(backButton);
         
+        //for the layout
         SpringUtilities.makeCompactGrid(contentPanel,
                 5, 2, //rows, cols 
                 6,6, //initX, initY
                 6, 6); //xPad, yPad
+        
         contentPanel.setBackground(Color.white);
         this.add(contentPanel);
+        
         this.setSize(new Dimension(500,700));
         this.setPreferredSize(new Dimension(500,700));
         

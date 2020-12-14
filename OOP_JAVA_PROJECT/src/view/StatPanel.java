@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
 import controller.ChangePanelListener;
@@ -16,13 +12,21 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Juju
+ * this panel is an intermediate between
+ * the "normal" view panels and 
+ * a Statistics panel
  */
 public class StatPanel extends JPanel{
     
+    /**
+     * constructor
+     * @param frame the main frame
+     * @param statType witch stat will be created
+     */
     public StatPanel(MainFrame frame, String statType)
     {
         super();
+        //dimension and background
         this.setBackground(Color.white);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
@@ -30,6 +34,7 @@ public class StatPanel extends JPanel{
         this.setPreferredSize(new Dimension(width/2, height/2));
         this.setSize(new Dimension(width/2, height/2));
         
+        //add the panel and navigation button
         this.setLayout(new BorderLayout());
         JLabel label= new JLabel("");
         this.add(label, BorderLayout.NORTH);
@@ -39,7 +44,6 @@ public class StatPanel extends JPanel{
         btn.addActionListener(new ChangePanelListener(frame, 23));
         this.add(btn, BorderLayout.SOUTH);
         
-        statContent.setVisible(true);
         
     }
     

@@ -130,7 +130,7 @@ public class Statistics extends JPanel {
                     true,true,false);
             ChartPanel panel = new ChartPanel(chart);
             this.add(panel);
-           // panel.setVisible(true);
+           
             
         } catch (SQLException ex) {
             Logger.getLogger(Statistics.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,11 +139,9 @@ public class Statistics extends JPanel {
         }
     }
     public void percentageTicketsPerSeats(){
-        final MultiplePieChartDemo1 demo = new MultiplePieChartDemo1("Statistics");
-        
+        final MultiplePieChartDemo1 demo = new MultiplePieChartDemo1("Statistics");     
         this.add(demo);
-      //  RefineryUtilities.centerFrameOnScreen(demo);
-        //demo.setVisible(true);
+     
     }
     public class MultiplePieChartDemo1 extends JPanel {
     public MultiplePieChartDemo1(final String title) {
@@ -151,7 +149,6 @@ public class Statistics extends JPanel {
         final CategoryDataset dataset = createDataset();
         final JFreeChart chart = createChart(dataset);
         final ChartPanel chartPanel = new ChartPanel(chart, true, true, true, false, true);
-        //chartPanel.setPreferredSize(new java.awt.Dimension(1366, 768));
         this.add(chartPanel);
 
     }
@@ -162,7 +159,6 @@ public class Statistics extends JPanel {
             Screening select = new Screening();
             final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             int numberTickets = 0, numberSeats = 0;
-           // int counter = 1;
             ArrayList<Screening> allScreenings = screenCo.getAllScreening();
             for(int i = 0; i < allScreenings.size() ; ++i){
                 select = screenCo.find(allScreenings.get(i).getDateTime());

@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 package view;
 import java.sql.SQLException;
@@ -18,31 +19,37 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 /**
- * ZHONG David
- * MAISTERRENA Pierre
- * DANIEL Juliette
- * ING3 TDE02
+ * chose a screening session
+ * for the customers that want 
+ * to buy tickets
  */
 public class ScreeningChoicePanel extends JPanel{
     
+    /**
+     *
+     * @param frame the main frame
+     * @param nextPanel next panel number
+     */
     public ScreeningChoicePanel(MainFrame frame, int nextPanel)
     {
         super();
       
+        //set the dimension of the panel
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
         this.setPreferredSize(new Dimension(width/2, height/2));
         this.setSize(new Dimension(width/2, height/2));
+        
         this.setBackground(Color.white);
         
+        //screenings
         JPanel screeningPanel= new JPanel();
         screeningPanel.setBackground(Color.white);
         
@@ -86,6 +93,8 @@ public class ScreeningChoicePanel extends JPanel{
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
         
+        //the screening panel is in a scroll panel
+        //so that we can scroll down to see all the screening sessions
         JScrollPane scrollPanel= new JScrollPane(screeningPanel);
         scrollPanel.setBackground(Color.white);
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
@@ -93,7 +102,7 @@ public class ScreeningChoicePanel extends JPanel{
         scrollPanel.setPreferredSize(new Dimension((width/2), (height/3)));
         this.add(scrollPanel);
         
-        
+        //navigation button
         JPanel panel2= new JPanel();
         panel2.setBackground(Color.white);
         JButton backButton=new JButton("Back");

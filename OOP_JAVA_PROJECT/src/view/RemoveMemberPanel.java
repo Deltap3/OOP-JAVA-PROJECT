@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
 import controller.ChangePanelListener;
@@ -15,16 +11,21 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 /**
- *
- * @author Juju
+ * panel to confirm the removal of
+ * a member from the database
  */
 public class RemoveMemberPanel extends JPanel{
 
+    /**
+     * constructor
+     * @param frame the main frame
+     */
     public RemoveMemberPanel(MainFrame frame) {
         
         super();
         this.setLayout(new SpringLayout());
         
+        //informations on the member
         JPanel infoPanel= new JPanel();
         infoPanel.setBackground(Color.white);
         infoPanel.setLayout(new SpringLayout());
@@ -47,6 +48,7 @@ public class RemoveMemberPanel extends JPanel{
                 6, 6); //xPad, yPad
         this.add(infoPanel);
         
+        //navigation buttons
         JPanel buttonPanel= new JPanel();
         buttonPanel.setBackground(Color.white);
         buttonPanel.setLayout(new SpringLayout());
@@ -64,6 +66,7 @@ public class RemoveMemberPanel extends JPanel{
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
         this.add(buttonPanel);
+        
         this.setSize(new Dimension(400,600));
         
         this.setBackground(Color.white);

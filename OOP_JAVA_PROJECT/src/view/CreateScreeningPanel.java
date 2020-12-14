@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
 import DAO.MovieDAO;
@@ -26,22 +22,29 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import model.Connections;
 import model.Movie;
-import org.jfree.ui.DateChooserPanel;
+
 
 /**
  *
  * @author Juju
+ * create a screening session
+ * all necessary infomations will be entered by
+ * the user
  */
 public class CreateScreeningPanel extends JPanel{
 
+    /**
+     * constructor
+     * @param frame the main frame
+     */
     public CreateScreeningPanel(MainFrame frame) {
         
         super();
-      
+        
+        //set the panel's sizes 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
@@ -91,8 +94,9 @@ public class CreateScreeningPanel extends JPanel{
         roomNumberList.setMaximumSize(roomNumberList.getPreferredSize());
         roomNumberList.setSelectedIndex(0);
         roomLabel.setLabelFor(roomNumberList);
-        //this label will be updated
+        
         JLabel label0= new JLabel("number of seats: ");
+        //this label will be updated by the action listener
         JLabel numberOfSeatsLabel= new JLabel("100");
         roomNumberList.addActionListener(new RoomAndSeatsListener(roomNumberList, numberOfSeatsLabel));
         

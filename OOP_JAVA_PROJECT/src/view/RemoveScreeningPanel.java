@@ -5,43 +5,46 @@
  */
 package view;
 
-import DAO.MovieDAO;
+
 import DAO.ScreeningDAO;
 import controller.ChangePanelListener;
 import controller.RemoveScreeningListener;
 import controller.ScreeningChoiceListener;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SpringLayout;
 import model.Connections;
-import model.Movie;
 import model.Screening;
 
 /**
- *
- * @author Juju
+ * panel that removes a screening session
+ * from the database
  */
 public class RemoveScreeningPanel extends JPanel{
 
+    //attribute
     private Screening selectedSession;
     
+    /**
+     * constructor
+     * @param frame the main frame
+     */
     public RemoveScreeningPanel(MainFrame frame) {
         
         super();
         this.setLayout(new SpringLayout());
         this.setBackground(Color.white);
         
+        //panel with all the sessions
         JPanel screeningPanel= new JPanel();
         screeningPanel.setBackground(Color.white);
         
@@ -51,13 +54,13 @@ public class RemoveScreeningPanel extends JPanel{
         ArrayList<Screening> sessions= new ArrayList<>();
         
         try{
-            
+         //connection with the database   
         Connections con= new Connections("project", "root", "password");
         ScreeningDAO screnningCo= new ScreeningDAO(con.getInstance());
         sessions=screnningCo.getAllScreening();//will be replaced later
         
         
-        
+        //for each session
         for(Screening s: sessions)
         {
    
@@ -85,6 +88,7 @@ public class RemoveScreeningPanel extends JPanel{
         
         this.add(screeningPanel);
         
+        //navigation buttons
         JPanel buttonPanel= new JPanel();
         buttonPanel.setBackground(Color.white);
         JButton backButton= new JButton("BACK");
@@ -104,10 +108,10 @@ public class RemoveScreeningPanel extends JPanel{
                 6, 6); //xPad, yPad
     }
 
+    //getters and setters
     public Screening getSelectedSession() {
         return selectedSession;
     }
-
     public void setSelectedSession(Screening selectedSession) {
         this.selectedSession = selectedSession;
     }

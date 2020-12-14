@@ -1,24 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
-import DAO.*;
+
 import controller.ChangePanelListener;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
-import model.CustomerGuest;
+
 
 /**
  * ZHONG David
@@ -26,24 +19,39 @@ import model.CustomerGuest;
  * DANIEL Juliette
  * ING3 TDE02
  */
-//this class creates a menu with a question
-//and as many buttons as you want
-//each button allows you to navigate between
-//your panels in the programm
+
+/*
+* this class creates a menu
+* with informations on the top
+* in JLabels
+* and as many buttons as you want
+* each button allows you to navigate between
+* your panels in the programm
+ */
 public class ButtonMenuPanel extends JPanel{
     
+    /**
+     *
+     * @param frame the main frame
+     * @param infos an ArrayList of all the information
+     * we will display as JLabels
+     * @param buttonLink a map: 
+     * String: button text, 
+     * Integer: number of the panel where this button leads
+     */
     public ButtonMenuPanel(MainFrame frame,ArrayList<String> infos, Map<String,Integer> buttonLink)
     {
         super();
         
         JPanel contentPanel= new JPanel();
-        
-        //making a vertical alligned layout
+       
         contentPanel.setLayout(new SpringLayout());
         
         
         for(String str: infos)
         {
+            //skip a line ("\n" is not taken in account in JLabels)
+            //before discplaying the content
             JLabel label=new JLabel("<html><br/>"+str+"</html>");
             contentPanel.add(label);
         }
