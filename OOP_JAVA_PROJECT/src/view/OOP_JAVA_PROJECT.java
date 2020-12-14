@@ -1,28 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * JAVA PROJECT 
+ * ZHONG David
+ * MAISTERRENA Pierre
+ * DANIEL Juliette
+ * ING3 TDE02
  */
 package view;
 
 
-import java.awt.BorderLayout;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import model.Connections;
 
-
-/*
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-*/
 
 /**
  *
- * @author maist
+ * contains the main method
  */
 public class OOP_JAVA_PROJECT {
 
@@ -30,7 +20,8 @@ public class OOP_JAVA_PROJECT {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Call of the first and main frame
+        //create a MainFrame object that will manage
+        //all the programm
         MainFrame frame= new MainFrame();
     }
 }

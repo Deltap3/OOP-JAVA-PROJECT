@@ -24,15 +24,20 @@ import view.OOP_JAVA_PROJECT;
 /**
  *
  * @author Juju
+ * manage member and employee
+ * connection (check login and password 
+ * in the database)
  */
 public class LoginListener implements ActionListener{
     
-         private int numPanel;
+        //attributes
+        private int numPanel;
         private String table;
         private MainFrame myFrame;
         private JTextField loginField;
         private JPasswordField pswField;
 
+        //constructor
         public LoginListener(int numPanel, String table, MainFrame myFrame, JTextField loginField, JPasswordField pswField) {
             this.numPanel = numPanel;
             this.table = table;
@@ -44,13 +49,16 @@ public class LoginListener implements ActionListener{
 
         public void actionPerformed(ActionEvent e) {
             try {
+                //establish connection
                 Connections co = new Connections("project", "root", "password");
-               // System.out.println(co.getAllFromTable(""));
+                
+               //get the login and password from the login panel
                 String login= loginField.getText();
                 String password= new String(pswField.getPassword());
                 
                 Person user = null;
                 
+                //check if correspond
                 if(table.equals("members")){
                     
                  CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
@@ -65,16 +73,17 @@ public class LoginListener implements ActionListener{
                     
                 }
                 
-                 
+                 //if we couldn't find the user
                 if(user==null){
                     throw new IllegalArgumentException("login or password is incorrect");
                 }
+                
                 else
                 {
+                    //set the user and go to next panel
                     myFrame.setUser(user);
                     myFrame.makeContentPane(myFrame.getPanels().get(numPanel));
-                   // myFrame.pack();
-                    myFrame.centerFrame();
+
                     myFrame.invalidate();
                     myFrame.validate();
                     myFrame.repaint();
@@ -93,6 +102,7 @@ public class LoginListener implements ActionListener{
 
             }
             
+            //clean the fields
             loginField.setText("");
             pswField.setText("");
 

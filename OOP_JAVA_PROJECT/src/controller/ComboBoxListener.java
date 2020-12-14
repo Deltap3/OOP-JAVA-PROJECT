@@ -13,14 +13,18 @@ import view.MainFrame;
 /**
  *
  * @author Juju
+ * manage the age discount
+ * combo box
  */
 public class ComboBoxListener implements ActionListener{
     
+    //attributes
     private MainFrame frame;
     private int ticket;
     private JComboBox box;
     private String selected;
 
+    //constructor
     public ComboBoxListener(MainFrame frame, int ticket, JComboBox box) {
         this.frame = frame;
         this.ticket = ticket;
@@ -30,8 +34,10 @@ public class ComboBoxListener implements ActionListener{
     
     public void actionPerformed(ActionEvent e)
     {
+        //get the choice
         selected=(String) box.getSelectedItem();
         
+        //set the corresponding discount (in the Order)
         if(selected.equals("regular"))
             frame.getCustomerOrder().getAgeDiscounts().set(ticket, 0);
         else if(selected.equals("children"))

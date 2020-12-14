@@ -21,13 +21,17 @@ import view.OOP_JAVA_PROJECT;
 /**
  *
  * @author Juju
+ * set a % discount for
+ * all screening session of a said movie
  */
 public class MovieDiscountListener implements ActionListener {
 
+    //attributes
     private MainFrame myFrame;
     private JLabel titleLabel;
     private JTextField discountField;
 
+    //constructor
     public MovieDiscountListener(MainFrame myFrame, JLabel titleLabel, JTextField discountField) {
         this.myFrame = myFrame;
         this.titleLabel = titleLabel;
@@ -59,8 +63,7 @@ public class MovieDiscountListener implements ActionListener {
                 
                 //finally we go to the next panel
                 myFrame.makeContentPane(myFrame.getPanels().get(10));
-               // myFrame.pack();
-                myFrame.centerFrame();
+
                 myFrame.invalidate();
                 myFrame.validate();
                 myFrame.repaint();

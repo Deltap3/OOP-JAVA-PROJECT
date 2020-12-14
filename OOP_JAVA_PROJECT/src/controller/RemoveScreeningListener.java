@@ -5,7 +5,7 @@
  */
 package controller;
 
-import DAO.CustomerMemberDAO;
+
 import DAO.ScreeningDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,8 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Connections;
-import model.CustomerMember;
-import model.Screening;
 import view.MainFrame;
 import view.OOP_JAVA_PROJECT;
 import view.RemoveScreeningPanel;
@@ -25,13 +23,15 @@ import view.RemoveScreeningPanel;
  * @author Juju
  */
 public class RemoveScreeningListener implements ActionListener{
+        //attributes
         private MainFrame myFrame;
         private RemoveScreeningPanel sPanel;
 
-    public RemoveScreeningListener(MainFrame myFrame, RemoveScreeningPanel sPanel) {
-        this.myFrame = myFrame;
-        this.sPanel = sPanel;
-    }
+        //constructor
+        public RemoveScreeningListener(MainFrame myFrame, RemoveScreeningPanel sPanel) {
+            this.myFrame = myFrame;
+            this.sPanel = sPanel;
+        }
 
         
 
@@ -44,13 +44,13 @@ public class RemoveScreeningListener implements ActionListener{
                 ScreeningDAO screeningCo= new ScreeningDAO(co.getInstance());
                 screeningCo.delete(sPanel.getSelectedSession());
 
+                //confirm success
                 JOptionPane.showConfirmDialog(null, "the screening session has "
                         + "successfully been deleted from the database", "",JOptionPane.DEFAULT_OPTION);
                 
                 // go to the next panel
                 myFrame.makeContentPane(myFrame.getPanels().get(10));
-               // myFrame.pack();
-                myFrame.centerFrame();
+
                 myFrame.invalidate();
                 myFrame.validate();
                 myFrame.repaint();

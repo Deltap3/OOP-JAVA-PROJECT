@@ -20,12 +20,15 @@ import view.OOP_JAVA_PROJECT;
 /**
  *
  * @author Juju
+ * remove a member from the database
  */
 public class RemoveMemberListener implements ActionListener{
     
+    //attributes
         private MainFrame myFrame;
         private CustomerMember member;
 
+    //constructor
     public RemoveMemberListener(MainFrame myFrame, CustomerMember member) {
         this.myFrame = myFrame;
         this.member = member;
@@ -35,18 +38,19 @@ public class RemoveMemberListener implements ActionListener{
             
             
             try {
+                //establish connection and
                 //delete the member from the database
                 Connections co = new Connections("project", "root", "password");
                 CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
                 memberCo.delete(member);
 
+                //confirm success 
                 JOptionPane.showConfirmDialog(null, "the member has successfully been deleted from the database",
                         "",JOptionPane.DEFAULT_OPTION);
                 
                 // go to the next panel
                 myFrame.makeContentPane(myFrame.getPanels().get(10));
-                //myFrame.pack();
-                myFrame.centerFrame();
+
                 myFrame.invalidate();
                 myFrame.validate();
                 myFrame.repaint();

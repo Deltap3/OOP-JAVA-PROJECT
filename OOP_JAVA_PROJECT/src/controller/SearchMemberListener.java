@@ -21,15 +21,20 @@ import view.OOP_JAVA_PROJECT;
 /**
  *
  * @author Juju
+ * search a member with its
+ * first name, last name,
+ * and mail address
  */
 public class SearchMemberListener implements ActionListener{
     
+    //attributes
         private int numPanel;
         private MainFrame myFrame;
         private JTextField firstNameField;
         private JTextField lastNameField;
         private JTextField mailField;
 
+    //constructor
     public SearchMemberListener(int numPanel, MainFrame myFrame, JTextField firstNameField, JTextField lastNameField, JTextField mailField) {
         this.numPanel = numPanel;
         this.myFrame = myFrame;
@@ -40,34 +45,46 @@ public class SearchMemberListener implements ActionListener{
 
         public void actionPerformed(ActionEvent e) {
             try {
+                //establish connection
                 Connections co = new Connections("project", "root", "password");
+                
+                //get the data from the fields
                 String fName= firstNameField.getText();
                 String lName= lastNameField.getText();
                 String mail= mailField.getText();
                 
+                //try to find the member
                 CustomerMember member= new CustomerMember();
    
                  CustomerMemberDAO memberCo= new CustomerMemberDAO(co.getInstance());
                  member= memberCo.findFromNameEmail(fName, lName, mail);
-                 myFrame.setSelectedMember(member);
+                 
       
                 if(member==null){
                     throw new IllegalArgumentException("did not find any corresponding member");
                 }
                 else
                 { 
+                    //set the member as selected member 
+                    myFrame.setSelectedMember(member);
+                    
+                    //different actions depending on what panel is next
                     if(numPanel==19)
                     {
+                        //build the info panel
+                        //(this panel need to be actualised)
                         myFrame.buildMemberInfoPanel(numPanel, 10);
                     }
                     else if(numPanel==22)
                     {
+                        //build the confiramtion panel
+                        //for deleting a member
                         myFrame.buildPanel22();
                     }
                     
+                    //go to the next panel
                     myFrame.makeContentPane(myFrame.getPanels().get(numPanel));
-                   // myFrame.pack();
-                    myFrame.centerFrame();
+
                     myFrame.invalidate();
                     myFrame.validate();
                     myFrame.repaint();

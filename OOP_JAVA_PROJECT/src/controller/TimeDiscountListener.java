@@ -21,13 +21,17 @@ import view.OOP_JAVA_PROJECT;
 /**
  *
  * @author Juju
+ * set a % discount on all screening
+ * between 2 datetimes
  */
 public class TimeDiscountListener implements ActionListener{
+    //attributes
     private MainFrame myFrame;
     private DateTimePanel startPanel;
     private DateTimePanel endPanel;
     private JTextField discountField;
 
+    //constructor
     public TimeDiscountListener(MainFrame myFrame, DateTimePanel startPanel, DateTimePanel endPanel, JTextField discountField) {
         this.myFrame = myFrame;
         this.startPanel = startPanel;
@@ -39,7 +43,7 @@ public class TimeDiscountListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         try {
-            
+            //get the datetimes from the panels
             String startTime= startPanel.getDateTime();
             String endTime= endPanel.getDateTime();
             
@@ -63,8 +67,7 @@ public class TimeDiscountListener implements ActionListener{
                 
                 //finally we go to the next panel
                 myFrame.makeContentPane(myFrame.getPanels().get(10));
-               // myFrame.pack();
-                myFrame.centerFrame();
+
                 myFrame.invalidate();
                 myFrame.validate();
                 myFrame.repaint();

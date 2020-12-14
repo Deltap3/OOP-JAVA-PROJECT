@@ -16,12 +16,18 @@ import view.MainFrame;
 /**
  *
  * @author Juju
+ * 
+ * creates the order when user
+ * decides to by ticketsNumber tickets
+ * for a secreening session
  */
 public class BuyActionListener implements ActionListener{
-     private MainFrame myFrame;
+    //attributes
+    private MainFrame myFrame;
     private Screening session;
     private JTextField nbTicketsField;
 
+    //constructor
     public BuyActionListener(MainFrame myFrame, Screening session, JTextField nbTextField) {
         this.myFrame = myFrame;
         this.session = session;
@@ -32,22 +38,23 @@ public class BuyActionListener implements ActionListener{
     public void actionPerformed(ActionEvent e)
     {           
         try{
-
+        //get the data
         String str= nbTicketsField.getText();
         int ticketsNumber=Integer.parseInt(str);
 
+        //check if there are enought seats remaining
         if(session.getNumberseat()<(session.getTicketsBoughts()+ticketsNumber))
         {
            throw new IllegalArgumentException("you cannot buy "+ticketsNumber+" tickets for this screening session"); 
         }
         else{
 
+        //create the Order
         Order customOrder=new Order(ticketsNumber,session,myFrame.getUser());  
-
         myFrame.setCustomerOrder(customOrder);
 
+        //go to next panel
         myFrame.buildPanel8();
-       
         myFrame.makeContentPane(myFrame.getPanels().get(8));
 
         }
@@ -58,8 +65,7 @@ public class BuyActionListener implements ActionListener{
             JOptionPane.showMessageDialog(null, ex.getMessage(),"",JOptionPane.ERROR_MESSAGE);
 
         }
-       // myFrame.pack();
-        myFrame.centerFrame();
+        
         myFrame.invalidate();
         myFrame.validate();
         myFrame.repaint();

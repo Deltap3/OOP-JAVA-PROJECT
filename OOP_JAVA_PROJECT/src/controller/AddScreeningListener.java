@@ -5,7 +5,7 @@
  */
 package controller;
 
-import DAO.CustomerMemberDAO;
+
 import DAO.ScreeningDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import model.Connections;
-import model.CustomerMember;
 import model.Screening;
 import view.DateTimePanel;
 import view.MainFrame;
@@ -26,9 +25,12 @@ import view.OOP_JAVA_PROJECT;
 /**
  *
  * @author Juju
+ * create a new screening session and 
+ * add it to the database
  */
 public class AddScreeningListener implements ActionListener {
     
+    //attributes
         private MainFrame myFrame;
         private JLabel movieTitle;
         private JComboBox roomField;
@@ -37,7 +39,7 @@ public class AddScreeningListener implements ActionListener {
         private JTextField discountField;
 
     
-
+    //constructor
     public AddScreeningListener(MainFrame myFrame, JLabel movieTitle, JComboBox roomField, JLabel seatLabel,DateTimePanel dateTimePanel, JTextField discountField) {
         this.myFrame = myFrame;
         this.movieTitle = movieTitle;
@@ -50,6 +52,7 @@ public class AddScreeningListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             
+            //get the data from the fields
             String dateTime=dateTimePanel.getDateTime();
          
             try {
@@ -85,8 +88,6 @@ public class AddScreeningListener implements ActionListener {
                 
                 //finally we go to the next panel
                 myFrame.makeContentPane(myFrame.getPanels().get(10));
-               // myFrame.pack();
-                myFrame.centerFrame();
                 myFrame.invalidate();
                 myFrame.validate();
                 myFrame.repaint();
